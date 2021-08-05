@@ -20,11 +20,18 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuc-no-EM6" userLabel="TopView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="266.5"/>
+                                        <rect key="frame" x="19.5" y="0.0" width="375" height="267"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="YKB_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Tic-rd-yUk">
                                                 <rect key="frame" x="-99" y="29" width="574" height="209"/>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="aaa," textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkT-mc-RsT">
+                                                <rect key="frame" x="172" y="172" width="31.5" height="42"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" systemColor="systemRedColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="Tic-rd-yUk" firstAttribute="centerY" secondItem="yuc-no-EM6" secondAttribute="centerY" id="Yxh-oY-ybP"/>
@@ -32,45 +39,66 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myY-vG-DrX" userLabel="MiddleView">
-                                        <rect key="frame" x="20" y="266.5" width="374" height="330"/>
+                                        <rect key="frame" x="72" y="267" width="270" height="329.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="zm4-ZB-r6s">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="330"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="zm4-ZB-r6s">
+                                                <rect key="frame" x="0.0" y="0.0" width="270" height="329.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8L-y0-6bP">
-                                                        <rect key="frame" x="166.5" y="0.0" width="41.5" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TC Kimlik No" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8L-y0-6bP">
+                                                        <rect key="frame" x="20" y="0.0" width="250" height="37.5"/>
+                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                        <color key="textColor" red="0.12941176470588234" green="0.3411764705882353" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="T.C." textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="wJX-Jf-SIC">
-                                                        <rect key="frame" x="160.5" y="65.5" width="53" height="39"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" background="gorev cubugu" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="wJX-Jf-SIC">
+                                                        <rect key="frame" x="20" y="37.5" width="250" height="71"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="250" id="lhg-j6-pIh"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Şifre" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Uab-h2-71m">
-                                                        <rect key="frame" x="158" y="149.5" width="58" height="34"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="İnternet ve Mobil Şube Şifresi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fw9-1q-Gbv">
+                                                        <rect key="frame" x="20" y="108.5" width="250" height="37.5"/>
+                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                        <color key="textColor" red="0.12941176469999999" green="0.3411764706" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Uab-h2-71m">
+                                                        <rect key="frame" x="20" y="146" width="250" height="71"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="250" id="23q-ok-7Jq"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="aaa," textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkT-mc-RsT">
-                                                        <rect key="frame" x="171.5" y="228.5" width="31.5" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" systemColor="systemRedColor"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Şifremi unuttum" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJ3-Ai-enF">
+                                                        <rect key="frame" x="160.5" y="217" width="109.5" height="37.5"/>
+                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                        <color key="textColor" red="0.12941176469999999" green="0.3411764706" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfI-bf-eyu">
-                                                        <rect key="frame" x="162.5" y="294" width="49" height="36"/>
-                                                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfI-bf-eyu">
+                                                        <rect key="frame" x="120" y="254.5" width="150" height="75"/>
+                                                        <color key="backgroundColor" red="0.074509803921568626" green="0.26666666666666666" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="150" id="YcG-1d-rqV"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <state key="normal" title="Login">
-                                                            <color key="titleColor" systemColor="systemYellowColor"/>
+                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="scanCardWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJ2-SE-YW1"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="wJX-Jf-SIC" firstAttribute="leading" secondItem="zm4-ZB-r6s" secondAttribute="leading" constant="20" id="Hob-PW-whH"/>
+                                                    <constraint firstItem="WfI-bf-eyu" firstAttribute="centerX" secondItem="zm4-ZB-r6s" secondAttribute="centerX" id="tjQ-0P-B0I"/>
+                                                    <constraint firstItem="v8L-y0-6bP" firstAttribute="leading" secondItem="zm4-ZB-r6s" secondAttribute="leading" constant="20" id="x3w-79-d5f"/>
+                                                    <constraint firstItem="fw9-1q-Gbv" firstAttribute="leading" secondItem="zm4-ZB-r6s" secondAttribute="leading" constant="20" id="xfz-g0-bNI"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <constraints>
@@ -81,9 +109,9 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRn-Z7-jbt" userLabel="BottomView">
-                                        <rect key="frame" x="0.0" y="596.5" width="414" height="221.5"/>
+                                        <rect key="frame" x="19.5" y="596.5" width="375" height="221.5"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="daireler" translatesAutoresizingMaskIntoConstraints="NO" id="rLC-62-7Mn">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rLC-62-7Mn">
                                                 <rect key="frame" x="-40" y="0.0" width="557" height="222"/>
                                             </imageView>
                                         </subviews>
@@ -98,7 +126,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.94117647058823528" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="v1s-Av-Cf7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7w0-hA-d5x"/>
                             <constraint firstItem="v1s-Av-Cf7" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="UXu-lh-Z5F"/>
@@ -119,18 +147,9 @@
     </scenes>
     <resources>
         <image name="YKB_Logo" width="175.5" height="87.5"/>
-        <image name="daireler" width="222.5" height="149"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <image name="gorev cubugu" width="151" height="76"/>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
