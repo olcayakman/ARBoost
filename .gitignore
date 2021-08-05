@@ -89,7 +89,7 @@ fastlane/test_output
 
 #Libraries are mostly above 100Mb cannot push them to remote
 *.a
-
+CardIO/*.a
 
 # Code Injection
 #

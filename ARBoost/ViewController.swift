@@ -7,13 +7,45 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
+    func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
+        print("cancel")
     }
+    
+    func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
+        print("provide")
+    }
+    
 
+  @IBOutlet weak var resultLabel: UILabel!
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+    CardIOUtilities.preload()
+  }
 
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  @IBAction func scanCard(sender: AnyObject) {
+    let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
+    cardIOVC!.modalPresentationStyle = .formSheet
+    present(cardIOVC!, animated: true, completion: nil)
+  }
+  
+  func userDidCancelPaymentViewController(paymentViewController: CardIOPaymentViewController!) {
+    resultLabel.text = "user canceled"
+    paymentViewController?.dismiss(animated: true, completion: nil)
+  }
+  
+  func userDidProvideCreditCardInfo(cardInfo: CardIOCreditCardInfo!, inPaymentViewController paymentViewController: CardIOPaymentViewController!) {
+    if let info = cardInfo {
+      let str = NSString(format: "Received card info.\n Number: %@\n expiry: %02lu/%lu\n cvv: %@.", info.redactedCardNumber, info.expiryMonth, info.expiryYear, info.cvv)
+      resultLabel.text = str as String
+    }
+    paymentViewController?.dismiss(animated: true, completion: nil)
+  }
 }
 

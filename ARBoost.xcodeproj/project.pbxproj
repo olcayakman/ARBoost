@@ -351,6 +351,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CardIO",
 				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mertgokcen.ARBoost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ARBoost/ARBoost-Bridging-Header.h";
@@ -374,6 +378,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CardIO",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mertgokcen.ARBoost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
