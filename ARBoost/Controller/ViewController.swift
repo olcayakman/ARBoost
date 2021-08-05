@@ -14,6 +14,9 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
     
     @IBOutlet weak var passwordInputField: UITextField!
+    
+    @IBOutlet weak var errorMessage: UILabel!
+    
     var myUser:User = User(
         tckn: "12341234123",
         name: "Mert",
@@ -42,42 +45,41 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     // Dispose of any resources that can be recreated.
   }
     
-    func displayTcError(tcEmpty:Bool,tcNotExisting:Bool){
-        if tcEmpty {
-            print("TC boş olamaz.Yeniden deneyiniz.")
-        }
-        else if tcNotExisting{
-            print("Yanlış bir TC girdiniz. Yeniden deneyiniz.")
-        }
-    }
   
   @IBAction func scanCard(sender: AnyObject) {
     
     let TCEmpty = tcInputField.text == ""
     
-    let passEmpty = passwordInputField.text == ""
+    let passwordEmpty = passwordInputField.text == ""
+    
+    let TCCorrect:Bool =  tcInputField.text == myUser.tckn
+    let passwordCorrect:Bool = passwordInputField.text == myUser.password
     
     if TCEmpty{
+        errorMessage.text = "TC boş olamaz.Yeniden deneyiniz."
         print("TC boş olamaz.Yeniden deneyiniz.")
     }
     
-    if passEmpty {
+    else if passwordEmpty {
+        errorMessage.text = "Şifre boş olamaz.Yeniden deneyiniz."
         print("Şifre boş olamaz.Yeniden deneyiniz.")
     }
     
-    
-    if tcInputField.text == ""{
-        print("default empty")
+    else if !TCCorrect {
+        errorMessage.text = "TC'niz yanlış.Yeniden deneyiniz."
+        print("TC'niz yanlış.Yeniden deneyiniz.")
+    }
+    else if !passwordCorrect{
+        errorMessage.text = "Şifrenizniz yanlış.Yeniden deneyiniz."
+        print("Şifrenizniz yanlış.Yeniden deneyiniz.")
     }
     
-    print(tcInputField.text ?? "Empty TC")
-    print(passwordInputField.text ?? "Empty password")
-    
-    if !TCEmpty && !passEmpty{
+    else{
         let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
         cardIOVC!.modalPresentationStyle = .formSheet
         present(cardIOVC!, animated: true, completion: nil)
     }
+    
  
   }
   
