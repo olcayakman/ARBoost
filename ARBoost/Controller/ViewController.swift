@@ -47,7 +47,7 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
   
   @IBAction func scanCard(sender: AnyObject) {
-    
+    errorMessage.textColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
     let TCEmpty = tcInputField.text == ""
     
     let passwordEmpty = passwordInputField.text == ""
@@ -57,20 +57,24 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
     if TCEmpty{
         errorMessage.text = "TC boş olamaz.Yeniden deneyiniz."
+        errorMessage.sizeToFit()
         print("TC boş olamaz.Yeniden deneyiniz.")
     }
     
     else if passwordEmpty {
         errorMessage.text = "Şifre boş olamaz.Yeniden deneyiniz."
+        errorMessage.sizeToFit()
         print("Şifre boş olamaz.Yeniden deneyiniz.")
     }
     
     else if !TCCorrect {
         errorMessage.text = "TC'niz yanlış.Yeniden deneyiniz."
+        errorMessage.sizeToFit()
         print("TC'niz yanlış.Yeniden deneyiniz.")
     }
     else if !passwordCorrect{
         errorMessage.text = "Şifrenizniz yanlış.Yeniden deneyiniz."
+        errorMessage.sizeToFit()
         print("Şifrenizniz yanlış.Yeniden deneyiniz.")
     }
     
