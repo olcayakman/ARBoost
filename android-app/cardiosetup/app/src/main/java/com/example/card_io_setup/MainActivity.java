@@ -12,7 +12,6 @@ import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
 
 public class MainActivity extends AppCompatActivity {
-
     Button button;
     TextView textView;
     int MY_SCAN_REQUEST_CODE = 111;
@@ -20,10 +19,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.hosgeldin_ekrani);
 
+        /*
         button = findViewById(R.id.button2);
         textView = findViewById(R.id.textView);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
                 onButtonListener();
             }
         });
+
+         */
+
     }
 
     private void onButtonListener(){
@@ -77,8 +81,11 @@ public class MainActivity extends AppCompatActivity {
                 resultDisplayStr = "Scan was canceled.";
             }
             // do something with resultDisplayStr, maybe display it in a textView
-             textView.setText(resultDisplayStr);
+            textView.setText(resultDisplayStr);
         }
         // else handle other activity results
     }
+
+
+
 }
