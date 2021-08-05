@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A64C9AF26BBA7F1007A1131 /* libopencv_imgproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A64C9A326BBA7ED007A1131 /* libopencv_imgproc.a */; };
+		0A64C9B026BBA7F1007A1131 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A64C9AA26BBA7ED007A1131 /* Accelerate.framework */; };
+		0A64C9B126BBA7F1007A1131 /* libCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A64C9AB26BBA7EF007A1131 /* libCardIO.a */; };
+		0A64C9B226BBA7F1007A1131 /* libopencv_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A64C9AC26BBA7F1007A1131 /* libopencv_core.a */; };
 		0A76AD5B26B9C35500427B4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A76AD5A26B9C35500427B4C /* AppDelegate.swift */; };
 		0A76AD5D26B9C35500427B4C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A76AD5C26B9C35500427B4C /* SceneDelegate.swift */; };
 		0A76AD5F26B9C35500427B4C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A76AD5E26B9C35500427B4C /* ViewController.swift */; };
@@ -17,6 +21,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A64C9A326BBA7ED007A1131 /* libopencv_imgproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_imgproc.a; sourceTree = "<group>"; };
+		0A64C9A426BBA7ED007A1131 /* CardIODetectionMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIODetectionMode.h; sourceTree = "<group>"; };
+		0A64C9A526BBA7ED007A1131 /* CardIOPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOPaymentViewController.h; sourceTree = "<group>"; };
+		0A64C9A626BBA7ED007A1131 /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
+		0A64C9A726BBA7ED007A1131 /* CardIOPaymentViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOPaymentViewControllerDelegate.h; sourceTree = "<group>"; };
+		0A64C9A826BBA7ED007A1131 /* CardIOView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOView.h; sourceTree = "<group>"; };
+		0A64C9A926BBA7ED007A1131 /* CardIOViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOViewDelegate.h; sourceTree = "<group>"; };
+		0A64C9AA26BBA7ED007A1131 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		0A64C9AB26BBA7EF007A1131 /* libCardIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCardIO.a; sourceTree = "<group>"; };
+		0A64C9AC26BBA7F1007A1131 /* libopencv_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_core.a; sourceTree = "<group>"; };
+		0A64C9AD26BBA7F1007A1131 /* CardIOUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOUtilities.h; sourceTree = "<group>"; };
+		0A64C9AE26BBA7F1007A1131 /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
+		0A64C9B326BBA875007A1131 /* ARBoost-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARBoost-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A76AD5726B9C35500427B4C /* ARBoost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARBoost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A76AD5A26B9C35500427B4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A76AD5C26B9C35500427B4C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,15 +50,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A64C9AF26BBA7F1007A1131 /* libopencv_imgproc.a in Frameworks */,
+				0A64C9B226BBA7F1007A1131 /* libopencv_core.a in Frameworks */,
+				0A64C9B126BBA7F1007A1131 /* libCardIO.a in Frameworks */,
+				0A64C9B026BBA7F1007A1131 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A64C9A226BBA7D7007A1131 /* CardIO */ = {
+			isa = PBXGroup;
+			children = (
+				0A64C9AA26BBA7ED007A1131 /* Accelerate.framework */,
+				0A64C9A626BBA7ED007A1131 /* CardIO.h */,
+				0A64C9AE26BBA7F1007A1131 /* CardIOCreditCardInfo.h */,
+				0A64C9A426BBA7ED007A1131 /* CardIODetectionMode.h */,
+				0A64C9A526BBA7ED007A1131 /* CardIOPaymentViewController.h */,
+				0A64C9A726BBA7ED007A1131 /* CardIOPaymentViewControllerDelegate.h */,
+				0A64C9AD26BBA7F1007A1131 /* CardIOUtilities.h */,
+				0A64C9A826BBA7ED007A1131 /* CardIOView.h */,
+				0A64C9A926BBA7ED007A1131 /* CardIOViewDelegate.h */,
+				0A64C9AB26BBA7EF007A1131 /* libCardIO.a */,
+				0A64C9AC26BBA7F1007A1131 /* libopencv_core.a */,
+				0A64C9A326BBA7ED007A1131 /* libopencv_imgproc.a */,
+			);
+			path = CardIO;
+			sourceTree = "<group>";
+		};
 		0A76AD4E26B9C35400427B4C = {
 			isa = PBXGroup;
 			children = (
+				0A64C9A226BBA7D7007A1131 /* CardIO */,
 				0A76ADD626BAA9CD00427B4C /* Resources */,
 				0A76AD5926B9C35500427B4C /* ARBoost */,
 				0A76AD5826B9C35500427B4C /* Products */,
@@ -66,6 +107,7 @@
 				0A76AD6326B9C35900427B4C /* Assets.xcassets */,
 				0A76AD6526B9C35900427B4C /* LaunchScreen.storyboard */,
 				0A76AD6826B9C35900427B4C /* Info.plist */,
+				0A64C9B326BBA875007A1131 /* ARBoost-Bridging-Header.h */,
 			);
 			path = ARBoost;
 			sourceTree = "<group>";
@@ -305,8 +347,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CardIO",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mertgokcen.ARBoost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARBoost/ARBoost-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -324,8 +371,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CardIO",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mertgokcen.ARBoost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARBoost/ARBoost-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
