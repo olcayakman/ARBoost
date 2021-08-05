@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ECF0F3"
+    >
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:background="#ECF0F3"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ykb_logo_680x340" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="77dp"
+            android:padding="1dp"
+            android:text="TC Kimlik No"
+            android:textSize="15dp"
+            android:textColor="#215782"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="244dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/down2"
+            android:drawablePadding="1dp"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:inputType="textPersonName"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:text=""
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="232dp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="23dp"
+            android:gravity="end"
+            android:textSize="15dp"
+            android:padding="1dp"
+            android:text="İnternet ve Mobil Şube Şifresi"
+            android:textColor="#215782"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/editTextNumberPassword"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="105dp" />
+
+        <EditText
+            android:id="@+id/editTextNumberPassword"
+            android:layout_width="244dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/down2"
+            android:padding="10dp"
+            android:ems="10"
+            android:inputType="numberPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="329dp" />
+
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginLeft="68dp"
+            android:gravity="end"
+            android:padding="5dp"
+            android:text="Şifremi Unuttum"
+            android:textColor="#215782"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumberPassword"
+            app:layout_constraintVertical_bias="0.173"
+            tools:layout_editor_absoluteX="199dp" />
+
+        <Button
+            android:id="@+id/button"
+
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="Giriş"
+            android:textSize="17dp"
+            android:backgroundTint="#A6134479"
+            app:cornerRadius="10dp"
+            tools:layout_editor_absoluteX="203dp"
+            tools:layout_editor_absoluteY="422dp"
+
+             />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/disayn" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
