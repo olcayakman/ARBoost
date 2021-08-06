@@ -132,6 +132,7 @@
                                     <constraint firstItem="myY-vG-DrX" firstAttribute="top" secondItem="hI4-5C-PNs" secondAttribute="bottom" id="i4p-k9-hkv"/>
                                     <constraint firstAttribute="trailing" secondItem="hI4-5C-PNs" secondAttribute="trailing" id="ppS-Oq-jiv"/>
                                     <constraint firstAttribute="trailing" secondItem="rLC-62-7Mn" secondAttribute="trailing" id="r68-PU-nng"/>
+                                    <constraint firstItem="myY-vG-DrX" firstAttribute="height" secondItem="rLC-62-7Mn" secondAttribute="height" id="uf0-ex-axa"/>
                                     <constraint firstAttribute="bottom" secondItem="rLC-62-7Mn" secondAttribute="bottom" id="vaB-FB-HDe"/>
                                 </constraints>
                             </stackView>
