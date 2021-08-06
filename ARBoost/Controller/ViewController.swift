@@ -15,8 +15,6 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
     @IBOutlet weak var passwordInputField: UITextField!
     
-    @IBOutlet weak var errorMessage: UILabel!
-    
     var myUser:User = User(
         tckn: "12341234123",
         name: "Mert",
@@ -47,34 +45,30 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
   
   @IBAction func scanCard(sender: AnyObject) {
-    errorMessage.textColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+    
     let TCEmpty = tcInputField.text == ""
     
     let passwordEmpty = passwordInputField.text == ""
     
     let TCCorrect:Bool =  tcInputField.text == myUser.tckn
     let passwordCorrect:Bool = passwordInputField.text == myUser.password
-    
+    var text:String
     if TCEmpty{
-        errorMessage.text = "TC boş olamaz.Yeniden deneyiniz."
-        errorMessage.sizeToFit()
+        text = "TC boş olamaz.Yeniden deneyiniz."
         print("TC boş olamaz.Yeniden deneyiniz.")
     }
     
     else if passwordEmpty {
-        errorMessage.text = "Şifre boş olamaz.Yeniden deneyiniz."
-        errorMessage.sizeToFit()
+        text = "Şifre boş olamaz.Yeniden deneyiniz."
         print("Şifre boş olamaz.Yeniden deneyiniz.")
     }
     
     else if !TCCorrect {
-        errorMessage.text = "TC'niz yanlış.Yeniden deneyiniz."
-        errorMessage.sizeToFit()
+        text = "TC'niz yanlış.Yeniden deneyiniz."
         print("TC'niz yanlış.Yeniden deneyiniz.")
     }
     else if !passwordCorrect{
-        errorMessage.text = "Şifrenizniz yanlış.Yeniden deneyiniz."
-        errorMessage.sizeToFit()
+        text = "Şifrenizniz yanlış.Yeniden deneyiniz."
         print("Şifrenizniz yanlış.Yeniden deneyiniz.")
     }
     
