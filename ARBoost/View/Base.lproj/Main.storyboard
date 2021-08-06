@@ -76,24 +76,36 @@
                                                         <color key="textColor" red="0.12941176469999999" green="0.3411764706" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfI-bf-eyu">
-                                                        <rect key="frame" x="110" y="211.5" width="160" height="61.5"/>
-                                                        <color key="backgroundColor" red="0.074509803921568626" green="0.26666666666666666" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CH7-1G-bwp">
+                                                        <rect key="frame" x="0.0" y="211.5" width="270" height="61.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfI-bf-eyu">
+                                                                <rect key="frame" x="65" y="0.0" width="140" height="61.5"/>
+                                                                <color key="backgroundColor" red="0.074509803921568626" green="0.26666666666666666" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="jFg-G3-pKo"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                <state key="normal" title="Giriş">
+                                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="scanCardWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJ2-SE-YW1"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="hyU-Gw-FOU"/>
+                                                            <constraint firstItem="WfI-bf-eyu" firstAttribute="centerY" secondItem="CH7-1G-bwp" secondAttribute="centerY" id="D36-rd-Qa7"/>
+                                                            <constraint firstItem="WfI-bf-eyu" firstAttribute="centerX" secondItem="CH7-1G-bwp" secondAttribute="centerX" id="KZL-pr-ipq"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                        <state key="normal" title="Giriş">
-                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="scanCardWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJ2-SE-YW1"/>
-                                                        </connections>
-                                                    </button>
+                                                    </stackView>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="CH7-1G-bwp" secondAttribute="trailing" id="N9e-iG-OhJ"/>
+                                                    <constraint firstItem="CH7-1G-bwp" firstAttribute="leading" secondItem="zm4-ZB-r6s" secondAttribute="leading" id="hzz-fi-ULk"/>
                                                     <constraint firstItem="v8L-y0-6bP" firstAttribute="leading" secondItem="zm4-ZB-r6s" secondAttribute="leading" constant="20" id="x3w-79-d5f"/>
                                                     <constraint firstItem="fw9-1q-Gbv" firstAttribute="leading" secondItem="zm4-ZB-r6s" secondAttribute="leading" constant="20" id="xfz-g0-bNI"/>
+                                                    <constraint firstAttribute="bottom" secondItem="CH7-1G-bwp" secondAttribute="bottom" id="zfq-hr-Z6H"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
