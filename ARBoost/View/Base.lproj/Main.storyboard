@@ -80,10 +80,10 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CH7-1G-bwp">
-                                                                <rect key="frame" x="110" y="31.5" width="140" height="63"/>
+                                                                <rect key="frame" x="0.0" y="31.5" width="250" height="63"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfI-bf-eyu">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="140" height="63"/>
+                                                                        <rect key="frame" x="55" y="0.0" width="140" height="63"/>
                                                                         <color key="backgroundColor" red="0.074509803921568626" green="0.26666666666666666" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="jFg-G3-pKo"/>
@@ -103,6 +103,10 @@
                                                                 </constraints>
                                                             </stackView>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="CH7-1G-bwp" firstAttribute="leading" secondItem="dEB-Ze-0q3" secondAttribute="leading" id="Ayq-Ez-xdE"/>
+                                                            <constraint firstAttribute="trailing" secondItem="CH7-1G-bwp" secondAttribute="trailing" id="U7M-fa-wJ0"/>
+                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
