@@ -38,17 +38,17 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myY-vG-DrX" userLabel="MiddleView">
                                         <rect key="frame" x="72" y="272.5" width="270" height="273"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="zm4-ZB-r6s">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="zm4-ZB-r6s">
                                                 <rect key="frame" x="0.0" y="0.0" width="270" height="273"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TC Kimlik No" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8L-y0-6bP">
-                                                        <rect key="frame" x="20" y="0.0" width="250" height="33.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="88" height="33.5"/>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                         <color key="textColor" red="0.12941176470588234" green="0.3411764705882353" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" background="Down2" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="wJX-Jf-SIC">
-                                                        <rect key="frame" x="20" y="33.5" width="250" height="58.5"/>
+                                                        <rect key="frame" x="0.0" y="33.5" width="250" height="58.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="58.5" id="Lep-Tl-eZw"/>
                                                             <constraint firstAttribute="width" constant="250" id="aaV-75-6vH"/>
@@ -57,55 +57,59 @@
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="İnternet ve Mobil Şube Şifresi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fw9-1q-Gbv">
-                                                        <rect key="frame" x="20" y="92" width="250" height="33.5"/>
+                                                        <rect key="frame" x="0.0" y="92" width="201" height="33.5"/>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                         <color key="textColor" red="0.12941176469999999" green="0.3411764706" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" background="Down2" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Uab-h2-71m">
-                                                        <rect key="frame" x="20" y="125.5" width="250" height="53"/>
+                                                        <rect key="frame" x="0.0" y="125.5" width="250" height="53"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="250" id="23q-ok-7Jq"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Şifremi unuttum" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJ3-Ai-enF">
-                                                        <rect key="frame" x="160.5" y="178.5" width="109.5" height="33"/>
-                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
-                                                        <color key="textColor" red="0.12941176469999999" green="0.3411764706" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CH7-1G-bwp">
-                                                        <rect key="frame" x="0.0" y="211.5" width="270" height="61.5"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="dEB-Ze-0q3">
+                                                        <rect key="frame" x="0.0" y="178.5" width="250" height="94.5"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfI-bf-eyu">
-                                                                <rect key="frame" x="65" y="0.0" width="140" height="61.5"/>
-                                                                <color key="backgroundColor" red="0.074509803921568626" green="0.26666666666666666" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Şifremi unuttum" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJ3-Ai-enF">
+                                                                <rect key="frame" x="140.5" y="0.0" width="109.5" height="31.5"/>
+                                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                                <color key="textColor" red="0.12941176469999999" green="0.3411764706" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CH7-1G-bwp">
+                                                                <rect key="frame" x="110" y="31.5" width="140" height="63"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfI-bf-eyu">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="140" height="63"/>
+                                                                        <color key="backgroundColor" red="0.074509803921568626" green="0.26666666666666666" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="jFg-G3-pKo"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                        <state key="normal" title="Giriş">
+                                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <action selector="scanCardWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJ2-SE-YW1"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="jFg-G3-pKo"/>
+                                                                    <constraint firstItem="WfI-bf-eyu" firstAttribute="centerY" secondItem="CH7-1G-bwp" secondAttribute="centerY" id="D36-rd-Qa7"/>
+                                                                    <constraint firstItem="WfI-bf-eyu" firstAttribute="centerX" secondItem="CH7-1G-bwp" secondAttribute="centerX" id="KZL-pr-ipq"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                                <state key="normal" title="Giriş">
-                                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="scanCardWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJ2-SE-YW1"/>
-                                                                </connections>
-                                                            </button>
+                                                            </stackView>
                                                         </subviews>
-                                                        <constraints>
-                                                            <constraint firstItem="WfI-bf-eyu" firstAttribute="centerY" secondItem="CH7-1G-bwp" secondAttribute="centerY" id="D36-rd-Qa7"/>
-                                                            <constraint firstItem="WfI-bf-eyu" firstAttribute="centerX" secondItem="CH7-1G-bwp" secondAttribute="centerX" id="KZL-pr-ipq"/>
-                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="CH7-1G-bwp" secondAttribute="trailing" id="N9e-iG-OhJ"/>
-                                                    <constraint firstItem="CH7-1G-bwp" firstAttribute="leading" secondItem="zm4-ZB-r6s" secondAttribute="leading" id="hzz-fi-ULk"/>
-                                                    <constraint firstItem="v8L-y0-6bP" firstAttribute="leading" secondItem="zm4-ZB-r6s" secondAttribute="leading" constant="20" id="x3w-79-d5f"/>
-                                                    <constraint firstItem="fw9-1q-Gbv" firstAttribute="leading" secondItem="zm4-ZB-r6s" secondAttribute="leading" constant="20" id="xfz-g0-bNI"/>
-                                                    <constraint firstAttribute="bottom" secondItem="CH7-1G-bwp" secondAttribute="bottom" id="zfq-hr-Z6H"/>
+                                                    <constraint firstAttribute="trailing" secondItem="dEB-Ze-0q3" secondAttribute="trailing" constant="20" id="RUd-0I-1Gv"/>
+                                                    <constraint firstItem="dEB-Ze-0q3" firstAttribute="leading" secondItem="zm4-ZB-r6s" secondAttribute="leading" id="aQD-hV-AoG"/>
+                                                    <constraint firstItem="dEB-Ze-0q3" firstAttribute="top" secondItem="Uab-h2-71m" secondAttribute="bottom" id="i4z-YC-dbX"/>
+                                                    <constraint firstAttribute="bottom" secondItem="dEB-Ze-0q3" secondAttribute="bottom" id="tfI-l4-SeB"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
