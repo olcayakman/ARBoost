@@ -120,29 +120,59 @@
                                             <constraint firstAttribute="bottom" secondItem="zm4-ZB-r6s" secondAttribute="bottom" id="m4w-HC-Nk5"/>
                                         </constraints>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disayn" translatesAutoresizingMaskIntoConstraints="NO" id="rLC-62-7Mn">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SmH-2O-8CV">
                                         <rect key="frame" x="0.0" y="545.5" width="414" height="272.5"/>
-                                    </imageView>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XZ-mQ-RaC">
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="272.5"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="middleRound" translatesAutoresizingMaskIntoConstraints="NO" id="uxR-I1-3sZ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="272.5"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="uxR-I1-3sZ" firstAttribute="leading" secondItem="8XZ-mQ-RaC" secondAttribute="leading" id="DNa-MF-IbM"/>
+                                                    <constraint firstItem="uxR-I1-3sZ" firstAttribute="centerY" secondItem="8XZ-mQ-RaC" secondAttribute="centerY" id="iVy-3S-B5c"/>
+                                                    <constraint firstItem="uxR-I1-3sZ" firstAttribute="centerX" secondItem="8XZ-mQ-RaC" secondAttribute="centerX" id="kle-Xe-2Ys"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="813-YK-LS2">
+                                                <rect key="frame" x="138" y="0.0" width="138" height="272.5"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UpRound" translatesAutoresizingMaskIntoConstraints="NO" id="M53-3O-0aH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="98"/>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6uH-33-9AU">
+                                                <rect key="frame" x="276" y="0.0" width="138" height="272.5"/>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="rLC-62-7Mn" firstAttribute="leading" secondItem="v1s-Av-Cf7" secondAttribute="leading" id="0x8-Ym-ftL"/>
                                     <constraint firstItem="hI4-5C-PNs" firstAttribute="leading" secondItem="v1s-Av-Cf7" secondAttribute="leading" id="8t8-ad-JLc"/>
-                                    <constraint firstItem="rLC-62-7Mn" firstAttribute="top" secondItem="myY-vG-DrX" secondAttribute="bottom" id="9C0-5u-bpE"/>
                                     <constraint firstItem="hI4-5C-PNs" firstAttribute="top" secondItem="v1s-Av-Cf7" secondAttribute="top" id="M5m-qy-aJZ"/>
                                     <constraint firstItem="myY-vG-DrX" firstAttribute="top" secondItem="hI4-5C-PNs" secondAttribute="bottom" id="i4p-k9-hkv"/>
                                     <constraint firstAttribute="trailing" secondItem="hI4-5C-PNs" secondAttribute="trailing" id="ppS-Oq-jiv"/>
-                                    <constraint firstAttribute="trailing" secondItem="rLC-62-7Mn" secondAttribute="trailing" id="r68-PU-nng"/>
-                                    <constraint firstItem="myY-vG-DrX" firstAttribute="height" secondItem="rLC-62-7Mn" secondAttribute="height" id="uf0-ex-axa"/>
-                                    <constraint firstAttribute="bottom" secondItem="rLC-62-7Mn" secondAttribute="bottom" id="vaB-FB-HDe"/>
                                 </constraints>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cornerRound" translatesAutoresizingMaskIntoConstraints="NO" id="8N0-yh-OAu">
+                                <rect key="frame" x="214" y="662" width="200" height="234"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Dsj-Og-tXT"/>
+                                    <constraint firstAttribute="height" constant="234" id="vhg-ze-P5k"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.94117647058823528" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="v1s-Av-Cf7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7w0-hA-d5x"/>
+                            <constraint firstItem="8N0-yh-OAu" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="MVO-gO-HGj"/>
                             <constraint firstItem="v1s-Av-Cf7" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="UXu-lh-Z5F"/>
                             <constraint firstItem="v1s-Av-Cf7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="i49-uA-pGe"/>
+                            <constraint firstItem="8N0-yh-OAu" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="scd-pH-ZoB"/>
                             <constraint firstItem="v1s-Av-Cf7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tNS-x0-iHr"/>
                         </constraints>
                     </view>
@@ -158,7 +188,9 @@
     </scenes>
     <resources>
         <image name="Down2" width="147" height="30.5"/>
+        <image name="UpRound" width="98" height="98"/>
         <image name="YKB_Logo" width="175.5" height="87.5"/>
-        <image name="disayn" width="130" height="104.5"/>
+        <image name="cornerRound" width="121" height="118"/>
+        <image name="middleRound" width="95" height="135"/>
     </resources>
 </document>
