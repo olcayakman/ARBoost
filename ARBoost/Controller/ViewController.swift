@@ -15,6 +15,13 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
     @IBOutlet weak var passwordInputField: UITextField!
     
+    
+    
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        tcInputField.resignFirstResponder()
+        passwordInputField.resignFirstResponder()
+    }
+    
     var myUser:User = User(
         tckn: "12341234123",
         name: "Mert",
@@ -34,6 +41,8 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
   @IBOutlet weak var resultLabel: UILabel!
   override func viewDidLoad() {
     super.viewDidLoad()
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+    self.view.addGestureRecognizer(tapGesture)
     
     // Do any additional setup after loading the view, typically from a nib.
     CardIOUtilities.preload()
