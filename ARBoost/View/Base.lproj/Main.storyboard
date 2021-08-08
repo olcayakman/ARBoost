@@ -152,7 +152,11 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="hI4-5C-PNs" firstAttribute="leading" secondItem="v1s-Av-Cf7" secondAttribute="leading" id="8t8-ad-JLc"/>
+                                    <constraint firstAttribute="trailing" secondItem="SmH-2O-8CV" secondAttribute="trailing" id="KB5-T4-kdo"/>
                                     <constraint firstItem="hI4-5C-PNs" firstAttribute="top" secondItem="v1s-Av-Cf7" secondAttribute="top" id="M5m-qy-aJZ"/>
+                                    <constraint firstItem="SmH-2O-8CV" firstAttribute="top" secondItem="myY-vG-DrX" secondAttribute="bottom" id="TQg-e6-lqq"/>
+                                    <constraint firstItem="SmH-2O-8CV" firstAttribute="leading" secondItem="v1s-Av-Cf7" secondAttribute="leading" id="Wne-n5-wKF"/>
+                                    <constraint firstAttribute="bottom" secondItem="SmH-2O-8CV" secondAttribute="bottom" id="d5Z-sI-nVQ"/>
                                     <constraint firstItem="myY-vG-DrX" firstAttribute="top" secondItem="hI4-5C-PNs" secondAttribute="bottom" id="i4p-k9-hkv"/>
                                     <constraint firstAttribute="trailing" secondItem="hI4-5C-PNs" secondAttribute="trailing" id="ppS-Oq-jiv"/>
                                 </constraints>
@@ -168,12 +172,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.94117647058823528" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="v1s-Av-Cf7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7w0-hA-d5x"/>
+                            <constraint firstItem="v1s-Av-Cf7" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="7w0-hA-d5x"/>
                             <constraint firstItem="8N0-yh-OAu" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="MVO-gO-HGj"/>
-                            <constraint firstItem="v1s-Av-Cf7" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="UXu-lh-Z5F"/>
-                            <constraint firstItem="v1s-Av-Cf7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="i49-uA-pGe"/>
+                            <constraint firstItem="v1s-Av-Cf7" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" constant="-34" id="UXu-lh-Z5F"/>
+                            <constraint firstItem="v1s-Av-Cf7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="44" id="i49-uA-pGe"/>
                             <constraint firstItem="8N0-yh-OAu" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="scd-pH-ZoB"/>
-                            <constraint firstItem="v1s-Av-Cf7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tNS-x0-iHr"/>
+                            <constraint firstItem="v1s-Av-Cf7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="tNS-x0-iHr"/>
                         </constraints>
                     </view>
                     <connections>
