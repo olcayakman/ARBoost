@@ -5,7 +5,7 @@
 //  Created by Mert Gökçen on 3.08.2021.
 //
 
-import UIKit
+import UIKit;import SceneKit;import ARKit
 
 class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
@@ -75,41 +75,51 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
   
   @IBAction func scanCard(sender: AnyObject) {
     
-    let TCEmpty = tcInputField.text == ""
-    
-    let passwordEmpty = passwordInputField.text == ""
-    
-    let TCCorrect:Bool =  tcInputField.text == myUser.tckn
-    let passwordCorrect:Bool = passwordInputField.text == myUser.password
-    var text:String
-    if TCEmpty{
-        text = "TC boş olamaz.Yeniden deneyiniz."
-        alert(text: text)
-        print("TC boş olamaz.Yeniden deneyiniz.")
+    if ARWorldTrackingConfiguration.isSupported {
+        print("okay")
+        let TCEmpty = tcInputField.text == ""
+        
+        let passwordEmpty = passwordInputField.text == ""
+        
+        let TCCorrect:Bool =  tcInputField.text == myUser.tckn
+        let passwordCorrect:Bool = passwordInputField.text == myUser.password
+        var text:String
+        if TCEmpty{
+            text = "TC boş olamaz.Yeniden deneyiniz."
+            alert(text: text)
+            print("TC boş olamaz.Yeniden deneyiniz.")
+        }
+        
+        else if passwordEmpty {
+            text = "Şifre boş olamaz.Yeniden deneyiniz."
+            alert(text: text)
+            print("Şifre boş olamaz.Yeniden deneyiniz.")
+        }
+        
+        else if !TCCorrect {
+            text = "TC'niz yanlış.Yeniden deneyiniz."
+            alert(text: text)
+            print("TC'niz yanlış.Yeniden deneyiniz.")
+        }
+        else if !passwordCorrect{
+            text = "Şifrenizniz yanlış.Yeniden deneyiniz."
+            alert(text: text)
+            print("Şifrenizniz yanlış.Yeniden deneyiniz.")
+        }
+        
+        else{
+            let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
+            cardIOVC!.modalPresentationStyle = .formSheet
+            present(cardIOVC!, animated: true, completion: nil)
+        }
+    }
+    else {
+        print("not supported")
+        alert(text: "Telefonunuz uygulamamızın bu özelliğini karşılamamaktadır.")
     }
     
-    else if passwordEmpty {
-        text = "Şifre boş olamaz.Yeniden deneyiniz."
-        alert(text: text)
-        print("Şifre boş olamaz.Yeniden deneyiniz.")
-    }
     
-    else if !TCCorrect {
-        text = "TC'niz yanlış.Yeniden deneyiniz."
-        alert(text: text)
-        print("TC'niz yanlış.Yeniden deneyiniz.")
-    }
-    else if !passwordCorrect{
-        text = "Şifrenizniz yanlış.Yeniden deneyiniz."
-        alert(text: text)
-        print("Şifrenizniz yanlış.Yeniden deneyiniz.")
-    }
     
-    else{
-        let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
-        cardIOVC!.modalPresentationStyle = .formSheet
-        present(cardIOVC!, animated: true, completion: nil)
-    }
     
  
   }
