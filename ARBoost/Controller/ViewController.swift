@@ -53,6 +53,25 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     // Dispose of any resources that can be recreated..
   }
     
+    func alert(text:String) {
+        let alert = UIAlertController(title: "Hata", message: text, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+                case .default:
+                print("default")
+                
+                case .cancel:
+                print("cancel")
+                
+                case .destructive:
+                print("destructive")
+                
+            @unknown default:
+                fatalError()
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
   
   @IBAction func scanCard(sender: AnyObject) {
     
@@ -65,20 +84,24 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     var text:String
     if TCEmpty{
         text = "TC boş olamaz.Yeniden deneyiniz."
+        alert(text: text)
         print("TC boş olamaz.Yeniden deneyiniz.")
     }
     
     else if passwordEmpty {
         text = "Şifre boş olamaz.Yeniden deneyiniz."
+        alert(text: text)
         print("Şifre boş olamaz.Yeniden deneyiniz.")
     }
     
     else if !TCCorrect {
         text = "TC'niz yanlış.Yeniden deneyiniz."
+        alert(text: text)
         print("TC'niz yanlış.Yeniden deneyiniz.")
     }
     else if !passwordCorrect{
         text = "Şifrenizniz yanlış.Yeniden deneyiniz."
+        alert(text: text)
         print("Şifrenizniz yanlış.Yeniden deneyiniz.")
     }
     
