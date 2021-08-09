@@ -131,6 +131,7 @@
 				0A64C9B426BBD563007A1131 /* Model */,
 				0A64C9B526BBD56A007A1131 /* View */,
 				0A64C9B626BBD570007A1131 /* Controller */,
+				0ACEEC4226C10EF200B2B472 /* art.scnassets */,
 				0A76AD6326B9C35900427B4C /* Assets.xcassets */,
 				0A76AD6526B9C35900427B4C /* LaunchScreen.storyboard */,
 				0A76AD6826B9C35900427B4C /* Info.plist */,
@@ -145,6 +146,13 @@
 				0A76ADD826BAA9F100427B4C /* Settings.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		0ACEEC4226C10EF200B2B472 /* art.scnassets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = art.scnassets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

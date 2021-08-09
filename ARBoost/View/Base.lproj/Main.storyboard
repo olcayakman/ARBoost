@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -189,6 +190,32 @@
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="77.678571428571431"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="kAC-e7-7B0">
+            <objects>
+                <viewController id="cCl-ff-IkD" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="D81-VZ-cs3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QFr-wr-kOu">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </arscnView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yNa-wg-Wim"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QFr-wr-kOu" firstAttribute="top" secondItem="yNa-wg-Wim" secondAttribute="top" id="NnM-0Z-4EE"/>
+                            <constraint firstItem="QFr-wr-kOu" firstAttribute="leading" secondItem="yNa-wg-Wim" secondAttribute="leading" id="OKW-5b-GlE"/>
+                            <constraint firstItem="yNa-wg-Wim" firstAttribute="trailing" secondItem="QFr-wr-kOu" secondAttribute="trailing" id="q5O-Ga-Phe"/>
+                            <constraint firstItem="yNa-wg-Wim" firstAttribute="bottom" secondItem="QFr-wr-kOu" secondAttribute="bottom" id="wac-wy-FCA"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kct-0t-scR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1014" y="78"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Down2" width="147" height="30.5"/>
@@ -196,5 +223,8 @@
         <image name="YKB_Logo" width="175.5" height="87.5"/>
         <image name="cornerRound" width="121" height="118"/>
         <image name="middleRound" width="95" height="135"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
