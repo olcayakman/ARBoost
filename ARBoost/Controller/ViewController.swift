@@ -23,7 +23,7 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     }
     
     var myUser:User = User(
-        tckn: "12341234123",
+        tckn: "123",
         name: "Mert",
         surname: "Gökçen",
         password: "mert")
