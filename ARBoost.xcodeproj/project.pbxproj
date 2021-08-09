@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A154F9D26C14E1100968129 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A154F9C26C14E1100968129 /* ARViewController.swift */; };
 		0A64C9AF26BBA7F1007A1131 /* libopencv_imgproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A64C9A326BBA7ED007A1131 /* libopencv_imgproc.a */; };
 		0A64C9B026BBA7F1007A1131 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A64C9AA26BBA7ED007A1131 /* Accelerate.framework */; };
 		0A64C9B126BBA7F1007A1131 /* libCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A64C9AB26BBA7EF007A1131 /* libCardIO.a */; };
@@ -19,9 +20,11 @@
 		0A76AD6426B9C35900427B4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A76AD6326B9C35900427B4C /* Assets.xcassets */; };
 		0A76AD6726B9C35900427B4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A76AD6526B9C35900427B4C /* LaunchScreen.storyboard */; };
 		0A76ADD926BAA9F100427B4C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A76ADD826BAA9F100427B4C /* Settings.bundle */; };
+		0ACC468C26C1527500F0EA6E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC468B26C1527500F0EA6E /* art.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A154F9C26C14E1100968129 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		0A64C9A326BBA7ED007A1131 /* libopencv_imgproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_imgproc.a; sourceTree = "<group>"; };
 		0A64C9A426BBA7ED007A1131 /* CardIODetectionMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIODetectionMode.h; sourceTree = "<group>"; };
 		0A64C9A526BBA7ED007A1131 /* CardIOPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOPaymentViewController.h; sourceTree = "<group>"; };
@@ -45,6 +48,7 @@
 		0A76AD6626B9C35900427B4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A76AD6826B9C35900427B4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A76ADD826BAA9F100427B4C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		0ACC468B26C1527500F0EA6E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				0A76AD5E26B9C35500427B4C /* ViewController.swift */,
+				0A154F9C26C14E1100968129 /* ARViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -131,8 +136,8 @@
 				0A64C9B426BBD563007A1131 /* Model */,
 				0A64C9B526BBD56A007A1131 /* View */,
 				0A64C9B626BBD570007A1131 /* Controller */,
-				0ACEEC4226C10EF200B2B472 /* art.scnassets */,
 				0A76AD6326B9C35900427B4C /* Assets.xcassets */,
+				0ACC468B26C1527500F0EA6E /* art.scnassets */,
 				0A76AD6526B9C35900427B4C /* LaunchScreen.storyboard */,
 				0A76AD6826B9C35900427B4C /* Info.plist */,
 				0A64C9B326BBA875007A1131 /* ARBoost-Bridging-Header.h */,
@@ -146,13 +151,6 @@
 				0A76ADD826BAA9F100427B4C /* Settings.bundle */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		0ACEEC4226C10EF200B2B472 /* art.scnassets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = art.scnassets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +212,7 @@
 			files = (
 				0A76ADD926BAA9F100427B4C /* Settings.bundle in Resources */,
 				0A76AD6726B9C35900427B4C /* LaunchScreen.storyboard in Resources */,
+				0ACC468C26C1527500F0EA6E /* art.scnassets in Resources */,
 				0A76AD6426B9C35900427B4C /* Assets.xcassets in Resources */,
 				0A76AD6226B9C35500427B4C /* Main.storyboard in Resources */,
 			);
@@ -230,6 +229,7 @@
 				0A76AD5F26B9C35500427B4C /* ViewController.swift in Sources */,
 				0A76AD5B26B9C35500427B4C /* AppDelegate.swift in Sources */,
 				0A76AD5D26B9C35500427B4C /* SceneDelegate.swift in Sources */,
+				0A154F9D26C14E1100968129 /* ARViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -108,9 +108,13 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         }
         
         else{
-            let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
-            cardIOVC!.modalPresentationStyle = .formSheet
-            present(cardIOVC!, animated: true, completion: nil)
+            let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
+            
+            self.present(arViewController, animated: false, completion: nil)
+//
+//            let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
+//            cardIOVC!.modalPresentationStyle = .formSheet
+//            present(cardIOVC!, animated: true, completion: nil)
         }
     }
     else {

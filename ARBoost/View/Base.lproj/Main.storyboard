@@ -193,7 +193,7 @@
         <!--View Controller-->
         <scene sceneID="kAC-e7-7B0">
             <objects>
-                <viewController id="cCl-ff-IkD" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ARViewController" id="cCl-ff-IkD" customClass="ARViewController" customModule="ARBoost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D81-VZ-cs3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -205,16 +205,19 @@
                         <viewLayoutGuide key="safeArea" id="yNa-wg-Wim"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="QFr-wr-kOu" firstAttribute="top" secondItem="yNa-wg-Wim" secondAttribute="top" id="NnM-0Z-4EE"/>
-                            <constraint firstItem="QFr-wr-kOu" firstAttribute="leading" secondItem="yNa-wg-Wim" secondAttribute="leading" id="OKW-5b-GlE"/>
-                            <constraint firstItem="yNa-wg-Wim" firstAttribute="trailing" secondItem="QFr-wr-kOu" secondAttribute="trailing" id="q5O-Ga-Phe"/>
-                            <constraint firstItem="yNa-wg-Wim" firstAttribute="bottom" secondItem="QFr-wr-kOu" secondAttribute="bottom" id="wac-wy-FCA"/>
+                            <constraint firstItem="QFr-wr-kOu" firstAttribute="top" secondItem="D81-VZ-cs3" secondAttribute="top" constant="44" id="NnM-0Z-4EE"/>
+                            <constraint firstItem="QFr-wr-kOu" firstAttribute="leading" secondItem="D81-VZ-cs3" secondAttribute="leading" id="OKW-5b-GlE"/>
+                            <constraint firstItem="QFr-wr-kOu" firstAttribute="trailing" secondItem="D81-VZ-cs3" secondAttribute="trailing" id="q5O-Ga-Phe"/>
+                            <constraint firstItem="QFr-wr-kOu" firstAttribute="bottom" secondItem="D81-VZ-cs3" secondAttribute="bottom" constant="-34" id="wac-wy-FCA"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="sceneView" destination="QFr-wr-kOu" id="lgh-6A-Cpk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kct-0t-scR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1014" y="78"/>
+            <point key="canvasLocation" x="875" y="78"/>
         </scene>
     </scenes>
     <resources>
