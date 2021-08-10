@@ -36,19 +36,34 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func loadFirstTable() -> SCNNode{
+        
         let tableMaterial = SCNMaterial()
+    
+        //Set appropriate colors
+        let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 1.00)
         
-        let img = textToImage(drawText: "Hoşgeldin", inImage: UIImage(named:"art.scnassets/temel.png")!, atPoint: CGPoint(x: 200, y: 80))
+        let debtTextColorNegative = UIColor(red: 0.67, green: 0.22, blue: 0.29, alpha: 1.00)
         
-        let img2 = textToImage(drawText: "Mert Gökçen", inImage: img, atPoint: CGPoint(x: 200, y: 110))
+        let debtTextColorPositive = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
         
-        let img3 = textToImage(drawText: "Kart Borcu", inImage: img2, atPoint: CGPoint(x: 150, y: 150))
+        let lastTransactionColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
         
-        let img4 = textToImage(drawText: "160TL", inImage: img3, atPoint: CGPoint(x: 160, y: 200))
+        //----------------------
+       
+        //Add all texts to the table
+        let img = textToImage(drawText: "Hoşgeldin", inImage: UIImage(named:"art.scnassets/temel.png")!, atPoint: CGPoint(x: 170, y: 75),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: 28)!)
+
+        let img2 = textToImage(drawText: "Mert Gökçen", inImage: img, atPoint: CGPoint(x: 170, y: 110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 24)!)
         
-        let img5 = textToImage(drawText: "Son İşlem", inImage: img4, atPoint: CGPoint(x: 150, y: 250))
+        let img3 = textToImage(drawText: "Kart Borcu", inImage: img2, atPoint: CGPoint(x: 70, y: 165),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
         
-        let img6 = textToImage(drawText: "333TL", inImage: img5, atPoint: CGPoint(x: 180, y: 350))
+        let img4 = textToImage(drawText: "-160TL", inImage: img3, atPoint: CGPoint(x: 100, y: 200),textColor: debtTextColorNegative,textFont: UIFont(name: "Helvetica", size: 25)!)
+        
+        let img5 = textToImage(drawText: "Son İşlem", inImage: img4, atPoint: CGPoint(x: 70, y: 250),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
+        
+        let img6 = textToImage(drawText: "333TL", inImage: img5, atPoint: CGPoint(x: 100, y: 290),textColor: lastTransactionColor,textFont: UIFont(name: "Helvetica-Bold", size: 25)!)
+        
+        //----------------------
         
         tableMaterial.diffuse.contents = img6
         let rectangle = SCNBox(width: 0.3, height: 0.3, length: 0, chamferRadius: 0.01)
@@ -105,11 +120,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
-        let textColor = UIColor.systemRed
-            //UIColor(red: CGFloat(21), green: CGFloat(57), blue: CGFloat(18), alpha: CGFloat(0))
-        let textFont = UIFont(name: "Helvetica Bold", size: 16)!
-
+    func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint,textColor:UIColor,textFont: UIFont) -> UIImage {
+        
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
 
