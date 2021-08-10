@@ -31,10 +31,16 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
     func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
         print("cancel")
+        self.dismiss(animated: true, completion: nil)
     }
     
     func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
+        print(cardInfo.cardNumber ?? "Couldn't read your card...")
         print("provide")
+        self.dismiss(animated: true, completion: nil)
+        let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
+        
+        self.present(arViewController, animated: false, completion: nil)
     }
     
 
@@ -108,13 +114,14 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         }
         
         else{
-            let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
-            
-            self.present(arViewController, animated: false, completion: nil)
-//
-//            let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
-//            cardIOVC!.modalPresentationStyle = .formSheet
-//            present(cardIOVC!, animated: true, completion: nil)
+
+            let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
+           cardIOVC!.modalPresentationStyle = .formSheet
+            cardIOVC?.hideCardIOLogo = true
+            cardIOVC?.suppressScanConfirmation = true
+            cardIOVC?.collectExpiry = false
+            cardIOVC?.collectCVV = false
+            present(cardIOVC!, animated: true, completion: nil)
         }
     }
     else {
