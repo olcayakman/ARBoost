@@ -13,6 +13,7 @@ import io.card.payment.CreditCard;
 
 public class MainActivity extends AppCompatActivity {
     Button button;
+    Button girisButonu;
     TextView textView;
     int MY_SCAN_REQUEST_CODE = 111;
 
@@ -20,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hosgeldin_ekrani);
-
-        /*
+//        setContentView(R.layout.activity_main);
+/*
         button = findViewById(R.id.button2);
         textView = findViewById(R.id.textView);
 
@@ -33,7 +34,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-         */
+*/
+        girisButonu = findViewById(R.id.girisButonu);
+
+        girisButonu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onButtonListener();
+            }
+        });
 
     }
 
@@ -82,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             }
             // do something with resultDisplayStr, maybe display it in a textView
             textView.setText(resultDisplayStr);
+            System.out.println(resultDisplayStr);
         }
         // else handle other activity results
     }
