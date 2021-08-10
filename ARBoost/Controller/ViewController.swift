@@ -16,6 +16,8 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     @IBOutlet weak var passwordInputField: UITextField!
     
     
+    @IBOutlet weak var buttonOutlet: UIButton!
+    
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         tcInputField.resignFirstResponder()
@@ -47,6 +49,9 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
   @IBOutlet weak var resultLabel: UILabel!
   override func viewDidLoad() {
     super.viewDidLoad()
+    buttonOutlet.layer.cornerRadius = 20
+    buttonOutlet.clipsToBounds = true
+   
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
     self.view.addGestureRecognizer(tapGesture)
     

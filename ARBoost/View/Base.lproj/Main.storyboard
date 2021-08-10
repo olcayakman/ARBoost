@@ -182,6 +182,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonOutlet" destination="WfI-bf-eyu" id="J11-l0-KE4"/>
                         <outlet property="passwordInputField" destination="Uab-h2-71m" id="4Ym-od-4AE"/>
                         <outlet property="tcInputField" destination="wJX-Jf-SIC" id="z11-w7-ylg"/>
                     </connections>
