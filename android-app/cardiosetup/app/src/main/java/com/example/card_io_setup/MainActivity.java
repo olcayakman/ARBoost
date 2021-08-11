@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 resultDisplayStr = "Scan was canceled.";
             }
             // do something with resultDisplayStr, maybe display it in a textView
-            textView.setText(resultDisplayStr);
+            // textView.setText(resultDisplayStr);
             System.out.println(resultDisplayStr);
         }
         // else handle other activity results
