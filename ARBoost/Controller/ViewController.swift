@@ -89,7 +89,7 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
     
     self.present(arViewController, animated: false, completion: nil)
-//
+//    
 //    if ARWorldTrackingConfiguration.isSupported {
 //        print("okay")
 //        let TCEmpty = tcInputField.text == ""
@@ -137,11 +137,7 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
 //        print("not supported")
 //        alert(text: "Telefonunuz uygulamamızın bu özelliğini karşılamamaktadır.")
 //    }
-//
-//
-    
-    
- 
+
   }
   
   func userDidCancelPaymentViewController(paymentViewController: CardIOPaymentViewController!) {

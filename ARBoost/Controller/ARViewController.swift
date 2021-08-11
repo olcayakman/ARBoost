@@ -30,7 +30,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         // Set the scene to the view
         //sceneView.scene = scene
         
-        sceneView.scene.rootNode.addChildNode(loadFirstTable())
+        sceneView.scene.rootNode.addChildNode(loadWelcomeTable())
         
         let nodes = loadCircles()
         for node in nodes {
@@ -65,35 +65,24 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         circleNode2.geometry = circle2
         circleNode3.geometry = circle3
         
-        circleMaterial1.diffuse.contents = UIImage(named: "art.scnassets/basılıkartlarımbutonu.png")!
-            //textToImage(drawText: "Kartlarım", inImage: UIImage(named: "art.scnassets/basılıkartlarımbutonu.png")!, atPoint: CGPoint(x: 0, y: 0),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 20)!)
-        circleMaterial2.diffuse.contents = UIImage(named: "art.scnassets/kampanyalarbutonu.png")!
-        circleMaterial3.diffuse.contents = UIImage(named: "art.scnassets/mobiledönüşbutonu.png")!
+        circleMaterial1.diffuse.contents = UIImage(named: "art.scnassets/cardsButton.png")!
+        circleMaterial2.diffuse.contents = UIImage(named: "art.scnassets/giftPackageButton.png")!
+        circleMaterial3.diffuse.contents = UIImage(named: "art.scnassets/mobileButton.png")!
         
-        
-//        let translation = SCNMatrix4MakeTranslation(0, -1, 0)
-//        let rotation = SCNMatrix4MakeRotation(Float.pi / 2, 0, 0, 1)
-//        let transform = SCNMatrix4Mult(translation, rotation)
-//
-//        circleMaterial1.diffuse.contentsTransform = transform
-//        circleMaterial2.diffuse.contentsTransform = transform
-//        circleMaterial3.diffuse.contentsTransform = transform
         
         circleNode1.transform = SCNMatrix4MakeRotation(Float.pi/2, 1, 0, 0)
         circleNode2.transform = SCNMatrix4MakeRotation(Float.pi/2, 1, 0, 0)
         circleNode3.transform = SCNMatrix4MakeRotation(Float.pi/2, 1, 0, 0)
         
         
-        
-        circleNode1.position = SCNVector3(x: 0.16, y: 0.2, z: -0.5)
+        circleNode1.position = SCNVector3(x: 0.17, y: 0.2, z: -0.5)
         circleNode2.position = SCNVector3(x: 0.16, y: 0.12, z: -0.5)
         circleNode3.position = SCNVector3(x: 0.16, y: 0.04, z: -0.5)
         
-        //return [circleNode1]
         return [circleNode1,circleNode2,circleNode3]
     }
     
-    func loadFirstTable() -> SCNNode{
+    func loadWelcomeTable() -> SCNNode{
         
         let tableMaterial = SCNMaterial()
     
