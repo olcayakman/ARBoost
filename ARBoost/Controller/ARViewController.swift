@@ -32,8 +32,17 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.scene.rootNode.addChildNode(loadWelcomeTable())
         
-        let nodes = loadCircles()
-        for node in nodes {
+        //var nodes = loadCircles(rotation: [Float.pi/2,1,0,0],positionFirst: [0.166, 0.18, -0.5] )
+        sceneView.scene.rootNode.addChildNode(loadKartlarımText(position: [0.166, 0.18, -0.5], rotation: [0,0,0,0]))
+        for node in loadCircles(rotation: [0,0,0,0],positionFirst: [0.166, 0.18, -0.5] ) {
+            sceneView.scene.rootNode.addChildNode(node)
+        }
+        
+        //nodes = loadCircles(rotation: [-Float.pi/5,0 , 1, 0], positionFirst: [0.716,0.18,-0.7])
+        //[-Float.pi/6,0 , 1, 0]
+        sceneView.scene.rootNode.addChildNode(loadKartlarımText(position: [0.9,0.18,-0.7], rotation: [-Float.pi/5,0 , 1, 0]))
+        for node in loadCircles(rotation: [Float.pi/5,0 , 0, 1]
+                                , positionFirst: [0.9,0.18,-0.7]) {
             sceneView.scene.rootNode.addChildNode(node)
         }
         
@@ -43,7 +52,32 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-    func loadCircles()-> [SCNNode]{
+    func loadKartlarımText(position pos:[Float], rotation rot:[Float])->SCNNode{
+        let textColor = UIColor(red: 0.40, green: 0.43, blue: 0.47, alpha: 0.75)
+        
+        let textMaterial = SCNMaterial()
+        
+        let text = SCNText(string: "Kartlarım", extrusionDepth: 2)
+        
+        
+        textMaterial.diffuse.contents = textColor
+        text.materials = [textMaterial]
+        
+        let textNode = SCNNode()
+        
+        textNode.geometry = text
+        
+        textNode.transform = SCNMatrix4MakeRotation(rot[0], rot[1], rot[2], rot[3])
+        
+        textNode.position = SCNVector3(x: pos[0]-0.016, y: pos[1]+0.025, z: pos[2])
+        
+        
+        textNode.scale = SCNVector3(x:0.001, y:0.001, z:0.001)
+        
+        return textNode
+    }
+    
+    func loadCircles(rotation rot:[Float], positionFirst pos:[Float] )-> [SCNNode]{
         
         let textColor = UIColor(red: 0.40, green: 0.43, blue: 0.47, alpha: 0.75)
         
@@ -79,21 +113,26 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         circleMaterial3.diffuse.contents = UIImage(named: "art.scnassets/mobileButton.png")!
         
         
+        let mat = SCNMatrix4MakeRotation(Float.pi/2,1,0,0)
         
+        //Rotation
+        circleNode1.transform = SCNMatrix4Rotate(mat, rot[0], rot[1], rot[2], rot[3])
+        circleNode2.transform = SCNMatrix4Rotate(mat, rot[0], rot[1], rot[2], rot[3])
+        circleNode3.transform = SCNMatrix4Rotate(mat, rot[0], rot[1], rot[2], rot[3])
         
+        //Position
+        circleNode1.position = SCNVector3(x: pos[0], y: pos[1], z: pos[2])
+        circleNode2.position = SCNVector3(x: pos[0]-0.006, y: pos[1]-0.08, z: pos[2])
+        circleNode3.position = SCNVector3(x: pos[0]-0.006, y: pos[1]-0.16, z: pos[2])
+        textNode.position = SCNVector3(x: pos[0]-0.016, y: pos[1]+0.025, z: pos[2])
         
-        circleNode1.transform = SCNMatrix4MakeRotation(Float.pi/2, 1, 0, 0)
-        circleNode2.transform = SCNMatrix4MakeRotation(Float.pi/2, 1, 0, 0)
-        circleNode3.transform = SCNMatrix4MakeRotation(Float.pi/2, 1, 0, 0)
-        
-        
-        circleNode1.position = SCNVector3(x: 0.166, y: 0.18, z: -0.5)
-        circleNode2.position = SCNVector3(x: 0.16, y: 0.10, z: -0.5)
-        circleNode3.position = SCNVector3(x: 0.16, y: 0.02, z: -0.5)
-        textNode.position = SCNVector3(x: 0.15, y: 0.205, z: -0.5)
+//        circleNode1.position = SCNVector3(x: 0.166, y: 0.18, z: -0.5)
+//        circleNode2.position = SCNVector3(x: 0.16, y: 0.10, z: -0.5)
+//        circleNode3.position = SCNVector3(x: 0.16, y: 0.02, z: -0.5)
+//        textNode.position = SCNVector3(x: 0.15, y: 0.205, z: -0.5)
         textNode.scale = SCNVector3(x:0.001, y:0.001, z:0.001)
-        
-        return [textNode,circleNode1,circleNode2,circleNode3]
+        //textNode
+        return [circleNode1,circleNode2,circleNode3]
     }
     
     //This function probably draws an arrow
@@ -150,7 +189,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     
     func loadCardsTable() -> SCNNode{
         let tableMaterial = SCNMaterial()
-        
+        let kartlarimColor = UIColor(red: 0.40, green: 0.43, blue: 0.47, alpha: 0.75)
         let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 1.00)
         //Headers will be normal, titles will be bold!
         
