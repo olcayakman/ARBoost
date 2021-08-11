@@ -156,30 +156,40 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
         
-        let img = textToImage(drawText: "Bakiye", inImage: UIImage(named:"art.scnassets/cardsTable.png")!, atPoint: CGPoint(x: 40, y: 70),textColor: textColor, textFont: UIFont(name: "Helvetica", size: 28)!)
+        let img = textToImage(drawText: "Bakiye", inImage: UIImage(named:"art.scnassets/cardsTable.png")!, atPoint: CGPoint(x: 35, y: 70),textColor: textColor, textFont: UIFont(name: "Helvetica", size: 18)!)
 
-        let img2 = textToImage(drawText: "Kullanılabilir Limit", inImage: img, atPoint: CGPoint(x: 40, y: 90),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 24)!)
+        let img2 = textToImage(drawText: "Kullanılabilir Limit", inImage: img, atPoint: CGPoint(x: 35, y: 100),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 18)!)
         
-        let img3 = textToImage(drawText: "2350,80TL", inImage: img2, atPoint: CGPoint(x: 160, y: 70),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 16)!)
+        let img3 = textToImage(drawText: "2350,80TL", inImage: img2, atPoint: CGPoint(x: 185, y: 70),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 18)!)
         
-        let img4 = textToImage(drawText: "3649,20TL", inImage: img3, atPoint: CGPoint(x: 160, y: 90),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 16)!)
+        let img4 = textToImage(drawText: "3649,20TL", inImage: img3, atPoint: CGPoint(x: 185, y: 100),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 18)!)
     
         
-        let img5 = textToImage(drawText: "Ödeme Bilgileri", inImage: img4, atPoint: CGPoint(x: 30, y: 130),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 25)!)
+        let img5 = textToImage(drawText: "Ödeme Bilgileri", inImage: img4, atPoint: CGPoint(x: 30, y: 140),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 20)!)
         
-        let img6 = textToImage(drawText: "Kart Borcu", inImage: img5, atPoint: CGPoint(x: 50, y: 150),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 16)!)
+        let img6 = textToImage(drawText: "Kart Borcu", inImage: img5, atPoint: CGPoint(x: 35, y: 180),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 20)!)
         
-        let img7 = textToImage(drawText: "2350,80TL", inImage: img6, atPoint: CGPoint(x: 120, y: 150),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 25)!)
+        let img7 = textToImage(drawText: "2350,80TL", inImage: img6, atPoint: CGPoint(x: 185, y: 180),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 20)!)
         
-        tableMaterial.diffuse.contents = img7
-        let rectangle = SCNBox(width: 0.3, height: 0.3, length: 0, chamferRadius: 0.01)
+        let img8 = textToImage(drawText: "Tarih Bilgileri", inImage: img7, atPoint: CGPoint(x: 30, y: 220),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 20)!)
+        
+        let img9 = textToImage(drawText: "Hesap Kesim Tarihi", inImage: img8, atPoint: CGPoint(x: 35, y: 255),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 19)!)
+        
+        let img10 = textToImage(drawText: "05/07/2021", inImage: img9, atPoint: CGPoint(x: 205, y: 255),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 18)!)
+        
+        let img11 = textToImage(drawText: "Son Ödeme Tarihi", inImage: img10, atPoint: CGPoint(x: 35, y: 280),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 18)!)
+        
+        let img12 = textToImage(drawText: "16/07/2021", inImage: img11, atPoint: CGPoint(x: 205, y: 280),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 18)!)
+        
+        tableMaterial.diffuse.contents = img12
+        let rectangle = SCNBox(width: 0.45, height: 0.45, length: 0, chamferRadius: 0.01)
         rectangle.materials = [tableMaterial]
         let tableNode = SCNNode()
         
         tableNode.geometry = rectangle
         
         tableNode.transform = SCNMatrix4MakeRotation(-Float.pi/5,0 , 1, 0)
-        tableNode.position = SCNVector3(x: 0.4, y: 0.1, z: -0.5)
+        tableNode.position = SCNVector3(x: 0.55, y: 0.1, z: -0.75)
         
         return tableNode
         
