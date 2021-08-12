@@ -184,6 +184,33 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             return aNode
     }
     
+    func loadWorldPointsTable() -> SCNNode{
+        let tableMaterial = SCNMaterial()
+        let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 1.00)
+        
+      
+        let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
+        
+        let img = textToImage(drawText: "Toplam World Puan", inImage: UIImage(named:"art.scnassets/worldPointsTable.png")!, atPoint: CGPoint(x: 200, y: 200),textColor: textColor, textFont: UIFont(name: "Helvetica", size: 20)!)
+
+        let img2 = textToImage(drawText: "45 TL", inImage: img, atPoint: CGPoint(x: 220, y: 230),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 16)!)
+        
+        tableMaterial.diffuse.contents = img2
+        
+        let rectangle = SCNBox(width: 0.45, height: 0.45, length: 0, chamferRadius: 0.01)
+        rectangle.materials = [tableMaterial]
+        let tableNode = SCNNode()
+        
+        tableNode.geometry = rectangle
+        
+        tableNode.transform = SCNMatrix4MakeRotation(Float.pi/5,0 , 1, 0)
+        tableNode.position = SCNVector3(x: -0.55, y: 0.1, z: -0.75)
+        
+        return tableNode
+        
+        
+    }
+    
     func loadPastTransactionsTable() -> SCNNode{
         let tableMaterial = SCNMaterial()
         
@@ -238,7 +265,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         tableNode.position = SCNVector3(x: 0.9, y: 0.1, z: 0)
         
         return tableNode
-        
         
     }
     
