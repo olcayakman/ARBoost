@@ -179,22 +179,20 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             return aNode
     }
     
-    func addTwoImages(back:String,front:String,locX:CGFloat,locY:CGFloat) -> UIImage {
-        
-        let bottomImage = UIImage(named: back)
-        let topImage = UIImage(named: front)
-
-        let size = CGSize(width: bottomImage!.size.width, height: bottomImage!.size.height)
+    func addTwoImages(bottomImage:UIImage,topImage:UIImage,
+                      locX:CGFloat,locY:CGFloat) -> UIImage {
+   
+        let size = CGSize(width: bottomImage.size.width, height: bottomImage.size.height)
         
         UIGraphicsBeginImageContext(size)
 
         let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        bottomImage!.draw(in: areaSize)
+        bottomImage.draw(in: areaSize)
         
-        let areaSizeTop = CGRect(x: locX, y: locY, width: topImage!.size.width, height: topImage!.size.height)
-        bottomImage!.draw(in: areaSize)
+        let areaSizeTop = CGRect(x: locX, y: locY, width: topImage.size.width, height: topImage.size.height)
+        bottomImage.draw(in: areaSize)
 
-        topImage!.draw(in: areaSizeTop, blendMode: .normal, alpha: 0.8)
+        topImage.draw(in: areaSizeTop, blendMode: .normal, alpha: 0.8)
 
         let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
@@ -232,8 +230,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         let tableMaterial = SCNMaterial()
         let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 1.00)
         
-        let startX:Double = 40
-        let startY:Double = 100
+        let startX:Double = 65
+        let startY:Double = 110
         
         let headerSize:CGFloat = 18.0
         let subHeaderSize:CGFloat = 16.0
@@ -241,21 +239,27 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
         
-        let imgSet = addTwoImages(back: "art.scnassets/settingsTable.png", front: "art.scnassets/on.png", locX: CGFloat(startX)+70, locY: CGFloat(startY)+30)
+        let imgSet = addTwoImages(
+        bottomImage: UIImage(named: "art.scnassets/settingsTable.png")!,
+        topImage: UIImage(named: "art.scnassets/on.png")!,
+        locX: CGFloat(startX)+220, locY: CGFloat(startY)+40)
+        let imgSet2 = addTwoImages(
+            bottomImage: imgSet,
+            topImage: UIImage(named: "art.scnassets/off.png")!,
+            locX: CGFloat(startX)+220, locY: CGFloat(startY)+90)
         
-        
-        let img = textToImage(drawText: "Kullanım Tercihleri", inImage: imgSet, atPoint: CGPoint(x: startX, y: startY),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
+        let img = textToImage(drawText: "Kullanım Tercihleri", inImage: imgSet2, atPoint: CGPoint(x: startX, y: startY),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
 
-        let img2 = textToImage(drawText: "Temassız Özellik", inImage: img, atPoint: CGPoint(x: startX+20, y: startY+30),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let img2 = textToImage(drawText: "Temassız Özellik", inImage: img, atPoint: CGPoint(x: startX+5, y: startY+40),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        let img3 = textToImage(drawText: "İnternetten Alışveriş Yetkisi", inImage: img2, atPoint: CGPoint(x: startX+20, y: startY+50),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let img3 = textToImage(drawText: "İnternetten Alışveriş Yetkisi", inImage: img2, atPoint: CGPoint(x: startX+5, y: startY+90),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        let img4 = textToImage(drawText: "Ödeme Talimatları", inImage: img3, atPoint: CGPoint(x: startX, y: startY+70),textColor: dataColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
+        let img4 = textToImage(drawText: "Ödeme Talimatları", inImage: img3, atPoint: CGPoint(x: startX, y: startY+120),textColor: dataColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
     
         
-        let img5 = textToImage(drawText: "Otamatik Ödeme Talimatı", inImage: img4, atPoint: CGPoint(x: startX+20, y: startY+90),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let img5 = textToImage(drawText: "Otamatik Ödeme Talimatı", inImage: img4, atPoint: CGPoint(x: startX+5, y: startY+185),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        let img6 = textToImage(drawText: "E-Hesap Özeti Talimatı", inImage: img5, atPoint: CGPoint(x: startX+20, y: startY+110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let img6 = textToImage(drawText: "E-Hesap Özeti Talimatı", inImage: img5, atPoint: CGPoint(x: startX+5, y: startY+200),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
         
         tableMaterial.diffuse.contents = img6
