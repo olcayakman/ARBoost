@@ -32,21 +32,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.scene.rootNode.addChildNode(loadWelcomeTable())
         
-        //var nodes = loadCircles(rotation: [Float.pi/2,1,0,0],positionFirst: [0.166, 0.18, -0.5] )
-        sceneView.scene.rootNode.addChildNode(loadKartlarımText(position: [0.166, 0.18, -0.5], rotation: [0,0,0,0]))
-        for node in loadCircles(rotation: [0,0,0,0],positionFirst: [0.166, 0.18, -0.5] ) {
-            sceneView.scene.rootNode.addChildNode(node)
-        }
         
-        //nodes = loadCircles(rotation: [-Float.pi/5,0 , 1, 0], positionFirst: [0.716,0.18,-0.7])
-        //[-Float.pi/6,0 , 1, 0]
-        sceneView.scene.rootNode.addChildNode(loadKartlarımText(position: [0.9,0.18,-0.7], rotation: [-Float.pi/5,0 , 1, 0]))
-        for node in loadCircles(rotation: [Float.pi/5,0 , 0, 1]
-                                , positionFirst: [0.9,0.18,-0.7]) {
-            sceneView.scene.rootNode.addChildNode(node)
-        }
+//        sceneView.scene.rootNode.addChildNode(loadKartlarımText(position: [0.166, 0.18, -0.5], rotation: [0,0,0,0]))
+//        for node in loadCircles(rotation: [0,0,0,0],positionFirst: [0.166, 0.18, -0.5] ) {
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
+        
+//        sceneView.scene.rootNode.addChildNode(loadKartlarımText(position: [0.9,0.18,-0.7], rotation: [-Float.pi/5,0 , 1, 0]))
+//
         
         sceneView.scene.rootNode.addChildNode(loadCardsTable())
+        
+        sceneView.scene.rootNode.addChildNode(loadPastTransactionsTable())
         
         sceneView.autoenablesDefaultLighting = true
         
@@ -187,38 +184,99 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             return aNode
     }
     
-    func loadCardsTable() -> SCNNode{
+    func loadPastTransactionsTable() -> SCNNode{
         let tableMaterial = SCNMaterial()
-        let kartlarimColor = UIColor(red: 0.40, green: 0.43, blue: 0.47, alpha: 0.75)
         let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 1.00)
-        //Headers will be normal, titles will be bold!
+        
+        let startX:Double = 100
+        let startY:Double = 110
+        
+        let dataSize:CGFloat = 16.0
+        let companyNameSize:CGFloat = 18.0
+        let dateSize:CGFloat = 16.0
+        
         
         let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
         
-        let img = textToImage(drawText: "Bakiye", inImage: UIImage(named:"art.scnassets/cardsTable.png")!, atPoint: CGPoint(x: 35, y: 70),textColor: textColor, textFont: UIFont(name: "Helvetica", size: 18)!)
+        let img = textToImage(drawText: "Mavi Giyim AŞ", inImage: UIImage(named:"art.scnassets/pastTransactionsTable.png")!, atPoint: CGPoint(x: startX, y: startY),textColor: textColor, textFont: UIFont(name: "Helvetica", size: companyNameSize)!)
 
-        let img2 = textToImage(drawText: "Kullanılabilir Limit", inImage: img, atPoint: CGPoint(x: 35, y: 100),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 18)!)
+        let img2 = textToImage(drawText: "25 Temmuz", inImage: img, atPoint: CGPoint(x: startX, y: startY+20),textColor: textColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
         
-        let img3 = textToImage(drawText: "2350,80TL", inImage: img2, atPoint: CGPoint(x: 185, y: 70),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 18)!)
+        let img3 = textToImage(drawText: "2350,80TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY+10),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
         
-        let img4 = textToImage(drawText: "3649,20TL", inImage: img3, atPoint: CGPoint(x: 185, y: 100),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 18)!)
+        let img4 = textToImage(drawText: "Migros Ticaret AŞ", inImage: img3, atPoint: CGPoint(x: startX, y: startY+50),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: companyNameSize)!)
     
         
-        let img5 = textToImage(drawText: "Ödeme Bilgileri", inImage: img4, atPoint: CGPoint(x: 30, y: 140),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 20)!)
+        let img5 = textToImage(drawText: "24 Temmuz", inImage: img4, atPoint: CGPoint(x: startX, y: startY+70),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: dateSize)!)
         
-        let img6 = textToImage(drawText: "Kart Borcu", inImage: img5, atPoint: CGPoint(x: 35, y: 180),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 20)!)
+        let img6 = textToImage(drawText: "85,70TL", inImage: img5, atPoint: CGPoint(x: startX+150, y: startY+80),textColor: textColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
         
-        let img7 = textToImage(drawText: "2350,80TL", inImage: img6, atPoint: CGPoint(x: 185, y: 180),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 20)!)
+        let img7 = textToImage(drawText: "Sephora Kozmetik AŞ", inImage: img6, atPoint: CGPoint(x: startX, y: startY+110),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: companyNameSize)!)
         
-        let img8 = textToImage(drawText: "Tarih Bilgileri", inImage: img7, atPoint: CGPoint(x: 30, y: 220),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 20)!)
+        let img8 = textToImage(drawText: "16 Temmuz", inImage: img7, atPoint: CGPoint(x: startX, y: startY+130),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: dateSize)!)
         
-        let img9 = textToImage(drawText: "Hesap Kesim Tarihi", inImage: img8, atPoint: CGPoint(x: 35, y: 255),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 19)!)
+        let img9 = textToImage(drawText: "-605,13", inImage: img8, atPoint: CGPoint(x: startX+150, y: startY+120),textColor: textColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
         
-        let img10 = textToImage(drawText: "05/07/2021", inImage: img9, atPoint: CGPoint(x: 205, y: 255),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 18)!)
+        let img10 = textToImage(drawText: "IYZICO*AMZNPRIMETR", inImage: img9, atPoint: CGPoint(x: startX, y: startY+190),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: companyNameSize)!)
         
-        let img11 = textToImage(drawText: "Son Ödeme Tarihi", inImage: img10, atPoint: CGPoint(x: 35, y: 280),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 18)!)
+        let img11 = textToImage(drawText: "13 Temmuz", inImage: img10, atPoint: CGPoint(x: startX, y: startY+220),textColor: textColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
         
-        let img12 = textToImage(drawText: "16/07/2021", inImage: img11, atPoint: CGPoint(x: 205, y: 280),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: 18)!)
+        let img12 = textToImage(drawText: "-7,90", inImage: img11, atPoint: CGPoint(x: startX+150, y: startY+220),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        
+        tableMaterial.diffuse.contents = img12
+        let rectangle = SCNBox(width: 0.45, height: 0.45, length: 0, chamferRadius: 0.01)
+        rectangle.materials = [tableMaterial]
+        let tableNode = SCNNode()
+        
+        tableNode.geometry = rectangle
+        
+        tableNode.transform = SCNMatrix4MakeRotation(-Float.pi/2,0 , 1, 0)
+        tableNode.position = SCNVector3(x: 0.7, y: 0.1, z: 0)
+        
+        return tableNode
+        
+        
+    }
+    
+    
+    func loadCardsTable() -> SCNNode{
+        let tableMaterial = SCNMaterial()
+        let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 1.00)
+        
+        let startX:Double = 35
+        let startY:Double = 120
+        
+        let dataSize:CGFloat = 16.0
+        let headerSize:CGFloat = 18.0
+        let subHeaderSize:CGFloat = 16.0
+        
+        
+        let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
+        
+        let img = textToImage(drawText: "Bakiye", inImage: UIImage(named:"art.scnassets/cardsTable.png")!, atPoint: CGPoint(x: startX, y: startY),textColor: textColor, textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+
+        let img2 = textToImage(drawText: "Kullanılabilir Limit", inImage: img, atPoint: CGPoint(x: startX, y: startY+30),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        
+        let img3 = textToImage(drawText: "2350,80TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        
+        let img4 = textToImage(drawText: "3649,20TL", inImage: img3, atPoint: CGPoint(x: startX+150, y: startY+30),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+    
+        
+        let img5 = textToImage(drawText: "Ödeme Bilgileri", inImage: img4, atPoint: CGPoint(x: startX-5, y: startY+75),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
+        
+        let img6 = textToImage(drawText: "Kart Borcu", inImage: img5, atPoint: CGPoint(x: startX, y: startY+110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        
+        let img7 = textToImage(drawText: "2350,80TL", inImage: img6, atPoint: CGPoint(x: startX+150, y: startY+110),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        
+        let img8 = textToImage(drawText: "Tarih Bilgileri", inImage: img7, atPoint: CGPoint(x: startX-5, y: startY+150),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
+        
+        let img9 = textToImage(drawText: "Hesap Kesim Tarihi", inImage: img8, atPoint: CGPoint(x: startX, y: startY+190),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        
+        let img10 = textToImage(drawText: "05/07/2021", inImage: img9, atPoint: CGPoint(x: startX+180, y: startY+190),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        
+        let img11 = textToImage(drawText: "Son Ödeme Tarihi", inImage: img10, atPoint: CGPoint(x: startX, y: startY+220),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        
+        let img12 = textToImage(drawText: "16/07/2021", inImage: img11, atPoint: CGPoint(x: startX+180, y: startY+220),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
         
         tableMaterial.diffuse.contents = img12
         let rectangle = SCNBox(width: 0.45, height: 0.45, length: 0, chamferRadius: 0.01)
@@ -251,7 +309,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         //----------------------
        
         //Add all texts to the table
-        let img = textToImage(drawText: "Hoşgeldin", inImage: UIImage(named:"art.scnassets/welcomeTable.png")!, atPoint: CGPoint(x: 170, y: 75),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: 28)!)
+        let img = textToImage(drawText: "Hoşgeldin", inImage: UIImage(named:"art.scnassets/welcomeTable1.png")!, atPoint: CGPoint(x: 170, y: 75),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: 28)!)
 
         let img2 = textToImage(drawText: "Mert Gökçen", inImage: img, atPoint: CGPoint(x: 170, y: 110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 24)!)
         
