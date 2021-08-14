@@ -30,17 +30,35 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         // Set the scene to the view
         //sceneView.scene = scene
         
-        sceneView.scene.rootNode.addChildNode(loadWelcomeTable())
+        var nodes = loadWelcomeTable()
+        for node in nodes{
+            sceneView.scene.rootNode.addChildNode(node)
+        }
         
-        sceneView.scene.rootNode.addChildNode(loadCardsTable())
+        nodes = loadCardsTable()
+        for node in nodes{
+            sceneView.scene.rootNode.addChildNode(node)
+        }
         
-        sceneView.scene.rootNode.addChildNode(loadPastTransactionsTable())
+        nodes = loadPastTransactionsTable()
+        for node in nodes{
+            sceneView.scene.rootNode.addChildNode(node)
+        }
         
-        sceneView.scene.rootNode.addChildNode(loadWorldPointsTable())
+        nodes = loadWorldPointsTable()
+        for node in nodes{
+            sceneView.scene.rootNode.addChildNode(node)
+        }
         
-        sceneView.scene.rootNode.addChildNode(loadSettingsTable())
+        nodes = loadSettingsTable()
+        for node in nodes{
+            sceneView.scene.rootNode.addChildNode(node)
+        }
         
-        sceneView.autoenablesDefaultLighting = true
+        nodes = loadWorldPointsTable()
+        for node in nodes{
+            sceneView.scene.rootNode.addChildNode(node)
+        }
         
     }
     
@@ -199,34 +217,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         return newImage
     }
     
-    func loadWorldPointsTable() -> SCNNode{
-        let tableMaterial = SCNMaterial()
-        let textColor = UIColor(red: 0.48, green: 0.17, blue: 0.51, alpha: 1.00)
-        
-      
-        let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
-        
-        let img = textToImage(drawText: "Toplam World Puan", inImage: UIImage(named:"art.scnassets/worldPointsTable.png")!, atPoint: CGPoint(x: 70, y: 140),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: 20)!)
-
-        let img2 = textToImage(drawText: "45 TL", inImage: img, atPoint: CGPoint(x: 150, y: 190),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 20)!)
-        
-        tableMaterial.diffuse.contents = img2
-        
-        let rectangle = SCNBox(width: 0.45, height: 0.45, length: 0, chamferRadius: 0.01)
-        rectangle.materials = [tableMaterial]
-        let tableNode = SCNNode()
-        
-        tableNode.geometry = rectangle
-        
-        tableNode.transform = SCNMatrix4MakeRotation(Float.pi/5,0 , 1, 0)
-        tableNode.position = SCNVector3(x: -0.55, y: 0.1, z: -0.75)
-        
-        return tableNode
-        
-        
-    }
     
-    func loadSettingsTable()->SCNNode{
+    func loadSettingsTable()->[SCNNode]{
         let tableMaterial = SCNMaterial()
         let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 1.00)
         
@@ -284,13 +276,191 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         tableNode.geometry = rectangle
         
-        tableNode.transform = SCNMatrix4MakeRotation(Float.pi/2,0 , 1, 0)
-        tableNode.position = SCNVector3(x: -0.9, y: 0.1, z: 0)
         
-        return tableNode
+        let tablePosition:[Float] = [-0.9, 0.15, 0]
+        let tableRotation:[Float] = [Float.pi/2,0 , 1, 0]
+        
+        tableNode.transform = SCNMatrix4MakeRotation(tableRotation[0],
+        tableRotation[1] , tableRotation[2], tableRotation[3])
+        tableNode.position = SCNVector3(x: tablePosition[0],
+            y: tablePosition[1], z: tablePosition[2])
+        
+        
+        let rightArrow = loadArrows(name: "arrowGroup1.png",
+        position: [ tablePosition[0]+0.15, tablePosition[1]-0.4, tablePosition[2]],
+        rotation: [tableRotation[0],tableRotation[1],tableRotation[2],tableRotation[3]],
+        size:[0.35,0.35,0.0,1],action: [0,0,0.2])
+        
+        return [tableNode,rightArrow]
+        
     }
     
-    func loadPastTransactionsTable() -> SCNNode{
+    func loadWorldPointsTable() -> [SCNNode]{
+        let tableMaterial = SCNMaterial()
+        let textColor = UIColor(red: 0.48, green: 0.17, blue: 0.51, alpha: 1.00)
+        
+      
+        let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
+        
+        let img = textToImage(drawText: "Toplam World Puan", inImage: UIImage(named:"art.scnassets/worldPointsTable.png")!, atPoint: CGPoint(x: 70, y: 140),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: 20)!)
+
+        let img2 = textToImage(drawText: "45 TL", inImage: img, atPoint: CGPoint(x: 150, y: 190),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 20)!)
+        
+        tableMaterial.diffuse.contents = img2
+        
+        let rectangle = SCNBox(width: 0.45, height: 0.45, length: 0, chamferRadius: 0.01)
+        rectangle.materials = [tableMaterial]
+        let tableNode = SCNNode()
+        
+        tableNode.geometry = rectangle
+        
+        let tablePosition:[Float] = [-0.58, 0.1, -0.75]
+        let tableRotation:[Float] = [Float.pi/5,0, 1, 0]
+        
+        tableNode.transform = SCNMatrix4MakeRotation(tableRotation[0],
+        tableRotation[1] , tableRotation[2], tableRotation[3])
+        tableNode.position = SCNVector3(x: tablePosition[0],
+            y: tablePosition[1], z: tablePosition[2])
+        
+        let leftArrow = loadArrows(name: "arrowGroup2.png",
+        position: [ tablePosition[0]-0.19, tablePosition[1]-0.4, tablePosition[2]],
+        rotation: [tableRotation[0],tableRotation[1],tableRotation[2],tableRotation[3]],
+        size:[0.2,0.2,0.0,1],action: [0,0,0.25])
+        
+        let rightArrow = loadArrows(name: "arrowGroup3.png",
+        position: [ tablePosition[0]+0.15, tablePosition[1]-0.4, tablePosition[2]],
+        rotation: [tableRotation[0],tableRotation[1],tableRotation[2],tableRotation[3]],
+        size:[0.3,0.3,0.0,1],action: [0,0,0.25])
+        
+        return [tableNode,rightArrow,leftArrow]
+        
+    }
+    
+    func loadWelcomeTable() -> [SCNNode]{
+        
+        let tableMaterial = SCNMaterial()
+    
+        //Set appropriate colors
+        let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 0.75)
+        
+        let debtTextColorNegative = UIColor(red: 0.67, green: 0.22, blue: 0.29, alpha: 1.00)
+        
+        let debtTextColorPositive = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.0)
+        
+        let lastTransactionColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 0.75)
+        
+        //----------------------
+       
+        //Add all texts to the table
+        let img = textToImage(drawText: "Hoşgeldin", inImage: UIImage(named:"art.scnassets/welcomeTable.png")!, atPoint: CGPoint(x: 170, y: 75),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: 28)!)
+
+        let img2 = textToImage(drawText: "Mert Gökçen", inImage: img, atPoint: CGPoint(x: 170, y: 110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 24)!)
+        
+        let img3 = textToImage(drawText: "Kart Borcu", inImage: img2, atPoint: CGPoint(x: 70, y: 165),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
+        
+        let img4 = textToImage(drawText: "-160TL", inImage: img3, atPoint: CGPoint(x: 100, y: 200),textColor: debtTextColorNegative,textFont: UIFont(name: "Helvetica", size: 25)!)
+        
+        let img5 = textToImage(drawText: "Son İşlem", inImage: img4, atPoint: CGPoint(x: 70, y: 250),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
+        
+        let img6 = textToImage(drawText: "333TL", inImage: img5, atPoint: CGPoint(x: 100, y: 290),textColor: lastTransactionColor,textFont: UIFont(name: "Helvetica-Bold", size: 25)!)
+        
+        //----------------------
+        
+        tableMaterial.diffuse.contents = img6
+        
+        let rectangle = SCNBox(width: 0.3, height: 0.3, length: 0, chamferRadius: 0.01)
+        rectangle.materials = [tableMaterial]
+        let tableNode = SCNNode()
+        let tablePosition:[Float] = [0,0.1,-0.55]
+        tableNode.position = SCNVector3(x: tablePosition[0],
+                                y: tablePosition[1], z: tablePosition[2])
+        tableNode.geometry = rectangle
+        
+        
+        let rightArrow = loadArrows(name: "arrowGroup4.png",
+        position: [ tablePosition[0]-0.1, tablePosition[1]-0.25, tablePosition[2]],
+        rotation: [0,0,0,0],size:[0.2,0.2,0.0,1],action: [0,0,0.25])
+        
+        let leftArrow = loadArrows(name: "arrowGroup5.png",
+        position: [ tablePosition[0]+0.1, tablePosition[1]-0.25, tablePosition[2]],
+        rotation: [0,0,0,0],size:[0.2,0.2,0.0,1],action: [0,0,0.25])
+        
+        
+        return [tableNode,leftArrow,rightArrow]
+        
+    }
+
+    func loadCardsTable() -> [SCNNode]{
+        let tableMaterial = SCNMaterial()
+        let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 1.00)
+        
+        let startX:Double = 35
+        let startY:Double = 120
+        
+        let dataSize:CGFloat = 16.0
+        let headerSize:CGFloat = 18.0
+        let subHeaderSize:CGFloat = 16.0
+        
+        
+        let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
+        
+        let img = textToImage(drawText: "Bakiye", inImage: UIImage(named:"art.scnassets/cardsTable.png")!, atPoint: CGPoint(x: startX, y: startY),textColor: textColor, textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+
+        let img2 = textToImage(drawText: "Kullanılabilir Limit", inImage: img, atPoint: CGPoint(x: startX, y: startY+30),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        
+        let img3 = textToImage(drawText: "2350,80TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        
+        let img4 = textToImage(drawText: "3649,20TL", inImage: img3, atPoint: CGPoint(x: startX+150, y: startY+30),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+    
+        
+        let img5 = textToImage(drawText: "Ödeme Bilgileri", inImage: img4, atPoint: CGPoint(x: startX-5, y: startY+75),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
+        
+        let img6 = textToImage(drawText: "Kart Borcu", inImage: img5, atPoint: CGPoint(x: startX, y: startY+110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        
+        let img7 = textToImage(drawText: "2350,80TL", inImage: img6, atPoint: CGPoint(x: startX+150, y: startY+110),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        
+        let img8 = textToImage(drawText: "Tarih Bilgileri", inImage: img7, atPoint: CGPoint(x: startX-5, y: startY+150),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
+        
+        let img9 = textToImage(drawText: "Hesap Kesim Tarihi", inImage: img8, atPoint: CGPoint(x: startX, y: startY+190),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        
+        let img10 = textToImage(drawText: "05/07/2021", inImage: img9, atPoint: CGPoint(x: startX+180, y: startY+190),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        
+        let img11 = textToImage(drawText: "Son Ödeme Tarihi", inImage: img10, atPoint: CGPoint(x: startX, y: startY+220),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        
+        let img12 = textToImage(drawText: "16/07/2021", inImage: img11, atPoint: CGPoint(x: startX+180, y: startY+220),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        
+        tableMaterial.diffuse.contents = img12
+        let rectangle = SCNBox(width: 0.45, height: 0.45, length: 0, chamferRadius: 0.01)
+        rectangle.materials = [tableMaterial]
+        let tableNode = SCNNode()
+        
+        tableNode.geometry = rectangle
+        
+        let tablePosition:[Float] = [0.558, 0.1, -0.75]
+        let tableRotation:[Float] = [-Float.pi/5,0, 1, 0]
+        
+        tableNode.transform = SCNMatrix4MakeRotation(tableRotation[0],
+        tableRotation[1] , tableRotation[2], tableRotation[3])
+        tableNode.position = SCNVector3(x: tablePosition[0],
+        y: tablePosition[1], z: tablePosition[2])
+        
+        
+        let leftArrow = loadArrows(name: "arrowGroup6.png",
+        position: [ tablePosition[0]-0.19, tablePosition[1]-0.4, tablePosition[2]],
+        rotation: [tableRotation[0],tableRotation[1],tableRotation[2],tableRotation[3]],
+        size:[0.3,0.3,0.0,1],action: [0,0,0.25])
+        
+        let rightArrow = loadArrows(name: "arrowGroup7.png",
+        position: [ tablePosition[0]+0.15, tablePosition[1]-0.4, tablePosition[2]],
+        rotation: [tableRotation[0],tableRotation[1],tableRotation[2],tableRotation[3]],
+        size:[0.2,0.2,0.0,1],action: [0,0,0.25])
+        
+        return [tableNode,rightArrow,leftArrow]
+        
+        
+    }
+    
+    func loadPastTransactionsTable() -> [SCNNode]{
         let tableMaterial = SCNMaterial()
         
         let startX:Double = 130
@@ -340,110 +510,56 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         tableNode.geometry = rectangle
         
-        tableNode.transform = SCNMatrix4MakeRotation(-Float.pi/2,0 , 1, 0)
-        tableNode.position = SCNVector3(x: 0.9, y: 0.1, z: 0)
         
-        return tableNode
+        let tablePosition:[Float] = [0.9, 0.15, 0]
+        let tableRotation:[Float] = [-Float.pi/2,0 , 1, 0]
+        
+        tableNode.transform = SCNMatrix4MakeRotation(tableRotation[0],
+        tableRotation[1] , tableRotation[2], tableRotation[3])
+        tableNode.position = SCNVector3(x: tablePosition[0],
+        y: tablePosition[1], z: tablePosition[2])
+        
+        
+        let leftArrow = loadArrows(name: "arrowGroup8.png",
+            position: [ tablePosition[0]-0.15, tablePosition[1]-0.4, tablePosition[2]],
+        rotation: [tableRotation[0],tableRotation[1],tableRotation[2],tableRotation[3]],
+        size:[0.35,0.35,0.0,1],action: [0,0,0.2])
+
+        
+        return [tableNode,leftArrow]
         
     }
     
     
-    func loadCardsTable() -> SCNNode{
-        let tableMaterial = SCNMaterial()
-        let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 1.00)
-        
-        let startX:Double = 35
-        let startY:Double = 120
-        
-        let dataSize:CGFloat = 16.0
-        let headerSize:CGFloat = 18.0
-        let subHeaderSize:CGFloat = 16.0
-        
-        
-        let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
-        
-        let img = textToImage(drawText: "Bakiye", inImage: UIImage(named:"art.scnassets/cardsTable.png")!, atPoint: CGPoint(x: startX, y: startY),textColor: textColor, textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
-
-        let img2 = textToImage(drawText: "Kullanılabilir Limit", inImage: img, atPoint: CGPoint(x: startX, y: startY+30),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
-        
-        let img3 = textToImage(drawText: "2350,80TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
-        
-        let img4 = textToImage(drawText: "3649,20TL", inImage: img3, atPoint: CGPoint(x: startX+150, y: startY+30),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
     
+    func loadArrows(name:String, position pos:[Float],
+    rotation rot:[Float],size:[CGFloat],action:[CGFloat]) -> SCNNode{
         
-        let img5 = textToImage(drawText: "Ödeme Bilgileri", inImage: img4, atPoint: CGPoint(x: startX-5, y: startY+75),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
         
-        let img6 = textToImage(drawText: "Kart Borcu", inImage: img5, atPoint: CGPoint(x: startX, y: startY+110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let pointAction = SCNAction.rotateBy(x: action[0], y: action[1], z: action[2], duration: 1)
+        let pointAction2 = SCNAction.rotateBy(x: -action[0], y: -action[1], z: -action[2], duration: 1)
+        let moveSequence = SCNAction.sequence([pointAction,pointAction2])
         
-        let img7 = textToImage(drawText: "2350,80TL", inImage: img6, atPoint: CGPoint(x: startX+150, y: startY+110),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        let moveLoop = SCNAction.repeatForever(moveSequence)
         
-        let img8 = textToImage(drawText: "Tarih Bilgileri", inImage: img7, atPoint: CGPoint(x: startX-5, y: startY+150),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
+        let tableMaterial = SCNMaterial()
         
-        let img9 = textToImage(drawText: "Hesap Kesim Tarihi", inImage: img8, atPoint: CGPoint(x: startX, y: startY+190),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        let img10 = textToImage(drawText: "05/07/2021", inImage: img9, atPoint: CGPoint(x: startX+180, y: startY+190),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
-        
-        let img11 = textToImage(drawText: "Son Ödeme Tarihi", inImage: img10, atPoint: CGPoint(x: startX, y: startY+220),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
-        
-        let img12 = textToImage(drawText: "16/07/2021", inImage: img11, atPoint: CGPoint(x: startX+180, y: startY+220),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
-        
-        tableMaterial.diffuse.contents = img12
-        let rectangle = SCNBox(width: 0.45, height: 0.45, length: 0, chamferRadius: 0.01)
+        let img = UIImage(named: "art.scnassets/"+name)!
+    
+        tableMaterial.diffuse.contents = img
+        let rectangle = SCNBox(width: size[0], height: size[1], length: size[2], chamferRadius: size[3])
         rectangle.materials = [tableMaterial]
         let tableNode = SCNNode()
         
+        tableNode.transform = SCNMatrix4MakeRotation(rot[0],rot[1],rot[2],rot[3])
+        tableNode.position = SCNVector3(x: pos[0], y: pos[1], z: pos[2])
         tableNode.geometry = rectangle
-        
-        tableNode.transform = SCNMatrix4MakeRotation(-Float.pi/5,0 , 1, 0)
-        tableNode.position = SCNVector3(x: 0.55, y: 0.1, z: -0.75)
-        
+        tableNode.runAction(moveLoop)
         return tableNode
-        
-        
     }
     
-    func loadWelcomeTable() -> SCNNode{
-        
-        let tableMaterial = SCNMaterial()
     
-        //Set appropriate colors
-        let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 0.75)
-        
-        let debtTextColorNegative = UIColor(red: 0.67, green: 0.22, blue: 0.29, alpha: 1.00)
-        
-        let debtTextColorPositive = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.0)
-        
-        let lastTransactionColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 0.75)
-        
-        //----------------------
-       
-        //Add all texts to the table
-        let img = textToImage(drawText: "Hoşgeldin", inImage: UIImage(named:"art.scnassets/welcomeTable1.png")!, atPoint: CGPoint(x: 170, y: 75),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: 28)!)
-
-        let img2 = textToImage(drawText: "Mert Gökçen", inImage: img, atPoint: CGPoint(x: 170, y: 110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 24)!)
-        
-        let img3 = textToImage(drawText: "Kart Borcu", inImage: img2, atPoint: CGPoint(x: 70, y: 165),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
-        
-        let img4 = textToImage(drawText: "-160TL", inImage: img3, atPoint: CGPoint(x: 100, y: 200),textColor: debtTextColorNegative,textFont: UIFont(name: "Helvetica", size: 25)!)
-        
-        let img5 = textToImage(drawText: "Son İşlem", inImage: img4, atPoint: CGPoint(x: 70, y: 250),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
-        
-        let img6 = textToImage(drawText: "333TL", inImage: img5, atPoint: CGPoint(x: 100, y: 290),textColor: lastTransactionColor,textFont: UIFont(name: "Helvetica-Bold", size: 25)!)
-        
-        //----------------------
-        
-        tableMaterial.diffuse.contents = img6
-        
-        let rectangle = SCNBox(width: 0.3, height: 0.3, length: 0, chamferRadius: 0.01)
-        rectangle.materials = [tableMaterial]
-        let tableNode = SCNNode()
-        tableNode.position = SCNVector3(x: 0, y: 0.1, z: -0.55)
-        tableNode.geometry = rectangle
-        
-        
-        return tableNode
-        
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

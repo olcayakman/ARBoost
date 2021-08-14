@@ -85,54 +85,57 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     }
   
   @IBAction func scanCard(sender: AnyObject) {
+    let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
+    
+    self.present(arViewController, animated: false, completion: nil)
    
-    if ARWorldTrackingConfiguration.isSupported {
-        print("okay")
-        let TCEmpty = tcInputField.text == ""
-
-        let passwordEmpty = passwordInputField.text == ""
-
-        let TCCorrect:Bool =  tcInputField.text == myUser.tckn
-        let passwordCorrect:Bool = passwordInputField.text == myUser.password
-        var text:String
-        if TCEmpty{
-            text = "TC boş olamaz.Yeniden deneyiniz."
-            alert(text: text)
-            print("TC boş olamaz.Yeniden deneyiniz.")
-        }
-
-        else if passwordEmpty {
-            text = "Şifre boş olamaz.Yeniden deneyiniz."
-            alert(text: text)
-            print("Şifre boş olamaz.Yeniden deneyiniz.")
-        }
-
-        else if !TCCorrect {
-            text = "TC'niz yanlış.Yeniden deneyiniz."
-            alert(text: text)
-            print("TC'niz yanlış.Yeniden deneyiniz.")
-        }
-        else if !passwordCorrect{
-            text = "Şifrenizniz yanlış.Yeniden deneyiniz."
-            alert(text: text)
-            print("Şifrenizniz yanlış.Yeniden deneyiniz.")
-        }
-
-        else{
-
-            let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
-           cardIOVC!.modalPresentationStyle = .formSheet
-            cardIOVC?.hideCardIOLogo = true
-            cardIOVC?.suppressScanConfirmation = true
-            cardIOVC?.collectExpiry = false
-            cardIOVC?.collectCVV = false
-            present(cardIOVC!, animated: true, completion: nil)
-        }
-    }
-    else {
-        print("not supported")
-        alert(text: "Telefonunuz uygulamamızın bu özelliğini karşılamamaktadır.")
-    }
+//    if ARWorldTrackingConfiguration.isSupported {
+//        print("okay")
+//        let TCEmpty = tcInputField.text == ""
+//
+//        let passwordEmpty = passwordInputField.text == ""
+//
+//        let TCCorrect:Bool =  tcInputField.text == myUser.tckn
+//        let passwordCorrect:Bool = passwordInputField.text == myUser.password
+//        var text:String
+//        if TCEmpty{
+//            text = "TC boş olamaz.Yeniden deneyiniz."
+//            alert(text: text)
+//            print("TC boş olamaz.Yeniden deneyiniz.")
+//        }
+//
+//        else if passwordEmpty {
+//            text = "Şifre boş olamaz.Yeniden deneyiniz."
+//            alert(text: text)
+//            print("Şifre boş olamaz.Yeniden deneyiniz.")
+//        }
+//
+//        else if !TCCorrect {
+//            text = "TC'niz yanlış.Yeniden deneyiniz."
+//            alert(text: text)
+//            print("TC'niz yanlış.Yeniden deneyiniz.")
+//        }
+//        else if !passwordCorrect{
+//            text = "Şifrenizniz yanlış.Yeniden deneyiniz."
+//            alert(text: text)
+//            print("Şifrenizniz yanlış.Yeniden deneyiniz.")
+//        }
+//
+//        else{
+//
+//            let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
+//           cardIOVC!.modalPresentationStyle = .formSheet
+//            cardIOVC?.hideCardIOLogo = true
+//            cardIOVC?.suppressScanConfirmation = true
+//            cardIOVC?.collectExpiry = false
+//            cardIOVC?.collectCVV = false
+//            present(cardIOVC!, animated: true, completion: nil)
+//        }
+//    }
+//    else {
+//        print("not supported")
+//        alert(text: "Telefonunuz uygulamamızın bu özelliğini karşılamamaktadır.")
+//    }
 
   }
   
