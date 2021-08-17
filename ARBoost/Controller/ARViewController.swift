@@ -98,19 +98,24 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
         
+        let contactlessButton = (myCard!.contactless) ? "on.png" : "off.png";
+        let ecomButton = (myCard!.ecom) ? "on.png" : "off.png";
+        let mailOrderButton = (myCard!.mailOrder) ? "on.png" : "off.png";
+
+        
         let imgSet = addTwoImages(
         bottomImage: UIImage(named: "art.scnassets/settingsTable.png")!,
-        topImage: UIImage(named: "art.scnassets/on.png")!,
+        topImage: UIImage(named: "art.scnassets/"+contactlessButton)!,
         locX: CGFloat(startX)+230, locY: CGFloat(startY)+40)
         
         let imgSet2 = addTwoImages(
             bottomImage: imgSet,
-            topImage: UIImage(named: "art.scnassets/off.png")!,
+            topImage: UIImage(named: "art.scnassets/"+ecomButton)!,
             locX: CGFloat(startX)+230, locY: CGFloat(startY)+65)
         
         let imgSet3 = addTwoImages(
             bottomImage: imgSet2,
-            topImage: UIImage(named: "art.scnassets/on.png")!,
+            topImage: UIImage(named: "art.scnassets/"+mailOrderButton)!,
             locX: CGFloat(startX)+230, locY: CGFloat(startY)+90)
         
         let img = textToImage(drawText: "Kullanım Tercihleri", inImage:
@@ -123,8 +128,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         let img3 = textToImage(drawText: "E-Hesap Özeti Talimatı", inImage: img2_1, atPoint: CGPoint(x: startX+5, y: startY+90),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
         let img4 = textToImage(drawText: "Otomatik Ödeme Talimatı", inImage: img3, atPoint: CGPoint(x: startX, y: startY+140),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
-    
         
+        // TODO: Otomatik odeme talimati database'de nerede #warning
+        #warning("Otomatik odeme talimati database'de yok mu?")
         let img5 = textToImage(drawText: "Ali Büyükdereci", inImage: img4, atPoint: CGPoint(x: startX+5, y: startY+180),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
         let img5_1 = textToImage(drawText: "350TL", inImage: img5, atPoint: CGPoint(x: startX+200, y: startY+190),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
@@ -133,7 +139,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         let img7 = textToImage(drawText: "Kart Son Kullanma Tarihi", inImage: img6, atPoint: CGPoint(x: startX+5, y: startY+230),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: subHeaderSize)!)
         
-        let img8 = textToImage(drawText: "Şubat 2025", inImage: img7, atPoint: CGPoint(x: startX+200, y: startY+230),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let img8 = textToImage(drawText: myCard!.expMonth+"/"+myCard!.expYear, inImage: img7, atPoint: CGPoint(x: startX+200, y: startY+230),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
         
         tableMaterial.diffuse.contents = img8
@@ -171,7 +177,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         let img = textToImage(drawText: "Toplam World Puan", inImage: UIImage(named:"art.scnassets/worldPointsTable.png")!, atPoint: CGPoint(x: 70, y: 140),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: 20)!)
 
-        let img2 = textToImage(drawText: "45 TL", inImage: img, atPoint: CGPoint(x: 150, y: 190),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 20)!)
+        let img2 = textToImage(drawText: String(myCard!.wordPoint)+" TL", inImage: img, atPoint: CGPoint(x: 120, y: 190),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 20)!)
         
         tableMaterial.diffuse.contents = img2
         
@@ -221,14 +227,15 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         //Add all texts to the table
         let img = textToImage(drawText: "Hoşgeldin", inImage: UIImage(named:"art.scnassets/welcomeTable.png")!, atPoint: CGPoint(x: 170, y: 75),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: 28)!)
 
-        let img2 = textToImage(drawText: "Mert Gökçen", inImage: img, atPoint: CGPoint(x: 170, y: 110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 24)!)
+        let img2 = textToImage(drawText: myUser!.name+myUser!.surname, inImage: img, atPoint: CGPoint(x: 170, y: 110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 24)!)
         
         let img3 = textToImage(drawText: "Kart Borcu", inImage: img2, atPoint: CGPoint(x: 70, y: 165),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
-        
-        let img4 = textToImage(drawText: "-160TL", inImage: img3, atPoint: CGPoint(x: 100, y: 200),textColor: debtTextColorNegative,textFont: UIFont(name: "Helvetica", size: 25)!)
+        let colorToUse = (myCard!.debt == 0) ? debtTextColorPositive : debtTextColorNegative;
+        let img4 = textToImage(drawText: String(myCard!.debt), inImage: img3, atPoint: CGPoint(x: 100, y: 200),textColor: colorToUse,textFont: UIFont(name: "Helvetica", size: 25)!)
         
         let img5 = textToImage(drawText: "Son İşlem", inImage: img4, atPoint: CGPoint(x: 70, y: 250),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
-        
+        #warning("son islem statik hala")
+        //TODO: Son islem tutarini cek
         let img6 = textToImage(drawText: "333TL", inImage: img5, atPoint: CGPoint(x: 100, y: 290),textColor: lastTransactionColor,textFont: UIFont(name: "Helvetica-Bold", size: 25)!)
         
         //----------------------
@@ -275,16 +282,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
 
         let img2 = textToImage(drawText: "Kullanılabilir Limit", inImage: img, atPoint: CGPoint(x: startX, y: startY+30),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        let img3 = textToImage(drawText: "2350,80TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        //TODO: bakiye diye bir bilgi yok
+        #warning("database'de bakiye diye bir bilgi yok")
+        let img3 = textToImage(drawText: "???" + " TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
         
-        let img4 = textToImage(drawText: "3649,20TL", inImage: img3, atPoint: CGPoint(x: startX+150, y: startY+30),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        let img4 = textToImage(drawText: String(myCard!.cardLimit)+" TL", inImage: img3, atPoint: CGPoint(x: startX+150, y: startY+30),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
     
         
         let img5 = textToImage(drawText: "Ödeme Bilgileri", inImage: img4, atPoint: CGPoint(x: startX-5, y: startY+75),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
         
         let img6 = textToImage(drawText: "Kart Borcu", inImage: img5, atPoint: CGPoint(x: startX, y: startY+110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        let img7 = textToImage(drawText: "2350,80TL", inImage: img6, atPoint: CGPoint(x: startX+150, y: startY+110),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        let img7 = textToImage(drawText: String(myCard!.debt)+" TL", inImage: img6, atPoint: CGPoint(x: startX+150, y: startY+110),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
         
         let img8 = textToImage(drawText: "Tarih Bilgileri", inImage: img7, atPoint: CGPoint(x: startX-5, y: startY+150),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
         
