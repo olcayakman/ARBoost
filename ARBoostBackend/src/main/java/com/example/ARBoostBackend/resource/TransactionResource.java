@@ -33,16 +33,9 @@ public class TransactionResource {
 
     @GetMapping("/{cardNo}")
     public List<Transaction> getTransactionByCardNo(@PathVariable("cardNo") String cardNo){
-        List<Transaction> transactions = transactionRepository.findAll();
-        List<Transaction> returns = new ArrayList<>();
-
-        for (Transaction t : transactions){
-            if(t.getCardNo().equals(cardNo)){
-                returns.add(t);
-            }
-        }
-        returns.sort((o2,o1) -> o1.getTransactionDate().compareTo(o2.getTransactionDate()));
-        return returns;
+        List<Transaction> transactions = transactionRepository.getTransactionByCardNo(cardNo);
+        transactions.sort((o2,o1) -> o1.getTransactionDate().compareTo(o2.getTransactionDate()));
+        return transactions;
     }
 
 }

@@ -12,8 +12,9 @@ import java.util.Date;
 @Getter
 public class CreditCard {
 
-    @Id
+
     private String tckn;
+    @Id
     private String cardNo;
     private String expMonth;
     private String expYear;
