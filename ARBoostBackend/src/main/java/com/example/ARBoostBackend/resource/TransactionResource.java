@@ -27,7 +27,7 @@ public class TransactionResource {
     }
 
     @GetMapping("/id/{id}")
-    public Transaction getUserById(@PathVariable("id") Long id){
+    public Transaction getTransactionById(@PathVariable("id") Long id){
         return transactionRepository.findById(id).get();
     }
 

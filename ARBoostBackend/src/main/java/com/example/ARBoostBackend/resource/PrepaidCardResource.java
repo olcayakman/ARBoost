@@ -26,7 +26,7 @@ public class PrepaidCardResource {
     }
 
     @GetMapping("/{cardNo}")
-    public PrepaidCard getUserById(@PathVariable("cardNo") String cardNo){
+    public PrepaidCard getPrepaidCardById(@PathVariable("cardNo") String cardNo){
         return prepaidCardRepository.findById(cardNo).get();
     }
 

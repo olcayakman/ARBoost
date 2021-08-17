@@ -24,7 +24,12 @@ public class DebitCardResource {
     }
 
     @GetMapping("/{cardNo}")
-    public DebitCard getUserById(@PathVariable("cardNo") String cardNo){
+    public DebitCard getDebitCardById(@PathVariable("cardNo") String cardNo){
         return debitCardRepository.findById(cardNo).get();
+    }
+
+    @GetMapping("/tc/{tckn}")
+    public List<String> getCardNoFromTckn(@PathVariable("tckn") String tckn){
+        return debitCardRepository.getCardNoByTckn(tckn);
     }
 }

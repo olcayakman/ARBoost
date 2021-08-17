@@ -24,7 +24,7 @@ public class AccountResource {
     }
 
     @GetMapping("/{tckn}")
-    public Account getUserById(@PathVariable("tckn") String tckn){
+    public Account getAccountById(@PathVariable("tckn") String tckn){
         return accountRepository.findById(tckn).get();
     }
 }

@@ -26,7 +26,7 @@ public class CreditCardResource {
     }
 
     @GetMapping("/{cardNo}")
-    public CreditCard getUserById(@PathVariable("cardNo") String cardNo){
+    public CreditCard getCreditCardById(@PathVariable("cardNo") String cardNo){
         return creditCardRepository.findById(cardNo).get();
     }
 
