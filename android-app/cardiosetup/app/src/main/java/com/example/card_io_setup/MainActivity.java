@@ -1,40 +1,36 @@
 package com.example.card_io_setup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.card_io_setup.Entity.User;
+import com.example.card_io_setup.backend.ApiClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    Button button;
     Button girisButonu;
-    TextView textView;
     int MY_SCAN_REQUEST_CODE = 111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hosgeldin_ekrani);
-//        setContentView(R.layout.activity_main);
-/*
-        button = findViewById(R.id.button2);
-        textView = findViewById(R.id.textView);
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onButtonListener();
-            }
-        });
-
-*/
         girisButonu = findViewById(R.id.girisButonu);
 
         girisButonu.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +45,33 @@ public class MainActivity extends AppCompatActivity {
 
     private void onButtonListener(){
 
+        Call<List<User>> userList = ApiClient.getUserService().getAllUsers();
+        List<User> allUsers = new ArrayList<>();
+        userList.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if(response.isSuccessful()){
+                    List<User> users = response.body();
+                    EditText editTextTckn = findViewById(R.id.editTextTextPersonName);
+                    EditText editTextPassword = findViewById(R.id.editTextNumberPassword);
+                    String tckn = editTextTckn.getText().toString();
+                    String password = editTextPassword.getText().toString();
+                    for (User u: users){
+                        if(u.getTckn().equals(tckn) && u.getPassword().equals(password)){
+                            getArView();
+                        }
+                    }
+                    return;
+                }
+            }
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Log.e("failure", t.getLocalizedMessage());
+            }
+        });
+    }
+
+    protected void getArView(){
         Intent scanIntent = new Intent(this, CardIOActivity.class);
 
         // customize these values to suit your needs.
