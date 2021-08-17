@@ -52,26 +52,3 @@ class UserNetworkHandler {
         return toReturn
     }
 }
-
-
-//    func performRequest() {
-//        let add = "all"
-//        if let url = URL(string: generalUrl+add){
-//            let session = URLSession(configuration: .default)
-//
-//            let task = session.dataTask(with: url) { data, response, error in
-//                if error != nil{
-//                    print(error)
-//                    return
-//                }
-//                if let safeData = data {
-//                    parseJSON(userData:safeData)
-//                    print(String(data:safeData, encoding: .utf8))
-//                }
-//
-//            }
-//
-//            task.resume()
-//        }
-//
-//    }

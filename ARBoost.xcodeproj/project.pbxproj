@@ -24,6 +24,8 @@
 		0AD5FB2D26CB8324009D4853 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB2C26CB8324009D4853 /* CreditCard.swift */; };
 		0AD5FB3026CB87FC009D4853 /* UserNetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB2F26CB87FC009D4853 /* UserNetworkHandler.swift */; };
 		0AD5FB3226CB9D8A009D4853 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3126CB9D8A009D4853 /* UserData.swift */; };
+		0AD5FB3426CBC17D009D4853 /* CreditCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3326CBC17D009D4853 /* CreditCardData.swift */; };
+		0AD5FB3626CBD9FD009D4853 /* CreditCardNetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3526CBD9FD009D4853 /* CreditCardNetworkHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		0AD5FB2C26CB8324009D4853 /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
 		0AD5FB2F26CB87FC009D4853 /* UserNetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkHandler.swift; sourceTree = "<group>"; };
 		0AD5FB3126CB9D8A009D4853 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		0AD5FB3326CBC17D009D4853 /* CreditCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardData.swift; sourceTree = "<group>"; };
+		0AD5FB3526CBD9FD009D4853 /* CreditCardNetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardNetworkHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				0AD5FB2C26CB8324009D4853 /* CreditCard.swift */,
 				0AD5FB2F26CB87FC009D4853 /* UserNetworkHandler.swift */,
 				0AD5FB3126CB9D8A009D4853 /* UserData.swift */,
+				0AD5FB3326CBC17D009D4853 /* CreditCardData.swift */,
+				0AD5FB3526CBD9FD009D4853 /* CreditCardNetworkHandler.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,11 +261,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AD5FB3626CBD9FD009D4853 /* CreditCardNetworkHandler.swift in Sources */,
 				0AD5FB2D26CB8324009D4853 /* CreditCard.swift in Sources */,
 				0A64C9B826BBD5C2007A1131 /* User.swift in Sources */,
 				0AD5FB3226CB9D8A009D4853 /* UserData.swift in Sources */,
 				0A76AD5F26B9C35500427B4C /* ViewController.swift in Sources */,
 				0A76AD5B26B9C35500427B4C /* AppDelegate.swift in Sources */,
+				0AD5FB3426CBC17D009D4853 /* CreditCardData.swift in Sources */,
 				0A76AD5D26B9C35500427B4C /* SceneDelegate.swift in Sources */,
 				0A154F9D26C14E1100968129 /* ARViewController.swift in Sources */,
 				0AD5FB3026CB87FC009D4853 /* UserNetworkHandler.swift in Sources */,

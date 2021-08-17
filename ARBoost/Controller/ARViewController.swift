@@ -12,6 +12,8 @@ import ARKit
 class ARViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+    var myUser:User? = nil
+    var myCard: CreditCard? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,141 +62,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             sceneView.scene.rootNode.addChildNode(node)
         }
         
-    }
-    
-    func loadKartlarımText(position pos:[Float], rotation rot:[Float])->SCNNode{
-        let textColor = UIColor(red: 0.40, green: 0.43, blue: 0.47, alpha: 0.75)
-        
-        let textMaterial = SCNMaterial()
-        
-        let text = SCNText(string: "Kartlarım", extrusionDepth: 2)
-        
-        
-        textMaterial.diffuse.contents = textColor
-        text.materials = [textMaterial]
-        
-        let textNode = SCNNode()
-        
-        textNode.geometry = text
-        
-        textNode.transform = SCNMatrix4MakeRotation(rot[0], rot[1], rot[2], rot[3])
-        
-        textNode.position = SCNVector3(x: pos[0]-0.016, y: pos[1]+0.025, z: pos[2])
-        
-        
-        textNode.scale = SCNVector3(x:0.001, y:0.001, z:0.001)
-        
-        return textNode
-    }
-    
-    func loadCircles(rotation rot:[Float], positionFirst pos:[Float] )-> [SCNNode]{
-        
-        let textColor = UIColor(red: 0.40, green: 0.43, blue: 0.47, alpha: 0.75)
-        
-        let textMaterial = SCNMaterial()
-        let circleMaterial1 = SCNMaterial()
-        let circleMaterial2 = SCNMaterial()
-        let circleMaterial3 = SCNMaterial()
-        
-        let text = SCNText(string: "Kartlarım", extrusionDepth: 2)
-        let circle1 = SCNCylinder(radius: 0.02, height: 0)
-        let circle2 = SCNCylinder(radius: 0.06, height: 0)
-        let circle3 = SCNCylinder(radius: 0.06, height: 0)
-        
-        textMaterial.diffuse.contents = textColor
-        text.materials = [textMaterial]
-        
-        circle1.materials = [circleMaterial1]
-        circle2.materials = [circleMaterial2]
-        circle3.materials = [circleMaterial3]
-        
-        let textNode = SCNNode()
-        let circleNode1 = SCNNode()
-        let circleNode2 = SCNNode()
-        let circleNode3 = SCNNode()
-        
-        textNode.geometry = text
-        circleNode1.geometry = circle1
-        circleNode2.geometry = circle2
-        circleNode3.geometry = circle3
-        
-        circleMaterial1.diffuse.contents = UIImage(named: "art.scnassets/cardsButton.png")!
-        circleMaterial2.diffuse.contents = UIImage(named: "art.scnassets/giftPackageButton.png")!
-        circleMaterial3.diffuse.contents = UIImage(named: "art.scnassets/mobileButton.png")!
-        
-        
-        let mat = SCNMatrix4MakeRotation(Float.pi/2,1,0,0)
-        
-        //Rotation
-        circleNode1.transform = SCNMatrix4Rotate(mat, rot[0], rot[1], rot[2], rot[3])
-        circleNode2.transform = SCNMatrix4Rotate(mat, rot[0], rot[1], rot[2], rot[3])
-        circleNode3.transform = SCNMatrix4Rotate(mat, rot[0], rot[1], rot[2], rot[3])
-        
-        //Position
-        circleNode1.position = SCNVector3(x: pos[0], y: pos[1], z: pos[2])
-        circleNode2.position = SCNVector3(x: pos[0]-0.006, y: pos[1]-0.08, z: pos[2])
-        circleNode3.position = SCNVector3(x: pos[0]-0.006, y: pos[1]-0.16, z: pos[2])
-        textNode.position = SCNVector3(x: pos[0]-0.016, y: pos[1]+0.025, z: pos[2])
-        
-//        circleNode1.position = SCNVector3(x: 0.166, y: 0.18, z: -0.5)
-//        circleNode2.position = SCNVector3(x: 0.16, y: 0.10, z: -0.5)
-//        circleNode3.position = SCNVector3(x: 0.16, y: 0.02, z: -0.5)
-//        textNode.position = SCNVector3(x: 0.15, y: 0.205, z: -0.5)
-        textNode.scale = SCNVector3(x:0.001, y:0.001, z:0.001)
-        //textNode
-        return [circleNode1,circleNode2,circleNode3]
-    }
-    
-    //This function probably draws an arrow
-    //Haven't checked it yet
-    //Will check later
-    func drawArrow() -> SCNNode{
-        let vertcount = 48;
-            let verts: [Float] = [ -1.4923, 1.1824, 2.5000, -6.4923, 0.000, 0.000, -1.4923, -1.1824, 2.5000, 4.6077, -0.5812, 1.6800, 4.6077, -0.5812, -1.6800, 4.6077, 0.5812, -1.6800, 4.6077, 0.5812, 1.6800, -1.4923, -1.1824, -2.5000, -1.4923, 1.1824, -2.5000, -1.4923, 0.4974, -0.9969, -1.4923, 0.4974, 0.9969, -1.4923, -0.4974, 0.9969, -1.4923, -0.4974, -0.9969 ];
-
-            let facecount = 13;
-            let faces: [CInt] = [  3, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 2, 3, 4, 5, 6, 7, 1, 8, 8, 1, 0, 2, 1, 7, 9, 8, 0, 10, 10, 0, 2, 11, 11, 2, 7, 12, 12, 7, 8, 9, 9, 5, 4, 12, 10, 6, 5, 9, 11, 3, 6, 10, 12, 4, 3, 11 ];
-
-            let vertsData  = NSData(
-                bytes: verts,
-                length: MemoryLayout<Float>.size * vertcount
-            )
-
-            let vertexSource = SCNGeometrySource(data: vertsData as Data,
-                                                 semantic: .vertex,
-                                                 vectorCount: vertcount,
-                                                 usesFloatComponents: true,
-                                                 componentsPerVector: 3,
-                                                 bytesPerComponent: MemoryLayout<Float>.size,
-                                                 dataOffset: 0,
-                                                 dataStride: MemoryLayout<Float>.size * 3)
-
-            let polyIndexCount = 61;
-            let indexPolyData  = NSData( bytes: faces, length: MemoryLayout<CInt>.size * polyIndexCount )
-
-            let element1 = SCNGeometryElement(data: indexPolyData as Data,
-                                              primitiveType: .polygon,
-                                              primitiveCount: facecount,
-                                              bytesPerIndex: MemoryLayout<CInt>.size)
-
-            let geometry1 = SCNGeometry(sources: [vertexSource], elements: [element1])
-
-            let material1 = geometry1.firstMaterial!
-
-            material1.diffuse.contents = UIColor(red: 0.14, green: 0.82, blue: 0.95, alpha: 1.0)
-            material1.lightingModel = .lambert
-            material1.transparency = 1.00
-            material1.transparencyMode = .dualLayer
-            material1.fresnelExponent = 1.00
-            material1.reflective.contents = UIColor(white:0.00, alpha:1.0)
-            material1.specular.contents = UIColor(white:0.00, alpha:1.0)
-            material1.shininess = 1.00
-
-            //Assign the SCNGeometry to a SCNNode, for example:
-            let aNode = SCNNode()
-            aNode.geometry = geometry1
-            //aNode.scale = SCNVector3(0.1, 0.1, 0.1)
-            return aNode
     }
     
     func addTwoImages(bottomImage:UIImage,topImage:UIImage,
@@ -626,3 +493,143 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         return newImage!
     }
 }
+
+
+/*
+ 
+ 
+ func loadKartlarımText(position pos:[Float], rotation rot:[Float])->SCNNode{
+     let textColor = UIColor(red: 0.40, green: 0.43, blue: 0.47, alpha: 0.75)
+     
+     let textMaterial = SCNMaterial()
+     
+     let text = SCNText(string: "Kartlarım", extrusionDepth: 2)
+     
+     
+     textMaterial.diffuse.contents = textColor
+     text.materials = [textMaterial]
+     
+     let textNode = SCNNode()
+     
+     textNode.geometry = text
+     
+     textNode.transform = SCNMatrix4MakeRotation(rot[0], rot[1], rot[2], rot[3])
+     
+     textNode.position = SCNVector3(x: pos[0]-0.016, y: pos[1]+0.025, z: pos[2])
+     
+     
+     textNode.scale = SCNVector3(x:0.001, y:0.001, z:0.001)
+     
+     return textNode
+ }
+ 
+ func loadCircles(rotation rot:[Float], positionFirst pos:[Float] )-> [SCNNode]{
+     
+     let textColor = UIColor(red: 0.40, green: 0.43, blue: 0.47, alpha: 0.75)
+     
+     let textMaterial = SCNMaterial()
+     let circleMaterial1 = SCNMaterial()
+     let circleMaterial2 = SCNMaterial()
+     let circleMaterial3 = SCNMaterial()
+     
+     let text = SCNText(string: "Kartlarım", extrusionDepth: 2)
+     let circle1 = SCNCylinder(radius: 0.02, height: 0)
+     let circle2 = SCNCylinder(radius: 0.06, height: 0)
+     let circle3 = SCNCylinder(radius: 0.06, height: 0)
+     
+     textMaterial.diffuse.contents = textColor
+     text.materials = [textMaterial]
+     
+     circle1.materials = [circleMaterial1]
+     circle2.materials = [circleMaterial2]
+     circle3.materials = [circleMaterial3]
+     
+     let textNode = SCNNode()
+     let circleNode1 = SCNNode()
+     let circleNode2 = SCNNode()
+     let circleNode3 = SCNNode()
+     
+     textNode.geometry = text
+     circleNode1.geometry = circle1
+     circleNode2.geometry = circle2
+     circleNode3.geometry = circle3
+     
+     circleMaterial1.diffuse.contents = UIImage(named: "art.scnassets/cardsButton.png")!
+     circleMaterial2.diffuse.contents = UIImage(named: "art.scnassets/giftPackageButton.png")!
+     circleMaterial3.diffuse.contents = UIImage(named: "art.scnassets/mobileButton.png")!
+     
+     
+     let mat = SCNMatrix4MakeRotation(Float.pi/2,1,0,0)
+     
+     //Rotation
+     circleNode1.transform = SCNMatrix4Rotate(mat, rot[0], rot[1], rot[2], rot[3])
+     circleNode2.transform = SCNMatrix4Rotate(mat, rot[0], rot[1], rot[2], rot[3])
+     circleNode3.transform = SCNMatrix4Rotate(mat, rot[0], rot[1], rot[2], rot[3])
+     
+     //Position
+     circleNode1.position = SCNVector3(x: pos[0], y: pos[1], z: pos[2])
+     circleNode2.position = SCNVector3(x: pos[0]-0.006, y: pos[1]-0.08, z: pos[2])
+     circleNode3.position = SCNVector3(x: pos[0]-0.006, y: pos[1]-0.16, z: pos[2])
+     textNode.position = SCNVector3(x: pos[0]-0.016, y: pos[1]+0.025, z: pos[2])
+     
+//        circleNode1.position = SCNVector3(x: 0.166, y: 0.18, z: -0.5)
+//        circleNode2.position = SCNVector3(x: 0.16, y: 0.10, z: -0.5)
+//        circleNode3.position = SCNVector3(x: 0.16, y: 0.02, z: -0.5)
+//        textNode.position = SCNVector3(x: 0.15, y: 0.205, z: -0.5)
+     textNode.scale = SCNVector3(x:0.001, y:0.001, z:0.001)
+     //textNode
+     return [circleNode1,circleNode2,circleNode3]
+ }
+ 
+ //This function probably draws an arrow
+ //Haven't checked it yet
+ //Will check later
+ func drawArrow() -> SCNNode{
+     let vertcount = 48;
+         let verts: [Float] = [ -1.4923, 1.1824, 2.5000, -6.4923, 0.000, 0.000, -1.4923, -1.1824, 2.5000, 4.6077, -0.5812, 1.6800, 4.6077, -0.5812, -1.6800, 4.6077, 0.5812, -1.6800, 4.6077, 0.5812, 1.6800, -1.4923, -1.1824, -2.5000, -1.4923, 1.1824, -2.5000, -1.4923, 0.4974, -0.9969, -1.4923, 0.4974, 0.9969, -1.4923, -0.4974, 0.9969, -1.4923, -0.4974, -0.9969 ];
+
+         let facecount = 13;
+         let faces: [CInt] = [  3, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 2, 3, 4, 5, 6, 7, 1, 8, 8, 1, 0, 2, 1, 7, 9, 8, 0, 10, 10, 0, 2, 11, 11, 2, 7, 12, 12, 7, 8, 9, 9, 5, 4, 12, 10, 6, 5, 9, 11, 3, 6, 10, 12, 4, 3, 11 ];
+
+         let vertsData  = NSData(
+             bytes: verts,
+             length: MemoryLayout<Float>.size * vertcount
+         )
+
+         let vertexSource = SCNGeometrySource(data: vertsData as Data,
+                                              semantic: .vertex,
+                                              vectorCount: vertcount,
+                                              usesFloatComponents: true,
+                                              componentsPerVector: 3,
+                                              bytesPerComponent: MemoryLayout<Float>.size,
+                                              dataOffset: 0,
+                                              dataStride: MemoryLayout<Float>.size * 3)
+
+         let polyIndexCount = 61;
+         let indexPolyData  = NSData( bytes: faces, length: MemoryLayout<CInt>.size * polyIndexCount )
+
+         let element1 = SCNGeometryElement(data: indexPolyData as Data,
+                                           primitiveType: .polygon,
+                                           primitiveCount: facecount,
+                                           bytesPerIndex: MemoryLayout<CInt>.size)
+
+         let geometry1 = SCNGeometry(sources: [vertexSource], elements: [element1])
+
+         let material1 = geometry1.firstMaterial!
+
+         material1.diffuse.contents = UIColor(red: 0.14, green: 0.82, blue: 0.95, alpha: 1.0)
+         material1.lightingModel = .lambert
+         material1.transparency = 1.00
+         material1.transparencyMode = .dualLayer
+         material1.fresnelExponent = 1.00
+         material1.reflective.contents = UIColor(white:0.00, alpha:1.0)
+         material1.specular.contents = UIColor(white:0.00, alpha:1.0)
+         material1.shininess = 1.00
+
+         //Assign the SCNGeometry to a SCNNode, for example:
+         let aNode = SCNNode()
+         aNode.geometry = geometry1
+         //aNode.scale = SCNVector3(0.1, 0.1, 0.1)
+         return aNode
+ }
+ */
