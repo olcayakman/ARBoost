@@ -18,6 +18,7 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
     @IBOutlet weak var buttonOutlet: UIButton!
     
+    let networkHandler = NetworkHandler()
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         tcInputField.resignFirstResponder()
@@ -85,9 +86,10 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     }
   
   @IBAction func scanCard(sender: AnyObject) {
-    let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
-    
-    self.present(arViewController, animated: false, completion: nil)
+    networkHandler.performRequest()
+//    let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
+//
+//    self.present(arViewController, animated: false, completion: nil)
    
 //    if ARWorldTrackingConfiguration.isSupported {
 //        print("okay")

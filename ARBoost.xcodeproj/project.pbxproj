@@ -21,6 +21,8 @@
 		0A76AD6726B9C35900427B4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A76AD6526B9C35900427B4C /* LaunchScreen.storyboard */; };
 		0A76ADD926BAA9F100427B4C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A76ADD826BAA9F100427B4C /* Settings.bundle */; };
 		0ACC468C26C1527500F0EA6E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC468B26C1527500F0EA6E /* art.scnassets */; };
+		0AD5FB2D26CB8324009D4853 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB2C26CB8324009D4853 /* CreditCard.swift */; };
+		0AD5FB3026CB87FC009D4853 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB2F26CB87FC009D4853 /* NetworkHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		0A76AD6826B9C35900427B4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A76ADD826BAA9F100427B4C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0ACC468B26C1527500F0EA6E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		0AD5FB2C26CB8324009D4853 /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
+		0AD5FB2F26CB87FC009D4853 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				0A64C9B726BBD5C2007A1131 /* User.swift */,
+				0AD5FB2C26CB8324009D4853 /* CreditCard.swift */,
+				0AD5FB2F26CB87FC009D4853 /* NetworkHandler.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,11 +252,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AD5FB2D26CB8324009D4853 /* CreditCard.swift in Sources */,
 				0A64C9B826BBD5C2007A1131 /* User.swift in Sources */,
 				0A76AD5F26B9C35500427B4C /* ViewController.swift in Sources */,
 				0A76AD5B26B9C35500427B4C /* AppDelegate.swift in Sources */,
 				0A76AD5D26B9C35500427B4C /* SceneDelegate.swift in Sources */,
 				0A154F9D26C14E1100968129 /* ARViewController.swift in Sources */,
+				0AD5FB3026CB87FC009D4853 /* NetworkHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
