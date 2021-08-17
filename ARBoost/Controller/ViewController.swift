@@ -51,9 +51,13 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         if userCards.contains(cardInfo.cardNumber) {
             let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
             arViewController.myUser = myUser
-            arViewController.myCard = creditCardNetworkHandler.getByCardNo(cardNo:cardInfo.cardNumber)
-            
-            self.present(arViewController, animated: false, completion: nil)
+            arViewController.myCard =  creditCardNetworkHandler.getByCardNo(cardNo:cardInfo.cardNumber)
+            if arViewController.myCard != nil {
+                self.present(arViewController, animated: false, completion: nil)
+            }
+            else{
+                alert(text: "Bir hata oluştu, daha sonra yeniden deneyiniz.")
+            }
         }
         else{
             alert(text: "Böyle bir kartınız bulunmamaktadır.")
