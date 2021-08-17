@@ -8,8 +8,11 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.card_io_setup.Entity.CreditCardEntity;
 import com.example.card_io_setup.Entity.User;
 import com.example.card_io_setup.backend.ApiClient;
+
+import java.util.List;
 
 import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         girisButonu = findViewById(R.id.girisButonu);
+        getCreditCardInfo();
 
         girisButonu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +40,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getCreditCardInfo(){
+        Call<List<CreditCardEntity>> creditCards = ApiClient.getCreditCardService().getAllCards();
+
+        creditCards.enqueue(new Callback<List<CreditCardEntity>>() {
+            @Override
+            public void onResponse(Call<List<CreditCardEntity>> call, Response<List<CreditCardEntity>> response) {
+                if(response.isSuccessful()){
+                    List<CreditCardEntity> creditCards = response.body();
+
+                    for (CreditCardEntity c: creditCards){
+                        System.out.println(c.getDebt());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CreditCardEntity>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
 

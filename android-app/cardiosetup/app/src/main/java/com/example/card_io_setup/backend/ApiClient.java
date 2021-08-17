@@ -1,5 +1,6 @@
 package com.example.card_io_setup.backend;
 
+import com.example.card_io_setup.Service.CreditCardService;
 import com.example.card_io_setup.Service.UserService;
 
 import okhttp3.OkHttpClient;
@@ -31,5 +32,10 @@ public class ApiClient {
     public static UserService getUserService(){
         UserService userService = getRetrofit().create(UserService.class);
         return userService;
+    }
+
+    public static CreditCardService getCreditCardService(){
+        CreditCardService creditCardService = getRetrofit().create(CreditCardService.class);
+        return creditCardService;
     }
 }
