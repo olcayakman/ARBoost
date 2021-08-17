@@ -2,7 +2,6 @@ package com.example.card_io_setup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,9 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.card_io_setup.Entity.User;
 import com.example.card_io_setup.backend.ApiClient;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
@@ -45,28 +41,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void onButtonListener(){
 
-        Call<List<User>> userList = ApiClient.getUserService().getAllUsers();
-        List<User> allUsers = new ArrayList<>();
-        userList.enqueue(new Callback<List<User>>() {
+        EditText editTextTckn = findViewById(R.id.editTextTextPersonName);
+        String tckn = editTextTckn.getText().toString();
+
+        Call<User> user = ApiClient.getUserService().getUserByTckn(tckn);
+
+        user.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful()){
-                    List<User> users = response.body();
-                    EditText editTextTckn = findViewById(R.id.editTextTextPersonName);
+                    User u = response.body();
+
                     EditText editTextPassword = findViewById(R.id.editTextNumberPassword);
-                    String tckn = editTextTckn.getText().toString();
                     String password = editTextPassword.getText().toString();
-                    for (User u: users){
-                        if(u.getTckn().equals(tckn) && u.getPassword().equals(password)){
-                            getArView();
-                        }
+                    if (u.getPassword().equals(password)){
+                        getArView();
                     }
-                    return;
+                    else{
+                        // Buraya pop up eklenecek
+                        System.out.println("Yanlış Şifre");
+                    }
+                }
+                else {
+                    // Buraya da pop up eklenecek
+                    System.out.println("TC YANLIŞ");
                 }
             }
+
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
-                Log.e("failure", t.getLocalizedMessage());
+            public void onFailure(Call<User> call, Throwable t) {
+                t.printStackTrace();
             }
         });
     }

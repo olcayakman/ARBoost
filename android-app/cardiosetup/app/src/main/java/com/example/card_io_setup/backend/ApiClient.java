@@ -1,5 +1,7 @@
 package com.example.card_io_setup.backend;
 
+import com.example.card_io_setup.Service.UserService;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
