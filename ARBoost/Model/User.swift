@@ -15,7 +15,7 @@ class User {
     var password:String
     var birthDate: Date?
     
-    init(tckn:String,name:String,surname:String,password:String,birthDate:Date) {
+    init(tckn:String,name:String,surname:String,password:String,birthDate:Date?) {
         self.tckn = tckn
         self.name = name
         self.surname = surname

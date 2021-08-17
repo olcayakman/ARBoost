@@ -18,18 +18,14 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
     @IBOutlet weak var buttonOutlet: UIButton!
     
-    let networkHandler = NetworkHandler()
+    let userNetworkHandler = UserNetworkHandler()
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         tcInputField.resignFirstResponder()
         passwordInputField.resignFirstResponder()
     }
     
-    var myUser:User = User(
-        tckn: "123",
-        name: "Mert",
-        surname: "Gökçen",
-        password: "mert")
+    var myUser:User? = nil
     
     
     func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
@@ -86,43 +82,43 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     }
   
   @IBAction func scanCard(sender: AnyObject) {
-    networkHandler.performRequest()
-//    let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
-//
-//    self.present(arViewController, animated: false, completion: nil)
-   
-//    if ARWorldTrackingConfiguration.isSupported {
-//        print("okay")
-//        let TCEmpty = tcInputField.text == ""
-//
-//        let passwordEmpty = passwordInputField.text == ""
-//
-//        let TCCorrect:Bool =  tcInputField.text == myUser.tckn
-//        let passwordCorrect:Bool = passwordInputField.text == myUser.password
-//        var text:String
-//        if TCEmpty{
-//            text = "TC boş olamaz.Yeniden deneyiniz."
-//            alert(text: text)
-//            print("TC boş olamaz.Yeniden deneyiniz.")
-//        }
-//
-//        else if passwordEmpty {
-//            text = "Şifre boş olamaz.Yeniden deneyiniz."
-//            alert(text: text)
-//            print("Şifre boş olamaz.Yeniden deneyiniz.")
-//        }
-//
-//        else if !TCCorrect {
-//            text = "TC'niz yanlış.Yeniden deneyiniz."
-//            alert(text: text)
-//            print("TC'niz yanlış.Yeniden deneyiniz.")
-//        }
-//        else if !passwordCorrect{
-//            text = "Şifrenizniz yanlış.Yeniden deneyiniz."
-//            alert(text: text)
-//            print("Şifrenizniz yanlış.Yeniden deneyiniz.")
-//        }
-//
+    if ARWorldTrackingConfiguration.isSupported {
+        print("okay")
+        let TCEmpty = tcInputField.text == ""
+
+        let passwordEmpty = passwordInputField.text == ""
+
+        var text:String
+        
+        if TCEmpty{
+            text = "TC boş olamaz.Yeniden deneyiniz."
+            alert(text: text)
+            print("TC boş olamaz.Yeniden deneyiniz.")
+        }
+
+        else if passwordEmpty {
+            text = "Şifre boş olamaz.Yeniden deneyiniz."
+            alert(text: text)
+            print("Şifre boş olamaz.Yeniden deneyiniz.")
+        }
+
+        else{
+            myUser = userNetworkHandler.getByTc(tc: tcInputField.text!)
+            print("-------")
+            if myUser == nil {
+                text = "TC'niz yanlış.Yeniden deneyiniz."
+                alert(text: text)
+                print("TC'niz yanlış.Yeniden deneyiniz.")
+            }
+        
+        else if myUser!.password != passwordInputField.text{
+            
+            text = "Şifrenizniz yanlış.Yeniden deneyiniz."
+            alert(text: text)
+            print("Şifrenizniz yanlış.Yeniden deneyiniz.")
+        }
+    }
+
 //        else{
 //
 //            let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
@@ -133,11 +129,11 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
 //            cardIOVC?.collectCVV = false
 //            present(cardIOVC!, animated: true, completion: nil)
 //        }
-//    }
-//    else {
-//        print("not supported")
-//        alert(text: "Telefonunuz uygulamamızın bu özelliğini karşılamamaktadır.")
-//    }
+    }
+    else {
+        print("not supported")
+        alert(text: "Telefonunuz uygulamamızın bu özelliğini karşılamamaktadır.")
+    }
 
   }
   
