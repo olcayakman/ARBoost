@@ -30,6 +30,9 @@
 		0AD5FB3A26CD0F83009D4853 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3926CD0F83009D4853 /* Transaction.swift */; };
 		0AD5FB3C26CD0F90009D4853 /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3B26CD0F90009D4853 /* TransactionData.swift */; };
 		0AD5FB3E26CD0FA8009D4853 /* TransactionNetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3D26CD0FA8009D4853 /* TransactionNetworkHandler.swift */; };
+		0AD5FB4026CD2BB7009D4853 /* DebitCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3F26CD2BB7009D4853 /* DebitCard.swift */; };
+		0AD5FB4226CD2BC7009D4853 /* DebitCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB4126CD2BC7009D4853 /* DebitCardData.swift */; };
+		0AD5FB4426CD2BDD009D4853 /* DebitCardNetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB4326CD2BDD009D4853 /* DebitCardNetworkHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +70,9 @@
 		0AD5FB3926CD0F83009D4853 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		0AD5FB3B26CD0F90009D4853 /* TransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
 		0AD5FB3D26CD0FA8009D4853 /* TransactionNetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionNetworkHandler.swift; sourceTree = "<group>"; };
+		0AD5FB3F26CD2BB7009D4853 /* DebitCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebitCard.swift; sourceTree = "<group>"; };
+		0AD5FB4126CD2BC7009D4853 /* DebitCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebitCardData.swift; sourceTree = "<group>"; };
+		0AD5FB4326CD2BDD009D4853 /* DebitCardNetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebitCardNetworkHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +121,9 @@
 				0AD5FB3926CD0F83009D4853 /* Transaction.swift */,
 				0AD5FB3B26CD0F90009D4853 /* TransactionData.swift */,
 				0AD5FB3D26CD0FA8009D4853 /* TransactionNetworkHandler.swift */,
+				0AD5FB3F26CD2BB7009D4853 /* DebitCard.swift */,
+				0AD5FB4126CD2BC7009D4853 /* DebitCardData.swift */,
+				0AD5FB4326CD2BDD009D4853 /* DebitCardNetworkHandler.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -275,13 +284,16 @@
 			files = (
 				0AD5FB3626CBD9FD009D4853 /* CreditCardNetworkHandler.swift in Sources */,
 				0AD5FB3C26CD0F90009D4853 /* TransactionData.swift in Sources */,
+				0AD5FB4026CD2BB7009D4853 /* DebitCard.swift in Sources */,
 				0AD5FB2D26CB8324009D4853 /* CreditCard.swift in Sources */,
 				0AD5FB3A26CD0F83009D4853 /* Transaction.swift in Sources */,
 				0A64C9B826BBD5C2007A1131 /* User.swift in Sources */,
 				0AD5FB3226CB9D8A009D4853 /* UserData.swift in Sources */,
 				0A76AD5F26B9C35500427B4C /* ViewController.swift in Sources */,
 				0A76AD5B26B9C35500427B4C /* AppDelegate.swift in Sources */,
+				0AD5FB4426CD2BDD009D4853 /* DebitCardNetworkHandler.swift in Sources */,
 				0AD5FB3826CD0BAE009D4853 /* DebitARViewController.swift in Sources */,
+				0AD5FB4226CD2BC7009D4853 /* DebitCardData.swift in Sources */,
 				0AD5FB3426CBC17D009D4853 /* CreditCardData.swift in Sources */,
 				0A76AD5D26B9C35500427B4C /* SceneDelegate.swift in Sources */,
 				0A154F9D26C14E1100968129 /* ARViewController.swift in Sources */,

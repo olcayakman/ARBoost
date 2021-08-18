@@ -15,6 +15,7 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     var myUser:User? = nil
     var myCard: CreditCard? = nil
+    var transactions:[Transaction] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

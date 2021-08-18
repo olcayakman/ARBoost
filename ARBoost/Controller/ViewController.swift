@@ -21,6 +21,7 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     let userNetworkHandler = UserNetworkHandler()
     let creditCardNetworkHandler = CreditCardNetworkHandler()
     let transactionNetworkHandler = TransactionNetworkHandler()
+    let debitCardNetworkHandler = DebitCardNetworkHandler()
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         tcInputField.resignFirstResponder()
@@ -29,6 +30,7 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
     var myUser:User? = nil
     var userCards:[String] = []
+    var userDebitCards:[String] = []
     
     
     func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
@@ -36,6 +38,24 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func openCredit(_ number:String) {
+        let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
+        arViewController.myUser = myUser
+        arViewController.myCard =  creditCardNetworkHandler.getByCardNo(cardNo:number)
+        arViewController.transactions = transactionNetworkHandler.getByCardNo(cardNo: number)
+        if arViewController.myCard != nil {
+            self.present(arViewController, animated: false, completion: nil)
+        }
+        else{
+            alert(text: "Bir hata oluştu, daha sonra yeniden deneyiniz.")
+        }
+        
+        
+    }
+    
+    func openDebit(_ number:String) {
+        <#function body#>
+    }
     
     
     func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
@@ -45,25 +65,16 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         self.dismiss(animated: true, completion: nil)
         
         userCards = creditCardNetworkHandler.getByTc(tc: myUser!.tckn)
-        print("User Cards:")
-        for card in userCards{
-            print(card)
-        }
+        userDebitCards = debitCardNetworkHandler.getByTc(tc: myUser!.tckn)
+        
         if userCards.contains(cardInfo.cardNumber) {
-            let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
-            arViewController.myUser = myUser
-            arViewController.myCard =  creditCardNetworkHandler.getByCardNo(cardNo:cardInfo.cardNumber)
-            arViewController.transactions = transactionNetworkHandler.getByCardNo(cardNo: cardInfo.cardNumber)
-            for item in arViewController.transactions {
-                print(item)
-            }
-            if arViewController.myCard != nil {
-                self.present(arViewController, animated: false, completion: nil)
-            }
-            else{
-                alert(text: "Bir hata oluştu, daha sonra yeniden deneyiniz.")
-            }
+            openCredit(cardInfo.cardNumber)
         }
+        
+        else if userDebitCards.contains(cardInfo.cardNumber){
+            
+        }
+        
         else{
             alert(text: "Böyle bir kartınız bulunmamaktadır.")
         }
