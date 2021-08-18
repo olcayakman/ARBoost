@@ -26,6 +26,10 @@
 		0AD5FB3226CB9D8A009D4853 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3126CB9D8A009D4853 /* UserData.swift */; };
 		0AD5FB3426CBC17D009D4853 /* CreditCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3326CBC17D009D4853 /* CreditCardData.swift */; };
 		0AD5FB3626CBD9FD009D4853 /* CreditCardNetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3526CBD9FD009D4853 /* CreditCardNetworkHandler.swift */; };
+		0AD5FB3826CD0BAE009D4853 /* DebitARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3726CD0BAE009D4853 /* DebitARViewController.swift */; };
+		0AD5FB3A26CD0F83009D4853 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3926CD0F83009D4853 /* Transaction.swift */; };
+		0AD5FB3C26CD0F90009D4853 /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3B26CD0F90009D4853 /* TransactionData.swift */; };
+		0AD5FB3E26CD0FA8009D4853 /* TransactionNetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB3D26CD0FA8009D4853 /* TransactionNetworkHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +63,10 @@
 		0AD5FB3126CB9D8A009D4853 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		0AD5FB3326CBC17D009D4853 /* CreditCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardData.swift; sourceTree = "<group>"; };
 		0AD5FB3526CBD9FD009D4853 /* CreditCardNetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardNetworkHandler.swift; sourceTree = "<group>"; };
+		0AD5FB3726CD0BAE009D4853 /* DebitARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebitARViewController.swift; sourceTree = "<group>"; };
+		0AD5FB3926CD0F83009D4853 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		0AD5FB3B26CD0F90009D4853 /* TransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
+		0AD5FB3D26CD0FA8009D4853 /* TransactionNetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionNetworkHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +112,9 @@
 				0AD5FB3126CB9D8A009D4853 /* UserData.swift */,
 				0AD5FB3326CBC17D009D4853 /* CreditCardData.swift */,
 				0AD5FB3526CBD9FD009D4853 /* CreditCardNetworkHandler.swift */,
+				0AD5FB3926CD0F83009D4853 /* Transaction.swift */,
+				0AD5FB3B26CD0F90009D4853 /* TransactionData.swift */,
+				0AD5FB3D26CD0FA8009D4853 /* TransactionNetworkHandler.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -121,6 +132,7 @@
 			children = (
 				0A76AD5E26B9C35500427B4C /* ViewController.swift */,
 				0A154F9C26C14E1100968129 /* ARViewController.swift */,
+				0AD5FB3726CD0BAE009D4853 /* DebitARViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -262,14 +274,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AD5FB3626CBD9FD009D4853 /* CreditCardNetworkHandler.swift in Sources */,
+				0AD5FB3C26CD0F90009D4853 /* TransactionData.swift in Sources */,
 				0AD5FB2D26CB8324009D4853 /* CreditCard.swift in Sources */,
+				0AD5FB3A26CD0F83009D4853 /* Transaction.swift in Sources */,
 				0A64C9B826BBD5C2007A1131 /* User.swift in Sources */,
 				0AD5FB3226CB9D8A009D4853 /* UserData.swift in Sources */,
 				0A76AD5F26B9C35500427B4C /* ViewController.swift in Sources */,
 				0A76AD5B26B9C35500427B4C /* AppDelegate.swift in Sources */,
+				0AD5FB3826CD0BAE009D4853 /* DebitARViewController.swift in Sources */,
 				0AD5FB3426CBC17D009D4853 /* CreditCardData.swift in Sources */,
 				0A76AD5D26B9C35500427B4C /* SceneDelegate.swift in Sources */,
 				0A154F9D26C14E1100968129 /* ARViewController.swift in Sources */,
+				0AD5FB3E26CD0FA8009D4853 /* TransactionNetworkHandler.swift in Sources */,
 				0AD5FB3026CB87FC009D4853 /* UserNetworkHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

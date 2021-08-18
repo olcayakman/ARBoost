@@ -213,12 +213,41 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="sceneView" destination="QFr-wr-kOu" id="lgh-6A-Cpk"/>
+                        <outlet property="sceneView" destination="QFr-wr-kOu" id="9G9-gR-QMv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kct-0t-scR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="875" y="78"/>
+            <point key="canvasLocation" x="1139" y="-444"/>
+        </scene>
+        <!--DebitAR View Controller-->
+        <scene sceneID="k9b-Zu-qUt">
+            <objects>
+                <viewController storyboardIdentifier="DebitARViewController" id="LbW-21-cVc" customClass="DebitARViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="34L-7z-urH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xmD-NB-lzn">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </arscnView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Hlg-YA-YpF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Hlg-YA-YpF" firstAttribute="trailing" secondItem="xmD-NB-lzn" secondAttribute="trailing" id="Adw-PC-RsH"/>
+                            <constraint firstItem="xmD-NB-lzn" firstAttribute="leading" secondItem="Hlg-YA-YpF" secondAttribute="leading" id="Qzb-fe-Fu5"/>
+                            <constraint firstItem="xmD-NB-lzn" firstAttribute="top" secondItem="Hlg-YA-YpF" secondAttribute="top" id="VJC-I7-HhH"/>
+                            <constraint firstItem="Hlg-YA-YpF" firstAttribute="bottom" secondItem="xmD-NB-lzn" secondAttribute="bottom" id="o8I-U8-9u9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="sceneView" destination="xmD-NB-lzn" id="0lP-Zz-kwI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jzy-dy-Ecw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1138" y="247"/>
         </scene>
     </scenes>
     <resources>
