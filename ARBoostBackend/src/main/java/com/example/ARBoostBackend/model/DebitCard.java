@@ -23,4 +23,5 @@ public class DebitCard {
     private double wordPoint;
     private boolean contactless;
     private boolean ecom;
+    private boolean mailOrder;
 }

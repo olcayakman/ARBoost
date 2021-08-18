@@ -29,5 +29,8 @@ public class Transaction {
     private double amount;
     @Column(columnDefinition = "card_no")
     private Date transactionDate;
+    @Column(columnDefinition = "type")
+    private String type;
+
 
 }

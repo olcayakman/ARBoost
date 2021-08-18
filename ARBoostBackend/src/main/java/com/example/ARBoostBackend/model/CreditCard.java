@@ -20,6 +20,7 @@ public class CreditCard {
     private String expYear;
     private String cvv;
     private double cardLimit;
+    private double usableLimit;
     private double debt;
     private Date cutOffDate;
     private Date paymentDueDate;
@@ -27,5 +28,6 @@ public class CreditCard {
     private boolean contactless;
     private boolean ecom;
     private boolean mailOrder;
+
 
 }
