@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     Button girisButonu;
     int MY_SCAN_REQUEST_CODE = 111;
 
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
         Call<User> user = ApiClient.getUserService().getUserByTckn(tckn);
 
+
+
         user.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -85,12 +90,13 @@ public class MainActivity extends AppCompatActivity {
                         getArView();
                     }
                     else{
-                        // Buraya pop up eklenecek
+                        createNewDialog();
                         System.out.println("Yanlış Şifre");
                     }
                 }
                 else {
                     // Buraya da pop up eklenecek
+                    Toast.makeText(getApplicationContext(),"TC Kimlik Numaranız hatalıdır.",Toast.LENGTH_SHORT).show();
                     System.out.println("TC YANLIŞ");
                 }
             }
@@ -152,6 +158,15 @@ public class MainActivity extends AppCompatActivity {
         // else handle other activity results
     }
 
+    public void createNewDialog(){
+        dialogBuilder = new AlertDialog.Builder (this);
+        final View contactPopupView = getLayoutInflater().inflate(R.layout.popupSifre, null);
+
+        //popup xml dosyasina gore buttonlar baglanabilir burada
+        dialogBuilder.setView(contactPopupView);
+        dialog = dialogBuilder.create();
+        dialog.show();
+    }
 
 
 }
