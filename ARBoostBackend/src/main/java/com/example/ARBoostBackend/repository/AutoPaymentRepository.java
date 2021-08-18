@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface AutoPaymentRepository extends JpaRepository<AutoPayment, String> {
+public interface AutoPaymentRepository extends JpaRepository<AutoPayment, Long> {
 
     @Query(value = "SELECT * FROM AUTO_PAYMENT WHERE card_no = ?", nativeQuery = true)
     List<AutoPayment> getAutoPaymentByCardNo(String cardNo);
