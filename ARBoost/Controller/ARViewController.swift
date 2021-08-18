@@ -105,7 +105,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         
         let imgSet = addTwoImages(
-            bottomImage: UIImage(named: "art.scnassets/SettingsTable.png")!,
+            bottomImage: UIImage(named: "art.scnassets/settingsTable.png")!,
             topImage: UIImage(named: "art.scnassets/"+contactlessButton)!,
             locX: CGFloat(startX)+230, locY: CGFloat(startY)+40)
         
