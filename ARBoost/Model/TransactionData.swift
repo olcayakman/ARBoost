@@ -8,11 +8,11 @@
 import Foundation
 
 struct TransactionData: Codable {
-    var id:Int
+    var transactionId:Int
     var cardNo:String
     var sender:String
-    var reciever:String
+    var receiver:String
     var amount:Double
-    var type:String
-    var date:String
+   // var type:String
+    var transactionDate:String
 }

@@ -26,15 +26,15 @@ class TransactionNetworkHandler {
                     let decoder = JSONDecoder()
                     do{
                         let decodedData = try decoder.decode([TransactionData].self, from: safeData)
-                        
+                        print(decodedData)
                         for decoded in decodedData{
-                            let id = decoded.id
+                            let id = decoded.transactionId
                             let cardNo = decoded.cardNo
                             let sender = decoded.sender
-                            let reciever = decoded.reciever
+                            let reciever = decoded.receiver
                             let amount = decoded.amount
-                            let type = decoded.type
-                            var date = decoded.date
+                            //let type = decoded.type
+                            var date = decoded.transactionDate
                             var end = date.firstIndex(of: "T") ?? date.endIndex
                             
                             date = String(date[..<end])
@@ -43,7 +43,7 @@ class TransactionNetworkHandler {
                             dateFormatter.dateFormat = "yyyy-MM-dd"
                             let Day = dateFormatter.date(from: date)
                             
-                            toReturn.append(Transaction(id: id, cardNo: cardNo, sender: sender, reciever: reciever, amount: amount, type: type, date: Day!))
+                            toReturn.append(Transaction(id: id, cardNo: cardNo, sender: sender, reciever: reciever, amount: amount, type: "aa", date: Day!))
                         }
                     
                         
