@@ -105,7 +105,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         
         let imgSet = addTwoImages(
-            bottomImage: UIImage(named: "art.scnassets/debitSettingsTable.png")!,
+            bottomImage: UIImage(named: "art.scnassets/SettingsTable.png")!,
             topImage: UIImage(named: "art.scnassets/"+contactlessButton)!,
             locX: CGFloat(startX)+230, locY: CGFloat(startY)+40)
         
@@ -128,7 +128,23 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         let img3 = textToImage(drawText: "E-Hesap Özeti Talimatı", inImage: img2_1, atPoint: CGPoint(x: startX+5, y: startY+90),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        tableMaterial.diffuse.contents = img3
+        let img4 = textToImage(drawText: "Otomatik Ödeme Talimatı", inImage: img3, atPoint: CGPoint(x: startX, y: startY+140),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
+
+        // TODO: Otomatik odeme talimati database'de nerede #warning
+        #warning("Otomatik odeme talimati database'de yok mu?")
+        let img5 = textToImage(drawText: "Ali Büyükdereci", inImage: img4, atPoint: CGPoint(x: startX+5, y: startY+180),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+
+        let img5_1 = textToImage(drawText: "350TL", inImage: img5, atPoint: CGPoint(x: startX+200, y: startY+190),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+
+        let img6 = textToImage(drawText: "2 Temmuz", inImage: img5_1, atPoint: CGPoint(x: startX+5, y: startY+200),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+
+        let img7 = textToImage(drawText: "Kart Son Kullanma Tarihi", inImage: img6, atPoint: CGPoint(x: startX+5, y: startY+230),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: subHeaderSize)!)
+
+        let img8 = textToImage(drawText: myCard!.expMonth+"/"+myCard!.expYear, inImage: img7, atPoint: CGPoint(x: startX+200, y: startY+230),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+
+
+        tableMaterial.diffuse.contents = img8
+    
         let rectangle = SCNBox(width: 0.45, height: 0.45, length: 0, chamferRadius: 0.01)
         rectangle.materials = [tableMaterial]
         let tableNode = SCNNode()

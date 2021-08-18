@@ -33,9 +33,9 @@ class TransactionNetworkHandler {
                             let sender = decoded.sender
                             let reciever = decoded.receiver
                             let amount = decoded.amount
-                            //let type = decoded.type
+                            let type = decoded.type
                             var date = decoded.transactionDate
-                            var end = date.firstIndex(of: "T") ?? date.endIndex
+                            let end = date.firstIndex(of: "T") ?? date.endIndex
                             
                             date = String(date[..<end])
                             
@@ -43,7 +43,7 @@ class TransactionNetworkHandler {
                             dateFormatter.dateFormat = "yyyy-MM-dd"
                             let Day = dateFormatter.date(from: date)
                             
-                            toReturn.append(Transaction(id: id, cardNo: cardNo, sender: sender, reciever: reciever, amount: amount, type: "aa", date: Day!))
+                            toReturn.append(Transaction(id: id, cardNo: cardNo, sender: sender, reciever: reciever, amount: amount, type: type, date: Day!))
                         }
                     
                         
@@ -52,7 +52,7 @@ class TransactionNetworkHandler {
                         print("Error in decoding")
                         semaphore.signal()
                     }
-                    print(String(data:safeData, encoding: .utf8))
+                    //print(String(data:safeData, encoding: .utf8))
                     
                 }
                 semaphore.signal()

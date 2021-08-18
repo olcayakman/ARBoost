@@ -14,6 +14,7 @@ class CreditCard {
     var expYear : String
     var cvv : String
     var cardLimit : Double
+    var usableLimit : Double
     var debt : Double
     var cutOffDate : Date
     var paymentDueDate : Date
@@ -23,7 +24,7 @@ class CreditCard {
     var mailOrder : Bool
     
     init(tckn : String, cardNo : String, expMonth : String, expYear : String, cvv :String , cardLimit : Double, debt : Double, cutOffDate : Date, paymentDueDate : Date
-        , wordPoint : Double, contactless : Bool, ecom : Bool, mailOrder : Bool) {
+         , wordPoint : Double, contactless : Bool, ecom : Bool, mailOrder : Bool,usableLimit:Double) {
         self.tckn = tckn
         self.cardNo = cardNo
         self.expMonth = expMonth
@@ -37,6 +38,7 @@ class CreditCard {
         self.contactless = contactless
         self.ecom = ecom
         self.mailOrder = mailOrder
+        self.usableLimit = usableLimit
         
     }
     

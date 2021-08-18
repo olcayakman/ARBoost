@@ -18,6 +18,7 @@ class CreditCardNetworkHandler {
     }
     
     func getByCardNo(cardNo:String) -> CreditCard? {
+        print(cardNo)
         var toReturn:CreditCard? = nil
         let semaphore = DispatchSemaphore(value: 0)
     
@@ -42,6 +43,7 @@ class CreditCardNetworkHandler {
                         let cvv = decodedData.cvv
                         let cardLimit = decodedData.cardLimit
                         let debt = decodedData.debt
+                        //let uLimit = decodedData.usableLimit
                         
                         var cutOffDate = decodedData.cutOffDate
                         var end = cutOffDate.firstIndex(of: "T") ?? cutOffDate.endIndex
@@ -62,7 +64,7 @@ class CreditCardNetworkHandler {
                         let ecom = decodedData.ecom
                         let mailOrder  = decodedData.mailOrder
                         
-                        toReturn = CreditCard(tckn: tckn, cardNo: cardNo, expMonth: expMonth, expYear: expYear, cvv: cvv, cardLimit: cardLimit, debt: debt, cutOffDate: cutOffDay!, paymentDueDate: payDay!, wordPoint: wordPoint, contactless: contactless, ecom: ecom, mailOrder: mailOrder)
+                        toReturn = CreditCard(tckn: tckn, cardNo: cardNo, expMonth: expMonth, expYear: expYear, cvv: cvv, cardLimit: cardLimit, debt: debt, cutOffDate: cutOffDay!, paymentDueDate: payDay!, wordPoint: wordPoint, contactless: contactless, ecom: ecom, mailOrder: mailOrder,usableLimit: 0.3)
                         
                     }catch{
                         print(error)

@@ -13,6 +13,6 @@ struct TransactionData: Codable {
     var sender:String
     var receiver:String
     var amount:Double
-   // var type:String
+    var type:String
     var transactionDate:String
 }

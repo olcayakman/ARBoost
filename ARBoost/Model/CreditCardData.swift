@@ -14,6 +14,7 @@ struct CreditCardData : Codable {
     var expYear : String
     var cvv : String
     var cardLimit : Double
+    var usableLimit: Double
     var debt : Double
     var cutOffDate : String
     var paymentDueDate : String

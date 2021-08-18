@@ -54,7 +54,16 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     }
     
     func openDebit(_ number:String) {
-        <#function body#>
+        let debitarViewController = self.storyboard?.instantiateViewController(withIdentifier: "DebitARViewController") as! DebitARViewController
+        debitarViewController.myUser = myUser
+        debitarViewController.myCard =  debitCardNetworkHandler.getByCardNo(cardNo:number)
+        debitarViewController.transactions = transactionNetworkHandler.getByCardNo(cardNo: number)
+        if debitarViewController.myCard != nil {
+            self.present(debitarViewController, animated: false, completion: nil)
+        }
+        else{
+            alert(text: "Bir hata oluştu, daha sonra yeniden deneyiniz.")
+        }
     }
     
     
@@ -68,17 +77,20 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         userDebitCards = debitCardNetworkHandler.getByTc(tc: myUser!.tckn)
         
         if userCards.contains(cardInfo.cardNumber) {
+            print("Credit card entered")
             openCredit(cardInfo.cardNumber)
         }
         
         else if userDebitCards.contains(cardInfo.cardNumber){
-            
+            print("Debit card entered")
+            openDebit(cardInfo.cardNumber)
         }
         
         else{
             alert(text: "Böyle bir kartınız bulunmamaktadır.")
         }
         userCards = []
+        userDebitCards = []
     }
     
     

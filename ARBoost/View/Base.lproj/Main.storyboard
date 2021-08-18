@@ -223,7 +223,7 @@
         <!--DebitAR View Controller-->
         <scene sceneID="k9b-Zu-qUt">
             <objects>
-                <viewController storyboardIdentifier="DebitARViewController" id="LbW-21-cVc" customClass="DebitARViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DebitARViewController" id="LbW-21-cVc" customClass="DebitARViewController" customModule="ARBoost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="34L-7z-urH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
