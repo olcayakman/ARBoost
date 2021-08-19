@@ -9,13 +9,13 @@ import Foundation
 
 
 class TransactionNetworkHandler {
-    let generalUrl = "https://heroku-spring-backend.herokuapp.com/rest/transaction/"
+    let generalUrl = "https://heroku-spring-backend.herokuapp.com/transaction/"
     
     func getByCardNo(cardNo:String) -> [Transaction] {
         var toReturn:[Transaction] = []
         let semaphore = DispatchSemaphore(value: 0)
     
-        if let url = URL(string: generalUrl+cardNo){
+        if let url = URL(string: generalUrl+"card_no="+cardNo){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, response, error in
                 if error != nil{

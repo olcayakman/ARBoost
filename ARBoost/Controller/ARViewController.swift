@@ -65,24 +65,28 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-    func addTwoImages(bottomImage:UIImage,topImage:UIImage,
-                      locX:CGFloat,locY:CGFloat) -> UIImage {
-        
-        let size = CGSize(width: bottomImage.size.width, height: bottomImage.size.height)
-        
-        UIGraphicsBeginImageContext(size)
-        
-        let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        bottomImage.draw(in: areaSize)
-        
-        let areaSizeTop = CGRect(x: locX, y: locY, width: topImage.size.width, height: topImage.size.height)
-        bottomImage.draw(in: areaSize)
-        
-        topImage.draw(in: areaSizeTop, blendMode: .normal, alpha: 0.8)
-        
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return newImage
+    func addTwoImages(bottomImage:UIImage,topImage:UIImage?,
+                      locX:CGFloat,locY:CGFloat,width:CGFloat,height:CGFloat) -> UIImage {
+        if let safeTopImage = topImage {
+            let size = CGSize(width: bottomImage.size.width, height: bottomImage.size.height)
+            
+            UIGraphicsBeginImageContext(size)
+            
+            let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            bottomImage.draw(in: areaSize)
+            
+            let areaSizeTop = CGRect(x: locX, y: locY, width: safeTopImage.size.width+width,
+                                     height: safeTopImage.size.height+height)
+            bottomImage.draw(in: areaSize)
+            
+            safeTopImage.draw(in: areaSizeTop, blendMode: .normal, alpha: 0.8)
+            
+            let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            return newImage
+        }
+        return bottomImage
+       
     }
     
     
@@ -106,18 +110,21 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         let imgSet = addTwoImages(
             bottomImage: UIImage(named: "art.scnassets/settingsTable.png")!,
-            topImage: UIImage(named: "art.scnassets/"+contactlessButton)!,
-            locX: CGFloat(startX)+230, locY: CGFloat(startY)+40)
+            topImage: UIImage(named: "art.scnassets/"+contactlessButton),
+            locX: CGFloat(startX)+230, locY: CGFloat(startY)+40,
+            width:CGFloat(0) , height: CGFloat(0))
         
         let imgSet2 = addTwoImages(
             bottomImage: imgSet,
-            topImage: UIImage(named: "art.scnassets/"+ecomButton)!,
-            locX: CGFloat(startX)+230, locY: CGFloat(startY)+65)
+            topImage: UIImage(named: "art.scnassets/"+ecomButton),
+            locX: CGFloat(startX)+230, locY: CGFloat(startY)+65,
+            width:CGFloat(0) , height: CGFloat(0))
         
         let imgSet3 = addTwoImages(
             bottomImage: imgSet2,
-            topImage: UIImage(named: "art.scnassets/"+mailOrderButton)!,
-            locX: CGFloat(startX)+230, locY: CGFloat(startY)+90)
+            topImage: UIImage(named: "art.scnassets/"+mailOrderButton),
+            locX: CGFloat(startX)+230, locY: CGFloat(startY)+90,
+            width:CGFloat(0) , height: CGFloat(0))
         
         let img = textToImage(drawText: "Kullanım Tercihleri", inImage:
                                 imgSet3, atPoint: CGPoint(x: startX, y: startY),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
@@ -226,7 +233,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         //Add all texts to the table
         let img = textToImage(drawText: "Hoşgeldin", inImage: UIImage(named:"art.scnassets/welcomeTable.png")!, atPoint: CGPoint(x: 170, y: 75),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: 28)!)
         
-        let img2 = textToImage(drawText: myUser!.name+myUser!.surname, inImage: img, atPoint: CGPoint(x: 170, y: 110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 24)!)
+        let img2 = textToImage(drawText: myUser!.name+" "+myUser!.surname, inImage: img, atPoint: CGPoint(x: 170, y: 110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 24)!)
         
         let img3 = textToImage(drawText: "Kart Borcu", inImage: img2, atPoint: CGPoint(x: 70, y: 165),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
         var colorToUse = (myCard!.debt == 0) ? debtTextColorPositive : debtTextColorNegative;
@@ -236,7 +243,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         //TODO: Son islem tutarini cek
         let price = (transactions.count>=1) ? transactions[0].amount : 0 ;
         colorToUse = (price == 0) ? lastTransactionColor : debtTextColorNegative;
-        let img6 = textToImage(drawText: String(price)+" TL", inImage: img5, atPoint: CGPoint(x: 100, y: 290),textColor: colorToUse,textFont: UIFont(name: "Helvetica-Bold", size: 25)!)
+        let img6 = textToImage(drawText: String(price)+" TL", inImage: img5, atPoint: CGPoint(x: 100, y: 290),textColor: colorToUse,textFont: UIFont(name: "Helvetica", size: 25)!)
         
         //----------------------
         
@@ -278,16 +285,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
         
-        let img = textToImage(drawText: "Bakiye", inImage: UIImage(named:"art.scnassets/cardsTable.png")!, atPoint: CGPoint(x: startX, y: startY),textColor: textColor, textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let img = textToImage(drawText: "Toplam Limit", inImage: UIImage(named:"art.scnassets/cardsTable.png")!, atPoint: CGPoint(x: startX, y: startY),textColor: textColor, textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
         let img2 = textToImage(drawText: "Kullanılabilir Limit", inImage: img, atPoint: CGPoint(x: startX, y: startY+30),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        //TODO: bakiye diye bir bilgi yok
-        #warning("database'de bakiye diye bir bilgi yok")
-        let img3 = textToImage(drawText: "???" + " TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
         
-        let img4 = textToImage(drawText: String(myCard!.cardLimit)+" TL", inImage: img3, atPoint: CGPoint(x: startX+150, y: startY+30),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        let img3 = textToImage(drawText: String(myCard!.cardLimit) + " TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
         
+        let img4 = textToImage(drawText: String(myCard!.usableLimit)+" TL", inImage: img3, atPoint: CGPoint(x: startX+150, y: startY+30),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
         
         let img5 = textToImage(drawText: "Ödeme Bilgileri", inImage: img4, atPoint: CGPoint(x: startX-5, y: startY+75),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
         
@@ -363,37 +368,51 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         var lastImage:UIImage = UIImage(named:"art.scnassets/pastTransactionsTable.png")!
         
         if transactions.count>=1 {
-            let img = textToImage(drawText: transactions[0].reciever, inImage: UIImage(named:"art.scnassets/pastTransactionsTable.png")!, atPoint: CGPoint(x: startX, y: startY),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+            print("Hey lok here")
+            let deneme12 = UIImage(named:"art.scnassets/"+transactions[0].type+".png")
+            print(deneme12!.size.width)
+            print(deneme12!.size.height)
+            let tryImg = addTwoImages(bottomImage: UIImage(named:"art.scnassets/pastTransactionsTable.png")!, topImage: UIImage(named:"art.scnassets/"+transactions[0].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY),width: CGFloat(-10),height:CGFloat(-10))
+            
+            let img = textToImage(drawText: transactions[0].reciever, inImage: tryImg, atPoint: CGPoint(x: startX, y: startY),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
             
             let img2 = textToImage(drawText:dateFormatter.string(from:transactions[0].date!), inImage: img, atPoint: CGPoint(x: startX, y: startY+20),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
             
             toUseColor = (transactions[0].amount>=0) ? dataColorPos : dataColor;
             let img3 = textToImage(drawText: String(transactions[0].amount)+" TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY+10),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
             lastImage = img3
+            
             if transactions.count>=2 {
-                let img4 = textToImage(drawText: transactions[1].reciever, inImage: img3, atPoint: CGPoint(x: startX, y: startY+50),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                
+                let tryImg2 = addTwoImages(bottomImage: img3, topImage: UIImage(named:"art.scnassets/"+transactions[1].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+50),width: CGFloat(-10),height:CGFloat(-10))
+                
+                let img4 = textToImage(drawText: transactions[1].reciever, inImage: tryImg2, atPoint: CGPoint(x: startX, y: startY+50),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                 
                 let img5 = textToImage(drawText: dateFormatter.string(from:transactions[1].date!), inImage: img4, atPoint: CGPoint(x: startX, y: startY+70),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
                 toUseColor = (transactions[1].amount>=0) ? dataColorPos : dataColor;
                 let img6 = textToImage(drawText: String(transactions[1].amount)+" TL", inImage: img5, atPoint: CGPoint(x: startX+150, y: startY+60),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
                 lastImage = img6
                 if transactions.count>=3 {
-                    let img7 = textToImage(drawText:transactions[2].reciever, inImage: img6, atPoint: CGPoint(x: startX, y: startY+100),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                    
+                    let tryImg3 = addTwoImages(bottomImage: img6, topImage: UIImage(named:"art.scnassets/"+transactions[2].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+100),width: CGFloat(-10),height:CGFloat(-10))
+                    
+                    let img7 = textToImage(drawText:transactions[2].reciever, inImage: tryImg3, atPoint: CGPoint(x: startX, y: startY+100),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                     
                     let img8 = textToImage(drawText: dateFormatter.string(from:transactions[2].date!), inImage: img7, atPoint: CGPoint(x: startX, y: startY+120),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: dateSize)!)
                     toUseColor = (transactions[2].amount>=0) ? dataColorPos : dataColor;
                     let img9 = textToImage(drawText: String(transactions[2].amount)+" TL", inImage: img8, atPoint: CGPoint(x: startX+150, y: startY+110),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
                     lastImage = img9
                     if transactions.count>=4 {
-                        
-                        let img10 = textToImage(drawText: transactions[3].reciever, inImage: img9, atPoint: CGPoint(x: startX, y: startY+150),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                        let tryImg3 = addTwoImages(bottomImage: img9, topImage: UIImage(named:"art.scnassets/"+transactions[3].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+150),width: CGFloat(-10),height:CGFloat(-10))
+                        let img10 = textToImage(drawText: transactions[3].reciever, inImage: tryImg3, atPoint: CGPoint(x: startX, y: startY+150),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                         
                         let img11 = textToImage(drawText: dateFormatter.string(from:transactions[3].date!), inImage: img10, atPoint: CGPoint(x: startX, y: startY+170),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
                         toUseColor = (transactions[3].amount>=0) ? dataColorPos : dataColor;
                         let img12 = textToImage(drawText:  String(transactions[3].amount)+" TL", inImage: img11, atPoint: CGPoint(x: startX+150, y: startY+160),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
                         lastImage = img12
                         if transactions.count>=5 {
-                            let img13 = textToImage(drawText: transactions[4].reciever, inImage: img12, atPoint: CGPoint(x: startX, y: startY+200),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                            let tryImg4 = addTwoImages(bottomImage: img12, topImage: UIImage(named:"art.scnassets/"+transactions[4].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+200),width: CGFloat(-10),height:CGFloat(-10))
+                            let img13 = textToImage(drawText: transactions[4].reciever, inImage: tryImg4, atPoint: CGPoint(x: startX, y: startY+200),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                             
                             let img14 = textToImage(drawText: dateFormatter.string(from:transactions[4].date!), inImage: img13, atPoint: CGPoint(x: startX, y: startY+220),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
                             toUseColor = (transactions[4].amount>=0) ? dataColorPos : dataColor;

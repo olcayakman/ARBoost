@@ -8,7 +8,7 @@
 import Foundation
 
 class DebitCardNetworkHandler {
-    let generalUrl = "https://heroku-spring-backend.herokuapp.com/rest/debit_card/"
+    let generalUrl = "https://heroku-spring-backend.herokuapp.com/debit_card/"
     
     func decodeDate(d:String)throws ->Date{
         let iso8601DateFormatter = ISO8601DateFormatter()
@@ -21,7 +21,7 @@ class DebitCardNetworkHandler {
         var toReturn:DebitCard? = nil
         let semaphore = DispatchSemaphore(value: 0)
     
-        if let url = URL(string: generalUrl+cardNo){
+        if let url = URL(string: generalUrl+"card_no="+cardNo){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, response, error in
                 if error != nil{
@@ -70,7 +70,7 @@ class DebitCardNetworkHandler {
         var toReturn:[String] = []
         let semaphore = DispatchSemaphore(value: 0)
     
-        if let url = URL(string: generalUrl+"tc/"+tc){
+        if let url = URL(string: generalUrl+"tckn="+tc){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, response, error in
                 if error != nil{

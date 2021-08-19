@@ -8,13 +8,13 @@
 import Foundation
 
 class UserNetworkHandler {
-    let generalUrl = "https://heroku-spring-backend.herokuapp.com/rest/user/"
+    let generalUrl = "https://heroku-spring-backend.herokuapp.com/user/"
     
     func getByTc(tc:String) -> User? {
         var toReturn:User? = nil
         let semaphore = DispatchSemaphore(value: 0)
     
-        if let url = URL(string: generalUrl+tc){
+        if let url = URL(string: generalUrl+"tckn="+tc){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, response, error in
                 if error != nil{

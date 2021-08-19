@@ -8,7 +8,7 @@
 import Foundation
 
 class CreditCardNetworkHandler {
-    let generalUrl = "https://heroku-spring-backend.herokuapp.com/rest/credit_card/"
+    let generalUrl = "https://heroku-spring-backend.herokuapp.com/credit_card/"
     
     func decodeDate(d:String)throws ->Date{
         let iso8601DateFormatter = ISO8601DateFormatter()
@@ -22,7 +22,7 @@ class CreditCardNetworkHandler {
         var toReturn:CreditCard? = nil
         let semaphore = DispatchSemaphore(value: 0)
     
-        if let url = URL(string: generalUrl+cardNo){
+        if let url = URL(string: generalUrl+"card_no="+cardNo){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, response, error in
                 if error != nil{
@@ -43,7 +43,7 @@ class CreditCardNetworkHandler {
                         let cvv = decodedData.cvv
                         let cardLimit = decodedData.cardLimit
                         let debt = decodedData.debt
-                        //let uLimit = decodedData.usableLimit
+                        let uLimit = decodedData.usableLimit
                         
                         var cutOffDate = decodedData.cutOffDate
                         var end = cutOffDate.firstIndex(of: "T") ?? cutOffDate.endIndex
@@ -64,7 +64,7 @@ class CreditCardNetworkHandler {
                         let ecom = decodedData.ecom
                         let mailOrder  = decodedData.mailOrder
                         
-                        toReturn = CreditCard(tckn: tckn, cardNo: cardNo, expMonth: expMonth, expYear: expYear, cvv: cvv, cardLimit: cardLimit, debt: debt, cutOffDate: cutOffDay!, paymentDueDate: payDay!, wordPoint: wordPoint, contactless: contactless, ecom: ecom, mailOrder: mailOrder,usableLimit: 0.3)
+                        toReturn = CreditCard(tckn: tckn, cardNo: cardNo, expMonth: expMonth, expYear: expYear, cvv: cvv, cardLimit: cardLimit, debt: debt, cutOffDate: cutOffDay!, paymentDueDate: payDay!, wordPoint: wordPoint, contactless: contactless, ecom: ecom, mailOrder: mailOrder,usableLimit: uLimit)
                         
                     }catch{
                         print(error)
@@ -87,7 +87,7 @@ class CreditCardNetworkHandler {
         var toReturn:[String] = []
         let semaphore = DispatchSemaphore(value: 0)
     
-        if let url = URL(string: generalUrl+"tc/"+tc){
+        if let url = URL(string: generalUrl+"tckn="+tc){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, response, error in
                 if error != nil{
