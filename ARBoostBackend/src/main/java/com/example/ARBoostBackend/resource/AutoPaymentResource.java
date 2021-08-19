@@ -2,12 +2,16 @@ package com.example.ARBoostBackend.resource;
 
 import com.example.ARBoostBackend.model.AutoPayment;
 import com.example.ARBoostBackend.repository.AutoPaymentRepository;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,24 +21,18 @@ import java.util.List;
 @RequestMapping("/auto_payment")
 public class AutoPaymentResource {
 
-
-    class PaymentDate{
-        String month;
-        int day;
-
-        public PaymentDate(String month, int day){
-            this.day = day;
-            this.month = month;
-        }
-
-        public String getMonth() {
-            return month;
-        }
-
-        public int getDay() {
-            return day;
-        }
+    @Getter
+    @AllArgsConstructor
+    class PaymentInfo{
+        private String cardNo;
+        private String receiver;
+        private double amount;
+        private int paymentDay;
+        private String paymentMonth;
     }
+
+
+
 
     @Autowired
     AutoPaymentRepository autoPaymentRepository;
@@ -50,7 +48,7 @@ public class AutoPaymentResource {
     }
 
     @GetMapping("/near/card_no={cardNo}")
-    public AutoPayment getNearestPaymentByCardNo(@PathVariable("cardNo") String cardNo){
+    public PaymentInfo getNearestPaymentByCardNo(@PathVariable("cardNo") String cardNo){
         List<AutoPayment> payments = autoPaymentRepository.getAutoPaymentByCardNo(cardNo);
 
         Calendar c = Calendar.getInstance();
@@ -85,7 +83,8 @@ public class AutoPaymentResource {
 
         String month = new SimpleDateFormat("MMMMMMMM").format(c.getTime());
         int day = nearest.getPaymentDay();
-        return nearest;
+        return new PaymentInfo(cardNo, nearest.getReceiver(), nearest.getAmount(), day, month);
+
     }
 
 
