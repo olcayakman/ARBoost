@@ -15,6 +15,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     var myUser:User? = nil
     var myCard: CreditCard? = nil
     var transactions:[Transaction] = []
+    var closestPaymnet:AutoPayment? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -179,16 +180,21 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         let img3 = textToImage(drawText: "E-Hesap Özeti Talimatı", inImage: img2_1, atPoint: CGPoint(x: startX+5, y: startY+90),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
         let img4 = textToImage(drawText: "Otomatik Ödeme Talimatı", inImage: img3, atPoint: CGPoint(x: startX, y: startY+140),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
+        
+        var lastImg = textToImage(drawText: "Otomatik ödeme talimatınız bulunmamaktadır.", inImage: img4, atPoint: CGPoint(x: startX, y: startY+190),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize-2)!)
+        
+        if let safeclosestPaymnet = closestPaymnet {
+    
+            let img5 = textToImage(drawText: safeclosestPaymnet.receiver, inImage: img4, atPoint: CGPoint(x: startX+5, y: startY+180),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
 
-        // TODO: Otomatik odeme talimati database'de nerede #warning
-        #warning("Otomatik odeme talimati database'de yok mu?")
-        let img5 = textToImage(drawText: "Ali Büyükdereci", inImage: img4, atPoint: CGPoint(x: startX+5, y: startY+180),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+            let img5_1 = textToImage(drawText:String(safeclosestPaymnet.amount)+" TL", inImage: img5, atPoint: CGPoint(x: startX+200, y: startY+190),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
 
-        let img5_1 = textToImage(drawText: "350TL", inImage: img5, atPoint: CGPoint(x: startX+200, y: startY+190),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
-
-        let img6 = textToImage(drawText: "2 Temmuz", inImage: img5_1, atPoint: CGPoint(x: startX+5, y: startY+200),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
-
-        let img7 = textToImage(drawText: "Kart Son Kullanma Tarihi", inImage: img6, atPoint: CGPoint(x: startX+5, y: startY+230),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: subHeaderSize)!)
+            let img6 = textToImage(drawText: String(safeclosestPaymnet.paymentDay)+" "+safeclosestPaymnet.paymentMonth, inImage: img5_1, atPoint: CGPoint(x: startX+5, y: startY+200),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+            lastImg = img6
+            
+        }
+       
+        let img7 = textToImage(drawText: "Kart Son Kullanma Tarihi", inImage: lastImg, atPoint: CGPoint(x: startX+5, y: startY+230),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: subHeaderSize)!)
 
         let img8 = textToImage(drawText: myCard!.expMonth+"/"+myCard!.expYear, inImage: img7, atPoint: CGPoint(x: startX+200, y: startY+230),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
 

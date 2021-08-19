@@ -22,6 +22,7 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     let creditCardNetworkHandler = CreditCardNetworkHandler()
     let transactionNetworkHandler = TransactionNetworkHandler()
     let debitCardNetworkHandler = DebitCardNetworkHandler()
+    let autoPaymentNetworkHandler = AutoPaymentNetworkHandler()
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         tcInputField.resignFirstResponder()
@@ -43,6 +44,9 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         arViewController.myUser = myUser
         arViewController.myCard =  creditCardNetworkHandler.getByCardNo(cardNo:number)
         arViewController.transactions = transactionNetworkHandler.getByCardNo(cardNo: number)
+        arViewController.closestPaymnet = autoPaymentNetworkHandler.getNearestByCardNo(cardNo: number)
+        print("Heyy")
+        print(arViewController.closestPaymnet?.receiver)
         if arViewController.myCard != nil {
             self.present(arViewController, animated: false, completion: nil)
         }
