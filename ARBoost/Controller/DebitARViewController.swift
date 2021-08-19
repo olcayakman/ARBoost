@@ -38,12 +38,11 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
         for node in nodes{
             sceneView.scene.rootNode.addChildNode(node)
         }
-        /*
+       
         nodes = loadCardsTable()
         for node in nodes{
             sceneView.scene.rootNode.addChildNode(node)
         }
-        */
         
         nodes = loadPastTransactionsTable()
         for node in nodes{
@@ -289,54 +288,37 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
         return [tableNode,leftArrow,rightArrow]
         
     }
-/*
+
     func loadCardsTable() -> [SCNNode]{
         let tableMaterial = SCNMaterial()
         let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 1.00)
+        let bakiyeColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
         
-        let startX:Double = 35
-        let startY:Double = 120
+        let startX:Double = 30
+        let startY:Double = 135
         
-        let dataSize:CGFloat = 16.0
         let headerSize:CGFloat = 18.0
         let subHeaderSize:CGFloat = 16.0
         
         
-        let dataColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
-        
-        let img = textToImage(drawText: "Bakiye", inImage: UIImage(named:"art.scnassets/cardsTable.png")!, atPoint: CGPoint(x: startX, y: startY),textColor: textColor, textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let img = textToImage(drawText: "Bakiye", inImage: UIImage(named:"art.scnassets/debitCardsTable.png")!, atPoint: CGPoint(x: startX+15, y: startY-10),textColor: textColor, textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
 
-        let img2 = textToImage(drawText: "Kullanılabilir Limit", inImage: img, atPoint: CGPoint(x: startX, y: startY+30),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let img2 = textToImage(drawText: "3450,10TL", inImage: img, atPoint: CGPoint(x: startX+140, y: startY-10),textColor: bakiyeColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        //TODO: bakiye diye bir bilgi yok
-        #warning("database'de bakiye diye bir bilgi yok")
-        let img3 = textToImage(drawText: "???" + " TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        let img3 = textToImage(drawText: "Hesap Bilgileri", inImage: img2, atPoint: CGPoint(x: startX-2, y: startY+35),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
         
-        let img4 = textToImage(drawText: String(myCard!.cardLimit)+" TL", inImage: img3, atPoint: CGPoint(x: startX+150, y: startY+30),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
-    
+        let img4 = textToImage(drawText: "Vadesiz TL", inImage: img3, atPoint: CGPoint(x: startX+10, y: startY+80),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        let img5 = textToImage(drawText: "Ödeme Bilgileri", inImage: img4, atPoint: CGPoint(x: startX-5, y: startY+75),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
+        let img5 = textToImage(drawText: "TR25 0006 4000 0017 2200 3041 00", inImage: img4, atPoint: CGPoint(x: startX+10, y: startY+100),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        let img6 = textToImage(drawText: "Kart Borcu", inImage: img5, atPoint: CGPoint(x: startX, y: startY+110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let img6 = textToImage(drawText: "Esnek Hesap", inImage: img5, atPoint: CGPoint(x: startX-5, y: startY+150),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
         
-        let img7 = textToImage(drawText: String(myCard!.debt)+" TL", inImage: img6, atPoint: CGPoint(x: startX+150, y: startY+110),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+        let img7 = textToImage(drawText: "Esnek Hesap başvurusu için mobil", inImage: img6, atPoint: CGPoint(x: startX+10, y: startY+170),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
-        let img8 = textToImage(drawText: "Tarih Bilgileri", inImage: img7, atPoint: CGPoint(x: startX-5, y: startY+150),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
-        
-        let img9 = textToImage(drawText: "Hesap Kesim Tarihi", inImage: img8, atPoint: CGPoint(x: startX, y: startY+190),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let img8 = textToImage(drawText: "şubeyi kullanınız.", inImage: img7, atPoint: CGPoint(x: startX+10, y: startY+190),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
        
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/YY"
-        
-        
-        let img10 = textToImage(drawText: dateFormatter.string(from: myCard!.cutOffDate), inImage: img9, atPoint: CGPoint(x: startX+180, y: startY+190),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
-        
-        let img11 = textToImage(drawText: "Son Ödeme Tarihi", inImage: img10, atPoint: CGPoint(x: startX, y: startY+220),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
-        
-        let img12 = textToImage(drawText: dateFormatter.string(from: myCard!.paymentDueDate), inImage: img11, atPoint: CGPoint(x: startX+180, y: startY+220),textColor: dataColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
-        
-        tableMaterial.diffuse.contents = img12
+        tableMaterial.diffuse.contents = img8
         let rectangle = SCNBox(width: 0.45, height: 0.45, length: 0, chamferRadius: 0.01)
         rectangle.materials = [tableMaterial]
         let tableNode = SCNNode()
@@ -366,7 +348,7 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
         
         
     }
-*/
+
 
     
     func loadPastTransactionsTable() -> [SCNNode]{
