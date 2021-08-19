@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/credit_card")
+@RequestMapping("/credit_card")
 public class CreditCardResource {
     @Autowired
     CreditCardRepository creditCardRepository;
@@ -25,12 +25,12 @@ public class CreditCardResource {
         return creditCardRepository.findAll();
     }
 
-    @GetMapping("/{cardNo}")
+    @GetMapping("/card_no={cardNo}")
     public CreditCard getCreditCardById(@PathVariable("cardNo") String cardNo){
         return creditCardRepository.findById(cardNo).get();
     }
 
-    @GetMapping("/tc/{tckn}")
+    @GetMapping("/tckn={tckn}")
     public List<String> getCardNoFromTckn(@PathVariable("tckn") String tckn){
         return creditCardRepository.getCardNoByTckn(tckn);
     }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/user")
+@RequestMapping("/user")
 public class UserResource {
 
     @Autowired
@@ -19,7 +19,7 @@ public class UserResource {
         return userRepository.findAll();
     }
 
-    @GetMapping("/{tckn}")
+    @GetMapping("/tckn={tckn}")
     public User getUserById(@PathVariable("tckn") String tckn){
         return userRepository.findById(tckn).get();
     }

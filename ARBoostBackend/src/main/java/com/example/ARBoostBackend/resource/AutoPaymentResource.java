@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/auto_payment")
+@RequestMapping("/auto_payment")
 public class AutoPaymentResource {
 
 
@@ -44,13 +44,13 @@ public class AutoPaymentResource {
         return autoPaymentRepository.findAll();
     }
 
-    @GetMapping("/{cardNo}")
+    @GetMapping("/card_no={cardNo}")
     public List<AutoPayment> getPaymentByCardNo(@PathVariable("cardNo") String cardNo){
         return autoPaymentRepository.getAutoPaymentByCardNo(cardNo);
     }
 
-    @GetMapping("/near/{cardNo}")
-    public PaymentDate getNearestPaymentByCardNo(@PathVariable("cardNo") String cardNo){
+    @GetMapping("/near/card_no={cardNo}")
+    public AutoPayment getNearestPaymentByCardNo(@PathVariable("cardNo") String cardNo){
         List<AutoPayment> payments = autoPaymentRepository.getAutoPaymentByCardNo(cardNo);
 
         Calendar c = Calendar.getInstance();
@@ -85,7 +85,7 @@ public class AutoPaymentResource {
 
         String month = new SimpleDateFormat("MMMMMMMM").format(c.getTime());
         int day = nearest.getPaymentDay();
-        return new PaymentDate(month, day);
+        return nearest;
     }
 
 

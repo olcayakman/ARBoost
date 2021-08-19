@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/transaction")
+@RequestMapping("/transaction")
 public class TransactionResource {
 
     @Autowired
@@ -26,12 +26,12 @@ public class TransactionResource {
         return transactionRepository.findAll();
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/id={id}")
     public Transaction getTransactionById(@PathVariable("id") Long id){
         return transactionRepository.findById(id).get();
     }
 
-    @GetMapping("/{cardNo}")
+    @GetMapping("/card_no={cardNo}")
     public List<Transaction> getTransactionByCardNo(@PathVariable("cardNo") String cardNo){
         List<Transaction> transactions = transactionRepository.getTransactionByCardNo(cardNo);
         transactions.sort((o2,o1) -> o1.getTransactionDate().compareTo(o2.getTransactionDate()));

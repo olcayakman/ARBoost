@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/prepaid_card")
+@RequestMapping("/prepaid_card")
 public class PrepaidCardResource {
     @Autowired
     PrepaidCardRepository prepaidCardRepository;
@@ -25,7 +25,7 @@ public class PrepaidCardResource {
         return prepaidCardRepository.findAll();
     }
 
-    @GetMapping("/{cardNo}")
+    @GetMapping("/card_no={cardNo}")
     public PrepaidCard getPrepaidCardById(@PathVariable("cardNo") String cardNo){
         return prepaidCardRepository.findById(cardNo).get();
     }

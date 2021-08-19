@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/debit_card")
+@RequestMapping("/debit_card")
 public class DebitCardResource {
     @Autowired
     DebitCardRepository debitCardRepository;
@@ -23,12 +23,12 @@ public class DebitCardResource {
         return debitCardRepository.findAll();
     }
 
-    @GetMapping("/{cardNo}")
+    @GetMapping("/card_no={cardNo}")
     public DebitCard getDebitCardById(@PathVariable("cardNo") String cardNo){
         return debitCardRepository.findById(cardNo).get();
     }
 
-    @GetMapping("/tc/{tckn}")
+    @GetMapping("/tckn={tckn}")
     public List<String> getCardNoFromTckn(@PathVariable("tckn") String tckn){
         return debitCardRepository.getCardNoByTckn(tckn);
     }

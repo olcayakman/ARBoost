@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/account")
+@RequestMapping("/account")
 public class AccountResource {
 
     @Autowired
@@ -23,7 +23,7 @@ public class AccountResource {
         return accountRepository.findAll();
     }
 
-    @GetMapping("/{tckn}")
+    @GetMapping("/tckn={tckn}")
     public Account getAccountById(@PathVariable("tckn") String tckn){
         return accountRepository.findById(tckn).get();
     }
