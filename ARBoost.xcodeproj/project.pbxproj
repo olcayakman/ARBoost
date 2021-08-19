@@ -36,6 +36,9 @@
 		0AD5FB4626CE852C009D4853 /* AutoPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB4526CE852C009D4853 /* AutoPayment.swift */; };
 		0AD5FB4826CE8545009D4853 /* AutoPaymentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB4726CE8545009D4853 /* AutoPaymentData.swift */; };
 		0AD5FB4A26CE8556009D4853 /* AutoPaymentNetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB4926CE8556009D4853 /* AutoPaymentNetworkHandler.swift */; };
+		0AD5FB4C26CE94B5009D4853 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB4B26CE94B5009D4853 /* Account.swift */; };
+		0AD5FB4E26CE94C2009D4853 /* AccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB4D26CE94C2009D4853 /* AccountData.swift */; };
+		0AD5FB5026CE94D0009D4853 /* AccountNetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5FB4F26CE94D0009D4853 /* AccountNetworkHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +82,9 @@
 		0AD5FB4526CE852C009D4853 /* AutoPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoPayment.swift; sourceTree = "<group>"; };
 		0AD5FB4726CE8545009D4853 /* AutoPaymentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoPaymentData.swift; sourceTree = "<group>"; };
 		0AD5FB4926CE8556009D4853 /* AutoPaymentNetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoPaymentNetworkHandler.swift; sourceTree = "<group>"; };
+		0AD5FB4B26CE94B5009D4853 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		0AD5FB4D26CE94C2009D4853 /* AccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountData.swift; sourceTree = "<group>"; };
+		0AD5FB4F26CE94D0009D4853 /* AccountNetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountNetworkHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +139,9 @@
 				0AD5FB4526CE852C009D4853 /* AutoPayment.swift */,
 				0AD5FB4726CE8545009D4853 /* AutoPaymentData.swift */,
 				0AD5FB4926CE8556009D4853 /* AutoPaymentNetworkHandler.swift */,
+				0AD5FB4B26CE94B5009D4853 /* Account.swift */,
+				0AD5FB4D26CE94C2009D4853 /* AccountData.swift */,
+				0AD5FB4F26CE94D0009D4853 /* AccountNetworkHandler.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -294,12 +303,14 @@
 				0AD5FB3626CBD9FD009D4853 /* CreditCardNetworkHandler.swift in Sources */,
 				0AD5FB4626CE852C009D4853 /* AutoPayment.swift in Sources */,
 				0AD5FB3C26CD0F90009D4853 /* TransactionData.swift in Sources */,
+				0AD5FB5026CE94D0009D4853 /* AccountNetworkHandler.swift in Sources */,
 				0AD5FB4026CD2BB7009D4853 /* DebitCard.swift in Sources */,
 				0AD5FB2D26CB8324009D4853 /* CreditCard.swift in Sources */,
 				0AD5FB3A26CD0F83009D4853 /* Transaction.swift in Sources */,
 				0A64C9B826BBD5C2007A1131 /* User.swift in Sources */,
 				0AD5FB3226CB9D8A009D4853 /* UserData.swift in Sources */,
 				0A76AD5F26B9C35500427B4C /* ViewController.swift in Sources */,
+				0AD5FB4E26CE94C2009D4853 /* AccountData.swift in Sources */,
 				0A76AD5B26B9C35500427B4C /* AppDelegate.swift in Sources */,
 				0AD5FB4426CD2BDD009D4853 /* DebitCardNetworkHandler.swift in Sources */,
 				0AD5FB3826CD0BAE009D4853 /* DebitARViewController.swift in Sources */,
@@ -311,6 +322,7 @@
 				0A154F9D26C14E1100968129 /* ARViewController.swift in Sources */,
 				0AD5FB3E26CD0FA8009D4853 /* TransactionNetworkHandler.swift in Sources */,
 				0AD5FB3026CB87FC009D4853 /* UserNetworkHandler.swift in Sources */,
+				0AD5FB4C26CE94B5009D4853 /* Account.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
