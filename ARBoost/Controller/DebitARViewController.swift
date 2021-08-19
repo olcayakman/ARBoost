@@ -220,7 +220,7 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
         let img5 = textToImage(drawText: "Son İşlem", inImage: img4, atPoint: CGPoint(x: 70, y: 250),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
         let price = (transactions.count>=1) ? transactions[0].amount : 0 ;
         let colorToUse = (price >= 0) ? textColor : TextColorNegative;
-        let img6 = textToImage(drawText: String(price)+" TL", inImage: img5, atPoint: CGPoint(x: 100, y: 290),textColor: colorToUse,textFont: UIFont(name: "Helvetica-Bold", size: 25)!)
+        let img6 = textToImage(drawText: String(price)+" TL", inImage: img5, atPoint: CGPoint(x: 100, y: 290),textColor: colorToUse,textFont: UIFont(name: "Helvetica", size: 25)!)
         
         //----------------------
         

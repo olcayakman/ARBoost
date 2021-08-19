@@ -65,23 +65,65 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
+    func blendImages(bottomImage img: UIImage, topImage imgTwo: UIImage?,
+        locX:CGFloat,locY:CGFloat,width:CGFloat,height:CGFloat) -> UIImage {
+        let bottomImage = img
+        let topImage = imgTwo!
+
+        let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: bottomImage.size.width, height: bottomImage.size.height))
+        
+        let imgView2 = UIImageView(frame: CGRect(x: locX, y: locY, width: topImage.size.width + width, height: topImage.size.height + height))
+     
+        // - Set Content mode to what you desire
+        imgView.contentMode = .scaleAspectFit
+        imgView2.contentMode = .scaleAspectFit
+
+        // - Set Images
+        imgView.image = bottomImage
+      
+        imgView2.image = topImage
+        // - Create UIView
+        let contentView = UIView(frame: CGRect(x: 0, y: 0, width: bottomImage.size.width, height: bottomImage.size.height))
+        contentView.addSubview(imgView)
+        contentView.addSubview(imgView2)
+        // - Set Size
+        let size = CGSize(width: bottomImage.size.width, height: bottomImage.size.height)
+
+        // - Where the magic happens
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+
+        contentView.drawHierarchy(in: contentView.bounds, afterScreenUpdates: true)
+        
+        guard let i = UIGraphicsGetImageFromCurrentImageContext(),
+              let data = i.jpegData(compressionQuality: 1.0)
+            else {return img}
+
+        UIGraphicsEndImageContext()
+
+        return i
+    }
+    
+    
     func addTwoImages(bottomImage:UIImage,topImage:UIImage?,
                       locX:CGFloat,locY:CGFloat,width:CGFloat,height:CGFloat) -> UIImage {
         if let safeTopImage = topImage {
             let size = CGSize(width: bottomImage.size.width, height: bottomImage.size.height)
             
-            UIGraphicsBeginImageContext(size)
+            //UIGraphicsBeginImageContext(size)
+            UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
             
-            let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            let areaSize = CGRect(origin: CGPoint.zero, size: size)
             bottomImage.draw(in: areaSize)
             
             let areaSizeTop = CGRect(x: locX, y: locY, width: safeTopImage.size.width+width,
                                      height: safeTopImage.size.height+height)
-            bottomImage.draw(in: areaSize)
             
-            safeTopImage.draw(in: areaSizeTop, blendMode: .normal, alpha: 0.8)
+            bottomImage.draw(in: areaSize,blendMode: CGBlendMode.normal,alpha: 1)
+            
+            safeTopImage.draw(in: areaSizeTop, blendMode: .normal, alpha: 1)
             
             let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+    
             UIGraphicsEndImageContext()
             return newImage
         }
@@ -368,11 +410,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         var lastImage:UIImage = UIImage(named:"art.scnassets/pastTransactionsTable.png")!
         
         if transactions.count>=1 {
-            print("Hey lok here")
+            print("Hey look here")
             let deneme12 = UIImage(named:"art.scnassets/"+transactions[0].type+".png")
             print(deneme12!.size.width)
             print(deneme12!.size.height)
-            let tryImg = addTwoImages(bottomImage: UIImage(named:"art.scnassets/pastTransactionsTable.png")!, topImage: UIImage(named:"art.scnassets/"+transactions[0].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY),width: CGFloat(-10),height:CGFloat(-10))
+            let tryImg = blendImages(bottomImage: UIImage(named:"art.scnassets/pastTransactionsTable.png")!, topImage: UIImage(named:"art.scnassets/"+transactions[0].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY),width: CGFloat(-10),height:CGFloat(-10))
             
             let img = textToImage(drawText: transactions[0].reciever, inImage: tryImg, atPoint: CGPoint(x: startX, y: startY),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
             
@@ -384,7 +426,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             
             if transactions.count>=2 {
                 
-                let tryImg2 = addTwoImages(bottomImage: img3, topImage: UIImage(named:"art.scnassets/"+transactions[1].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+50),width: CGFloat(-10),height:CGFloat(-10))
+                let tryImg2 = blendImages(bottomImage: img3, topImage: UIImage(named:"art.scnassets/"+transactions[1].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+50),width: CGFloat(-10),height:CGFloat(-10))
                 
                 let img4 = textToImage(drawText: transactions[1].reciever, inImage: tryImg2, atPoint: CGPoint(x: startX, y: startY+50),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                 
@@ -394,7 +436,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
                 lastImage = img6
                 if transactions.count>=3 {
                     
-                    let tryImg3 = addTwoImages(bottomImage: img6, topImage: UIImage(named:"art.scnassets/"+transactions[2].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+100),width: CGFloat(-10),height:CGFloat(-10))
+                    let tryImg3 = blendImages(bottomImage: img6, topImage: UIImage(named:"art.scnassets/"+transactions[2].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+100),width: CGFloat(-10),height:CGFloat(-10))
                     
                     let img7 = textToImage(drawText:transactions[2].reciever, inImage: tryImg3, atPoint: CGPoint(x: startX, y: startY+100),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                     
@@ -403,16 +445,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
                     let img9 = textToImage(drawText: String(transactions[2].amount)+" TL", inImage: img8, atPoint: CGPoint(x: startX+150, y: startY+110),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
                     lastImage = img9
                     if transactions.count>=4 {
-                        let tryImg3 = addTwoImages(bottomImage: img9, topImage: UIImage(named:"art.scnassets/"+transactions[3].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+150),width: CGFloat(-10),height:CGFloat(-10))
-                        let img10 = textToImage(drawText: transactions[3].reciever, inImage: tryImg3, atPoint: CGPoint(x: startX, y: startY+150),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                        let tryImg4 = blendImages(bottomImage: img9, topImage: UIImage(named:"art.scnassets/"+transactions[3].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+150),width: CGFloat(-10),height:CGFloat(-10))
+                        let img10 = textToImage(drawText: transactions[3].reciever, inImage: tryImg4, atPoint: CGPoint(x: startX, y: startY+150),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                         
                         let img11 = textToImage(drawText: dateFormatter.string(from:transactions[3].date!), inImage: img10, atPoint: CGPoint(x: startX, y: startY+170),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
                         toUseColor = (transactions[3].amount>=0) ? dataColorPos : dataColor;
                         let img12 = textToImage(drawText:  String(transactions[3].amount)+" TL", inImage: img11, atPoint: CGPoint(x: startX+150, y: startY+160),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
                         lastImage = img12
                         if transactions.count>=5 {
-                            let tryImg4 = addTwoImages(bottomImage: img12, topImage: UIImage(named:"art.scnassets/"+transactions[4].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+200),width: CGFloat(-10),height:CGFloat(-10))
-                            let img13 = textToImage(drawText: transactions[4].reciever, inImage: tryImg4, atPoint: CGPoint(x: startX, y: startY+200),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                            let tryImg5 = blendImages(bottomImage: img12, topImage: UIImage(named:"art.scnassets/"+transactions[4].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+200),width: CGFloat(-10),height:CGFloat(-10))
+                            let img13 = textToImage(drawText: transactions[4].reciever, inImage: tryImg5, atPoint: CGPoint(x: startX, y: startY+200),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                             
                             let img14 = textToImage(drawText: dateFormatter.string(from:transactions[4].date!), inImage: img13, atPoint: CGPoint(x: startX, y: startY+220),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
                             toUseColor = (transactions[4].amount>=0) ? dataColorPos : dataColor;
