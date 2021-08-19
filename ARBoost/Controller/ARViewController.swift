@@ -68,39 +68,40 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     func blendImages(bottomImage img: UIImage, topImage imgTwo: UIImage?,
         locX:CGFloat,locY:CGFloat,width:CGFloat,height:CGFloat) -> UIImage {
         let bottomImage = img
-        let topImage = imgTwo!
+        if let topImage = imgTwo{
+            let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: bottomImage.size.width, height: bottomImage.size.height))
+            
+            let imgView2 = UIImageView(frame: CGRect(x: locX, y: locY, width: topImage.size.width + width, height: topImage.size.height + height))
+         
+            // - Set Content mode to what you desire
+            imgView.contentMode = .scaleAspectFit
+            imgView2.contentMode = .scaleAspectFit
 
-        let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: bottomImage.size.width, height: bottomImage.size.height))
-        
-        let imgView2 = UIImageView(frame: CGRect(x: locX, y: locY, width: topImage.size.width + width, height: topImage.size.height + height))
-     
-        // - Set Content mode to what you desire
-        imgView.contentMode = .scaleAspectFit
-        imgView2.contentMode = .scaleAspectFit
+            // - Set Images
+            imgView.image = bottomImage
+          
+            imgView2.image = topImage
+            // - Create UIView
+            let contentView = UIView(frame: CGRect(x: 0, y: 0, width: bottomImage.size.width, height: bottomImage.size.height))
+            contentView.addSubview(imgView)
+            contentView.addSubview(imgView2)
+            // - Set Size
+            let size = CGSize(width: bottomImage.size.width, height: bottomImage.size.height)
 
-        // - Set Images
-        imgView.image = bottomImage
-      
-        imgView2.image = topImage
-        // - Create UIView
-        let contentView = UIView(frame: CGRect(x: 0, y: 0, width: bottomImage.size.width, height: bottomImage.size.height))
-        contentView.addSubview(imgView)
-        contentView.addSubview(imgView2)
-        // - Set Size
-        let size = CGSize(width: bottomImage.size.width, height: bottomImage.size.height)
+            // - Where the magic happens
+            UIGraphicsBeginImageContextWithOptions(size, false, 0)
 
-        // - Where the magic happens
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+            contentView.drawHierarchy(in: contentView.bounds, afterScreenUpdates: true)
+            
+            guard let i = UIGraphicsGetImageFromCurrentImageContext(),
+                  let data = i.jpegData(compressionQuality: 1.0)
+                else {return img}
 
-        contentView.drawHierarchy(in: contentView.bounds, afterScreenUpdates: true)
-        
-        guard let i = UIGraphicsGetImageFromCurrentImageContext(),
-              let data = i.jpegData(compressionQuality: 1.0)
-            else {return img}
+            UIGraphicsEndImageContext()
+            return i
+        }
 
-        UIGraphicsEndImageContext()
-
-        return i
+        return img
     }
     
     
@@ -150,19 +151,19 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         let mailOrderButton = (myCard!.mailOrder) ? "on.png" : "off.png";
         
         
-        let imgSet = addTwoImages(
+        let imgSet = blendImages(
             bottomImage: UIImage(named: "art.scnassets/settingsTable.png")!,
             topImage: UIImage(named: "art.scnassets/"+contactlessButton),
             locX: CGFloat(startX)+230, locY: CGFloat(startY)+40,
             width:CGFloat(0) , height: CGFloat(0))
         
-        let imgSet2 = addTwoImages(
+        let imgSet2 = blendImages(
             bottomImage: imgSet,
             topImage: UIImage(named: "art.scnassets/"+ecomButton),
             locX: CGFloat(startX)+230, locY: CGFloat(startY)+65,
             width:CGFloat(0) , height: CGFloat(0))
         
-        let imgSet3 = addTwoImages(
+        let imgSet3 = blendImages(
             bottomImage: imgSet2,
             topImage: UIImage(named: "art.scnassets/"+mailOrderButton),
             locX: CGFloat(startX)+230, locY: CGFloat(startY)+90,
@@ -410,10 +411,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         var lastImage:UIImage = UIImage(named:"art.scnassets/pastTransactionsTable.png")!
         
         if transactions.count>=1 {
-            print("Hey look here")
-            let deneme12 = UIImage(named:"art.scnassets/"+transactions[0].type+".png")
-            print(deneme12!.size.width)
-            print(deneme12!.size.height)
+            
             let tryImg = blendImages(bottomImage: UIImage(named:"art.scnassets/pastTransactionsTable.png")!, topImage: UIImage(named:"art.scnassets/"+transactions[0].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY),width: CGFloat(-10),height:CGFloat(-10))
             
             let img = textToImage(drawText: transactions[0].reciever, inImage: tryImg, atPoint: CGPoint(x: startX, y: startY),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)

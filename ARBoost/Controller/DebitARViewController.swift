@@ -67,6 +67,45 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
+    func blendImages(bottomImage img: UIImage, topImage imgTwo: UIImage?,
+        locX:CGFloat,locY:CGFloat,width:CGFloat,height:CGFloat) -> UIImage {
+        let bottomImage = img
+        if let topImage = imgTwo{
+            let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: bottomImage.size.width, height: bottomImage.size.height))
+            
+            let imgView2 = UIImageView(frame: CGRect(x: locX, y: locY, width: topImage.size.width + width, height: topImage.size.height + height))
+         
+            // - Set Content mode to what you desire
+            imgView.contentMode = .scaleAspectFit
+            imgView2.contentMode = .scaleAspectFit
+
+            // - Set Images
+            imgView.image = bottomImage
+          
+            imgView2.image = topImage
+            // - Create UIView
+            let contentView = UIView(frame: CGRect(x: 0, y: 0, width: bottomImage.size.width, height: bottomImage.size.height))
+            contentView.addSubview(imgView)
+            contentView.addSubview(imgView2)
+            // - Set Size
+            let size = CGSize(width: bottomImage.size.width, height: bottomImage.size.height)
+
+            // - Where the magic happens
+            UIGraphicsBeginImageContextWithOptions(size, false, 0)
+
+            contentView.drawHierarchy(in: contentView.bounds, afterScreenUpdates: true)
+            
+            guard let i = UIGraphicsGetImageFromCurrentImageContext(),
+                  let data = i.jpegData(compressionQuality: 1.0)
+                else {return img}
+
+            UIGraphicsEndImageContext()
+            return i
+        }
+
+        return img
+    }
+    
     func addTwoImages(bottomImage:UIImage,topImage:UIImage,
                       locX:CGFloat,locY:CGFloat) -> UIImage {
    
@@ -106,20 +145,23 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
         let mailOrderButton = (myCard!.mailOrder) ? "on.png" : "off.png";
 
         
-        let imgSet = addTwoImages(
+        let imgSet = blendImages(
         bottomImage: UIImage(named: "art.scnassets/debitSettingsTable.png")!,
         topImage: UIImage(named: "art.scnassets/"+contactlessButton)!,
-        locX: CGFloat(startX)+230, locY: CGFloat(startY)+40)
+        locX: CGFloat(startX)+230, locY: CGFloat(startY)+40,
+            width:CGFloat(0) , height: CGFloat(0))
         
-        let imgSet2 = addTwoImages(
+        let imgSet2 = blendImages(
             bottomImage: imgSet,
             topImage: UIImage(named: "art.scnassets/"+ecomButton)!,
-            locX: CGFloat(startX)+230, locY: CGFloat(startY)+65)
+            locX: CGFloat(startX)+230, locY: CGFloat(startY)+65,
+            width:CGFloat(0) , height: CGFloat(0))
         
-        let imgSet3 = addTwoImages(
+        let imgSet3 = blendImages(
             bottomImage: imgSet2,
             topImage: UIImage(named: "art.scnassets/"+mailOrderButton)!,
-            locX: CGFloat(startX)+230, locY: CGFloat(startY)+90)
+            locX: CGFloat(startX)+230, locY: CGFloat(startY)+90,
+            width:CGFloat(0) , height: CGFloat(0))
         
         let img = textToImage(drawText: "Kullanım Tercihleri", inImage:
             imgSet3, atPoint: CGPoint(x: startX, y: startY),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
@@ -325,6 +367,8 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
         
     }
 */
+
+    
     func loadPastTransactionsTable() -> [SCNNode]{
         let tableMaterial = SCNMaterial()
         
@@ -347,36 +391,48 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
         var lastImage:UIImage = UIImage(named:"art.scnassets/pastTransactionsTable.png")!
         
         if transactions.count>=1 {
-            let img = textToImage(drawText: transactions[0].reciever, inImage: UIImage(named:"art.scnassets/pastTransactionsTable.png")!, atPoint: CGPoint(x: startX, y: startY),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+            
+            let tryImg = blendImages(bottomImage: UIImage(named:"art.scnassets/pastTransactionsTable.png")!, topImage: UIImage(named:"art.scnassets/"+transactions[0].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY),width: CGFloat(-10),height:CGFloat(-10))
+            
+            let img = textToImage(drawText: transactions[0].reciever, inImage: tryImg, atPoint: CGPoint(x: startX, y: startY),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
             
             let img2 = textToImage(drawText:dateFormatter.string(from:transactions[0].date!), inImage: img, atPoint: CGPoint(x: startX, y: startY+20),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
+            
             toUseColor = (transactions[0].amount>=0) ? dataColorPos : dataColor;
             let img3 = textToImage(drawText: String(transactions[0].amount)+" TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY+10),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
             lastImage = img3
+            
             if transactions.count>=2 {
-                let img4 = textToImage(drawText: transactions[1].reciever, inImage: img3, atPoint: CGPoint(x: startX, y: startY+50),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                
+                let tryImg2 = blendImages(bottomImage: img3, topImage: UIImage(named:"art.scnassets/"+transactions[1].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+50),width: CGFloat(-10),height:CGFloat(-10))
+                
+                let img4 = textToImage(drawText: transactions[1].reciever, inImage: tryImg2, atPoint: CGPoint(x: startX, y: startY+50),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                 
                 let img5 = textToImage(drawText: dateFormatter.string(from:transactions[1].date!), inImage: img4, atPoint: CGPoint(x: startX, y: startY+70),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
                 toUseColor = (transactions[1].amount>=0) ? dataColorPos : dataColor;
                 let img6 = textToImage(drawText: String(transactions[1].amount)+" TL", inImage: img5, atPoint: CGPoint(x: startX+150, y: startY+60),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
                 lastImage = img6
                 if transactions.count>=3 {
-                    let img7 = textToImage(drawText:transactions[2].reciever, inImage: img6, atPoint: CGPoint(x: startX, y: startY+100),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                    
+                    let tryImg3 = blendImages(bottomImage: img6, topImage: UIImage(named:"art.scnassets/"+transactions[2].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+100),width: CGFloat(-10),height:CGFloat(-10))
+                    
+                    let img7 = textToImage(drawText:transactions[2].reciever, inImage: tryImg3, atPoint: CGPoint(x: startX, y: startY+100),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                     
                     let img8 = textToImage(drawText: dateFormatter.string(from:transactions[2].date!), inImage: img7, atPoint: CGPoint(x: startX, y: startY+120),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: dateSize)!)
                     toUseColor = (transactions[2].amount>=0) ? dataColorPos : dataColor;
                     let img9 = textToImage(drawText: String(transactions[2].amount)+" TL", inImage: img8, atPoint: CGPoint(x: startX+150, y: startY+110),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
                     lastImage = img9
                     if transactions.count>=4 {
-                        
-                        let img10 = textToImage(drawText: transactions[3].reciever, inImage: img9, atPoint: CGPoint(x: startX, y: startY+150),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                        let tryImg4 = blendImages(bottomImage: img9, topImage: UIImage(named:"art.scnassets/"+transactions[3].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+150),width: CGFloat(-10),height:CGFloat(-10))
+                        let img10 = textToImage(drawText: transactions[3].reciever, inImage: tryImg4, atPoint: CGPoint(x: startX, y: startY+150),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                         
                         let img11 = textToImage(drawText: dateFormatter.string(from:transactions[3].date!), inImage: img10, atPoint: CGPoint(x: startX, y: startY+170),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
                         toUseColor = (transactions[3].amount>=0) ? dataColorPos : dataColor;
                         let img12 = textToImage(drawText:  String(transactions[3].amount)+" TL", inImage: img11, atPoint: CGPoint(x: startX+150, y: startY+160),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
                         lastImage = img12
                         if transactions.count>=5 {
-                            let img13 = textToImage(drawText: transactions[4].reciever, inImage: img12, atPoint: CGPoint(x: startX, y: startY+200),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                            let tryImg5 = blendImages(bottomImage: img12, topImage: UIImage(named:"art.scnassets/"+transactions[4].type+".png"), locX: CGFloat(startX-50), locY: CGFloat(startY+200),width: CGFloat(-10),height:CGFloat(-10))
+                            let img13 = textToImage(drawText: transactions[4].reciever, inImage: tryImg5, atPoint: CGPoint(x: startX, y: startY+200),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
                             
                             let img14 = textToImage(drawText: dateFormatter.string(from:transactions[4].date!), inImage: img13, atPoint: CGPoint(x: startX, y: startY+220),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
                             toUseColor = (transactions[4].amount>=0) ? dataColorPos : dataColor;
@@ -450,8 +506,6 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
         return [tableNode,leftArrow]
         
     }
-    
-    
     
     func loadArrows(name:String, position pos:[Float],
     rotation rot:[Float],size:[CGFloat],action:[CGFloat]) -> SCNNode{
@@ -685,6 +739,133 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
          aNode.geometry = geometry1
          //aNode.scale = SCNVector3(0.1, 0.1, 0.1)
          return aNode
+ }
+ 
+ 
+ func loadPastTransactionsTable() -> [SCNNode]{
+     let tableMaterial = SCNMaterial()
+     
+     let startX:Double = 120
+     let startY:Double = 110
+     
+     let dataSize:CGFloat = 13.0
+     let companyNameSize:CGFloat = 13.0
+     let dateSize:CGFloat = 11.0
+     
+     let dataColor = UIColor(red: 0.67, green: 0.22, blue: 0.29, alpha: 1.00)
+     let companyNameColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
+     let dataColorPos = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.00)
+     var toUseColor = dataColor
+     
+     let noTransactionText = "Yakın zamanda başka bir işleminiz bulunmamaktadır."
+     
+     let dateFormatter = DateFormatter()
+     dateFormatter.dateFormat = "dd/MM/YY"
+     var lastImage:UIImage = UIImage(named:"art.scnassets/pastTransactionsTable.png")!
+     
+     if transactions.count>=1 {
+         let img = textToImage(drawText: transactions[0].reciever, inImage: UIImage(named:"art.scnassets/pastTransactionsTable.png")!, atPoint: CGPoint(x: startX, y: startY),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+         
+         let img2 = textToImage(drawText:dateFormatter.string(from:transactions[0].date!), inImage: img, atPoint: CGPoint(x: startX, y: startY+20),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
+         toUseColor = (transactions[0].amount>=0) ? dataColorPos : dataColor;
+         let img3 = textToImage(drawText: String(transactions[0].amount)+" TL", inImage: img2, atPoint: CGPoint(x: startX+150, y: startY+10),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+         lastImage = img3
+         if transactions.count>=2 {
+             let img4 = textToImage(drawText: transactions[1].reciever, inImage: img3, atPoint: CGPoint(x: startX, y: startY+50),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+             
+             let img5 = textToImage(drawText: dateFormatter.string(from:transactions[1].date!), inImage: img4, atPoint: CGPoint(x: startX, y: startY+70),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
+             toUseColor = (transactions[1].amount>=0) ? dataColorPos : dataColor;
+             let img6 = textToImage(drawText: String(transactions[1].amount)+" TL", inImage: img5, atPoint: CGPoint(x: startX+150, y: startY+60),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+             lastImage = img6
+             if transactions.count>=3 {
+                 let img7 = textToImage(drawText:transactions[2].reciever, inImage: img6, atPoint: CGPoint(x: startX, y: startY+100),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                 
+                 let img8 = textToImage(drawText: dateFormatter.string(from:transactions[2].date!), inImage: img7, atPoint: CGPoint(x: startX, y: startY+120),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: dateSize)!)
+                 toUseColor = (transactions[2].amount>=0) ? dataColorPos : dataColor;
+                 let img9 = textToImage(drawText: String(transactions[2].amount)+" TL", inImage: img8, atPoint: CGPoint(x: startX+150, y: startY+110),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+                 lastImage = img9
+                 if transactions.count>=4 {
+                     
+                     let img10 = textToImage(drawText: transactions[3].reciever, inImage: img9, atPoint: CGPoint(x: startX, y: startY+150),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                     
+                     let img11 = textToImage(drawText: dateFormatter.string(from:transactions[3].date!), inImage: img10, atPoint: CGPoint(x: startX, y: startY+170),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
+                     toUseColor = (transactions[3].amount>=0) ? dataColorPos : dataColor;
+                     let img12 = textToImage(drawText:  String(transactions[3].amount)+" TL", inImage: img11, atPoint: CGPoint(x: startX+150, y: startY+160),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+                     lastImage = img12
+                     if transactions.count>=5 {
+                         let img13 = textToImage(drawText: transactions[4].reciever, inImage: img12, atPoint: CGPoint(x: startX, y: startY+200),textColor: companyNameColor,textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize)!)
+                         
+                         let img14 = textToImage(drawText: dateFormatter.string(from:transactions[4].date!), inImage: img13, atPoint: CGPoint(x: startX, y: startY+220),textColor: companyNameColor,textFont: UIFont(name: "Helvetica", size: dateSize)!)
+                         toUseColor = (transactions[4].amount>=0) ? dataColorPos : dataColor;
+                         let img15 = textToImage(drawText: String(transactions[4].amount)+" TL", inImage: img14, atPoint: CGPoint(x: startX+150, y: startY+210),textColor: toUseColor,textFont: UIFont(name: "Helvetica", size: dataSize)!)
+                         lastImage = img15
+                     }
+                     
+                     else {
+                         lastImage = textToImage(drawText: noTransactionText, inImage:img12, atPoint: CGPoint(x: startX-50, y: startY+210),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-1)!)
+                     }
+                 }
+                 
+                 else {
+                     let imgNo4 = textToImage(drawText: noTransactionText, inImage:img9, atPoint: CGPoint(x: startX-50, y: startY+160),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+                     lastImage = textToImage(drawText: noTransactionText, inImage:imgNo4, atPoint: CGPoint(x: startX-50, y: startY+210),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+                 }
+                 
+             }
+             
+             else {
+                 let imgNo3 = textToImage(drawText: noTransactionText, inImage:img6, atPoint: CGPoint(x: startX-50, y: startY+110),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+                 let imgNo4 = textToImage(drawText: noTransactionText, inImage:imgNo3, atPoint: CGPoint(x: startX-50, y: startY+160),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+                 lastImage = textToImage(drawText: noTransactionText, inImage:imgNo4, atPoint: CGPoint(x: startX-50, y: startY+210),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+             }
+             
+             
+         }
+         
+         else{
+             let imgNo2 = textToImage(drawText: noTransactionText, inImage: img3, atPoint: CGPoint(x: startX-50, y: startY+60),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+             let imgNo3 = textToImage(drawText: noTransactionText, inImage:imgNo2, atPoint: CGPoint(x: startX-50, y: startY+110),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+             let imgNo4 = textToImage(drawText: noTransactionText, inImage:imgNo3, atPoint: CGPoint(x: startX-50, y: startY+160),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+             lastImage = textToImage(drawText: noTransactionText, inImage:imgNo4, atPoint: CGPoint(x: startX-50, y: startY+210),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+         }
+     }
+     
+     else {
+         //TODO:
+         let imgNo = textToImage(drawText: noTransactionText, inImage: UIImage(named:"art.scnassets/pastTransactionsTable.png")!, atPoint: CGPoint(x: startX-50, y: startY+10),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+         let imgNo2 = textToImage(drawText: noTransactionText, inImage: imgNo, atPoint: CGPoint(x: startX-50, y: startY+60),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+         let imgNo3 = textToImage(drawText: noTransactionText, inImage:imgNo2, atPoint: CGPoint(x: startX-50, y: startY+110),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+         let imgNo4 = textToImage(drawText: noTransactionText, inImage:imgNo3, atPoint: CGPoint(x: startX-50, y: startY+160),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+         lastImage = textToImage(drawText: noTransactionText, inImage:imgNo4, atPoint: CGPoint(x: startX-50, y: startY+210),textColor: companyNameColor, textFont: UIFont(name: "Helvetica-Bold", size: companyNameSize-2)!)
+         
+     }
+     
+     
+     tableMaterial.diffuse.contents = lastImage
+     let rectangle = SCNBox(width: 0.45, height: 0.45, length: 0, chamferRadius: 0.01)
+     rectangle.materials = [tableMaterial]
+     let tableNode = SCNNode()
+     
+     tableNode.geometry = rectangle
+     
+     
+     let tablePosition:[Float] = [0.9, 0.15, 0]
+     let tableRotation:[Float] = [-Float.pi/2,0 , 1, 0]
+     
+     tableNode.transform = SCNMatrix4MakeRotation(tableRotation[0],
+                                                  tableRotation[1] , tableRotation[2], tableRotation[3])
+     tableNode.position = SCNVector3(x: tablePosition[0],
+                                     y: tablePosition[1], z: tablePosition[2])
+     
+     
+     let leftArrow = loadArrows(name: "arrowGroup8.png",
+                                position: [ tablePosition[0]-0.15, tablePosition[1]-0.4, tablePosition[2]],
+                                rotation: [tableRotation[0],tableRotation[1],tableRotation[2],tableRotation[3]],
+                                size:[0.35,0.35,0.0,1],action: [0,0,0.2])
+     
+     
+     return [tableNode,leftArrow]
+     
  }
  */
 
