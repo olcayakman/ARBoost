@@ -16,6 +16,7 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
     var myUser:User? = nil
     var myCard: DebitCard? = nil
     var transactions:[Transaction] = []
+    var account:Account? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -302,14 +303,19 @@ class DebitARViewController: UIViewController, ARSCNViewDelegate {
         
         
         let img = textToImage(drawText: "Bakiye", inImage: UIImage(named:"art.scnassets/debitCardsTable.png")!, atPoint: CGPoint(x: startX+15, y: startY-10),textColor: textColor, textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
-
-        let img2 = textToImage(drawText: "3450,10TL", inImage: img, atPoint: CGPoint(x: startX+140, y: startY-10),textColor: bakiyeColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let amount = account?.balance ?? 0
+        
+        let img2 = textToImage(drawText: String(amount)+" TL", inImage: img, atPoint: CGPoint(x: startX+140, y: startY-10),textColor: bakiyeColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
         let img3 = textToImage(drawText: "Hesap Bilgileri", inImage: img2, atPoint: CGPoint(x: startX-2, y: startY+35),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
         
-        let img4 = textToImage(drawText: "Vadesiz TL", inImage: img3, atPoint: CGPoint(x: startX+10, y: startY+80),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let aType = account?.accountType ?? "Hesap Bulunmamaktadır"
         
-        let img5 = textToImage(drawText: "TR25 0006 4000 0017 2200 3041 00", inImage: img4, atPoint: CGPoint(x: startX+10, y: startY+100),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        let img4 = textToImage(drawText: aType, inImage: img3, atPoint: CGPoint(x: startX+10, y: startY+80),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
+        
+        let iban = account?.iban ?? "Hesap Bulunmamaktadır"
+        
+        let img5 = textToImage(drawText: iban, inImage: img4, atPoint: CGPoint(x: startX+10, y: startY+100),textColor: textColor,textFont: UIFont(name: "Helvetica", size: subHeaderSize)!)
         
         let img6 = textToImage(drawText: "Esnek Hesap", inImage: img5, atPoint: CGPoint(x: startX-5, y: startY+150),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: headerSize)!)
         

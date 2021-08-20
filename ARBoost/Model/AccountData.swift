@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+
+struct AccountData: Codable {
+    var tckn:String
+    var cardNo:String
+    var iban:String
+    var balance:Double
+    var accountType:String
+}
