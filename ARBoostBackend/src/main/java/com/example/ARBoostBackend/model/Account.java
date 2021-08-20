@@ -16,4 +16,5 @@ public class Account {
     private String iban;
     private double balance;
     private String cardNo;
+    private String accountType;
 }
