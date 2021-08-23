@@ -16,11 +16,28 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     var myCard: CreditCard? = nil
     var transactions:[Transaction] = []
     var closestPaymnet:AutoPayment? = nil
+    var lastTable:Int = 0
+    var tables:[UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
+        
+        tables = [loadWelcomeTable2()]
+        
+        let tableMaterial = SCNMaterial()
+        
+        let rectangle = SCNBox(width: 0.3, height: 0.3, length: 0, chamferRadius: 0.01)
+        rectangle.materials = [tableMaterial]
+        let tableNode = SCNNode()
+        let tablePosition:[Float] = [0.05,0,-0.6]
+        tableNode.position = SCNVector3(x: tablePosition[0],
+                                        y: tablePosition[1], z: tablePosition[2])
+        tableMaterial.diffuse.contents = tables[0]
+        tableNode.geometry = rectangle
+        tableNode.name = "tableNode"
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -28,43 +45,118 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
+        let circleNode = SCNNode()
+               
+        let circle = SCNBox(width: 0.1, height: 0.4, length: 0, chamferRadius: 0.01)
+
+        let material = SCNMaterial()
+
+        material.diffuse.contents = UIImage(named:"art.scnassets/navigationBar.png")!
+
+        circleNode.position = SCNVector3(-0.05, 0, -0.4)
+
+        circle.materials = [material]
+
+        circleNode.geometry = circle
+
+        
+        sceneView.scene.rootNode.addChildNode(tableNode)
+        sceneView.scene.rootNode.addChildNode(circleNode)
+        
+        
         // Create a new scene
         //let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
         // Set the scene to the view
         //sceneView.scene = scene
         
-        var nodes = loadWelcomeTable()
-        for node in nodes{
-            sceneView.scene.rootNode.addChildNode(node)
-        }
+        //var node = loadWelcomeTable2()
         
-        nodes = loadCardsTable()
-        for node in nodes{
-            sceneView.scene.rootNode.addChildNode(node)
-        }
-        
-        nodes = loadPastTransactionsTable()
-        for node in nodes{
-            sceneView.scene.rootNode.addChildNode(node)
-        }
-        
-        nodes = loadWorldPointsTable()
-        for node in nodes{
-            sceneView.scene.rootNode.addChildNode(node)
-        }
-        
-        nodes = loadSettingsTable()
-        for node in nodes{
-            sceneView.scene.rootNode.addChildNode(node)
-        }
-        
-        nodes = loadWorldPointsTable()
-        for node in nodes{
-            sceneView.scene.rootNode.addChildNode(node)
-        }
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
+//
+//        nodes = loadCardsTable()
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
+//
+//        nodes = loadPastTransactionsTable()
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
+//
+//        nodes = loadWorldPointsTable()
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
+//
+//        nodes = loadSettingsTable()
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
+//
+//        nodes = loadWorldPointsTable()
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
         
     }
+    
+    func loadWelcomeTable2() -> UIImage{
+        
+        let tableMaterial = SCNMaterial()
+        
+        //Set appropriate colors
+        let textColor = UIColor(red: 0.13, green: 0.34, blue: 0.51, alpha: 0.75)
+        
+        let debtTextColorNegative = UIColor(red: 0.67, green: 0.22, blue: 0.29, alpha: 1.00)
+        
+        let debtTextColorPositive = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 1.0)
+        
+        let lastTransactionColor = UIColor(red: 0.33, green: 0.49, blue: 0.62, alpha: 0.75)
+        
+        //----------------------
+        
+        //Add all texts to the table
+        let img = textToImage(drawText: "Hoşgeldin", inImage: UIImage(named:"art.scnassets/welcomeTable.png")!, atPoint: CGPoint(x: 170, y: 75),textColor: textColor, textFont: UIFont(name: "Helvetica-Bold", size: 28)!)
+        
+        let img2 = textToImage(drawText: myUser!.name+" "+myUser!.surname, inImage: img, atPoint: CGPoint(x: 170, y: 110),textColor: textColor,textFont: UIFont(name: "Helvetica", size: 24)!)
+        
+        let img3 = textToImage(drawText: "Kart Borcu", inImage: img2, atPoint: CGPoint(x: 70, y: 165),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
+        var colorToUse = (myCard!.debt == 0) ? debtTextColorPositive : debtTextColorNegative;
+        let img4 = textToImage(drawText: String(myCard!.debt), inImage: img3, atPoint: CGPoint(x: 100, y: 200),textColor: colorToUse,textFont: UIFont(name: "Helvetica", size: 25)!)
+        
+        let img5 = textToImage(drawText: "Son İşlem", inImage: img4, atPoint: CGPoint(x: 70, y: 250),textColor: textColor,textFont: UIFont(name: "Helvetica-Bold", size: 16)!)
+        //TODO: Son islem tutarini cek
+        let price = (transactions.count>=1) ? transactions[0].amount : 0 ;
+        colorToUse = (price == 0) ? lastTransactionColor : debtTextColorNegative;
+        let img6 = textToImage(drawText: String(price)+" TL", inImage: img5, atPoint: CGPoint(x: 100, y: 290),textColor: colorToUse,textFont: UIFont(name: "Helvetica", size: 25)!)
+        
+        //----------------------
+        tableMaterial.diffuse.contents = img6
+        
+        let rectangle = SCNBox(width: 0.3, height: 0.3, length: 0, chamferRadius: 0.01)
+        rectangle.materials = [tableMaterial]
+        let tableNode = SCNNode()
+        let tablePosition:[Float] = [0,0.1,-0.55]
+        tableNode.position = SCNVector3(x: tablePosition[0],
+                                        y: tablePosition[1], z: tablePosition[2])
+        tableNode.geometry = rectangle
+        
+        
+//        let rightArrow = loadArrows(name: "arrowGroup4.png",
+//                                    position: [ tablePosition[0]-0.1, tablePosition[1]-0.25, tablePosition[2]],
+//                                    rotation: [0,0,0,0],size:[0.2,0.2,0.0,1],action: [0,0,0.25])
+//
+//        let leftArrow = loadArrows(name: "arrowGroup5.png",
+//                                   position: [ tablePosition[0]+0.1, tablePosition[1]-0.25, tablePosition[2]],
+//                                   rotation: [0,0,0,0],size:[0.2,0.2,0.0,1],action: [0,0,0.25])
+//
+        return img6
+        
+    }
+    
     
     func blendImages(bottomImage img: UIImage, topImage imgTwo: UIImage?,
         locX:CGFloat,locY:CGFloat,width:CGFloat,height:CGFloat) -> UIImage {
@@ -568,10 +660,22 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
         
         // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
         
+        let configuration = ARImageTrackingConfiguration()
+                
+        let imageToTrack = ARReferenceImage.referenceImages(inGroupNamed: "Cards", bundle: Bundle.main)
+        if let safeImageToTrack = imageToTrack{
+            configuration.trackingImages = safeImageToTrack
+            configuration.maximumNumberOfTrackedImages = 1
+            print("Images successfully added.")
+        }
+        else{
+            print("Images couldn't added.")
+        }
+
         // Run the view's session
         sceneView.session.run(configuration)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -591,22 +695,60 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
      return node
      }
      */
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
+
+    func renderer(_ renderer: SCNSceneRenderer, willUpdate node: SCNNode, for anchor: ARAnchor) {
+        
+        if let tableNode = sceneView.scene.rootNode.childNode(withName: "tableNode", recursively: true) {
+            print("mert")
+            
+            if let imageAnchor = anchor as? ARImageAnchor {
+                let pos = imageAnchor.transform
+                //print(pos.columns.3.y)
+                if pos.columns.3.y >= 0.05 {
+                    tableNode.geometry?.firstMaterial?.diffuse.contents = tables[0]
+
+                }
+                else if pos.columns.3.y >= 0 {
+                    tableNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+                }
+                else if pos.columns.3.y >= -0.05{
+                    tableNode.geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                }
+                else if pos.columns.3.y >= -0.1 {
+                    tableNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+                }
+                else{
+                    tableNode.geometry?.firstMaterial?.diffuse.contents = UIColor.purple
+                }
+
+            }
+            else{
+                print("Error mert")
+            }
+        }
+        
         
     }
     
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
+    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+        return SCNNode()
     }
     
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
-    }
-    
+//    func session(_ session: ARSession, didFailWithError error: Error) {
+//        // Present an error message to the user
+//
+//    }
+//
+//    func sessionWasInterrupted(_ session: ARSession) {
+//        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+//
+//    }
+//
+//    func sessionInterruptionEnded(_ session: ARSession) {
+//        // Reset tracking and/or remove existing anchors if consistent tracking is required
+//
+//    }
+//
     
     func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint,textColor:UIColor,textFont: UIFont) -> UIImage {
         
