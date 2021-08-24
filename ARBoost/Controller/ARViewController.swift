@@ -18,6 +18,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     var closestPaymnet:AutoPayment? = nil
     var lastTable:Int = 0
     var tables:[UIImage] = []
+    var toDestroy:SCNNode? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,64 +47,30 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        let circleNode = SCNNode()
-               
-        let circle = SCNBox(width: 0.1, height: 0.45, length: 0, chamferRadius: 0.01)
-
-        let material = SCNMaterial()
-
-        material.diffuse.contents = UIImage(named:"art.scnassets/navigationBar.png")!
-
-        circleNode.position = SCNVector3(-0.1, -0.05, -0.4)
-
-        circle.materials = [material]
-
-        circleNode.geometry = circle
-
         
         sceneView.scene.rootNode.addChildNode(tableNode)
-        sceneView.scene.rootNode.addChildNode(circleNode)
-        
-        
-        // Create a new scene
-        //let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // Set the scene to the view
-        //sceneView.scene = scene
-        
-        //var node = loadWelcomeTable2()
-        
-//        for node in nodes{
-//            sceneView.scene.rootNode.addChildNode(node)
-//        }
-//
-//        nodes = loadCardsTable()
-//        for node in nodes{
-//            sceneView.scene.rootNode.addChildNode(node)
-//        }
-//
-//        nodes = loadPastTransactionsTable()
-//        for node in nodes{
-//            sceneView.scene.rootNode.addChildNode(node)
-//        }
-//
-//        nodes = loadWorldPointsTable()
-//        for node in nodes{
-//            sceneView.scene.rootNode.addChildNode(node)
-//        }
-//
-//        nodes = loadSettingsTable()
-//        for node in nodes{
-//            sceneView.scene.rootNode.addChildNode(node)
-//        }
-//
-//        nodes = loadWorldPointsTable()
-//        for node in nodes{
-//            sceneView.scene.rootNode.addChildNode(node)
-//        }
-        
     }
     
+    func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint,textColor:UIColor,textFont: UIFont) -> UIImage {
+        
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
+        
+        let textFontAttributes = [
+            NSAttributedString.Key.font: textFont,
+            NSAttributedString.Key.foregroundColor: textColor,
+            
+        ] as [NSAttributedString.Key : Any]
+        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+        
+        let rect = CGRect(origin: point, size: image.size)
+        text.draw(in: rect, withAttributes: textFontAttributes)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
     
     func blendImages(bottomImage img: UIImage, topImage imgTwo: UIImage?,
         locX:CGFloat,locY:CGFloat,width:CGFloat,height:CGFloat) -> UIImage {
@@ -565,7 +532,36 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        return SCNNode()
+        
+        let node = SCNNode()
+        
+        if let imageAnchor = anchor as? ARImageAnchor {
+            
+            let plane = SCNPlane(width: 0.05, height: 0.05)
+            
+            plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/directions.png")
+            
+       
+            let textNode = SCNNode(geometry: plane)
+            textNode.position = SCNVector3(x: 0.015,
+                                            y: 0, z: 0)
+            textNode.eulerAngles.x = -.pi/2
+            //node.addChildNode(planeNode)
+            node.addChildNode(textNode)
+            //backNode.addChildNode(planeNode)
+            
+            toDestroy = textNode
+            Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(destroyWriting), userInfo: nil, repeats: false)
+            
+        }
+        
+        return node
+    }
+    
+    @objc func destroyWriting(){
+        if let destroy = toDestroy {
+            destroy.removeFromParentNode()
+        }
     }
     
 //    func session(_ session: ARSession, didFailWithError error: Error) {
@@ -583,27 +579,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
 //
 //    }
 //
-    
-    func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint,textColor:UIColor,textFont: UIFont) -> UIImage {
-        
-        let scale = UIScreen.main.scale
-        UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
-        
-        let textFontAttributes = [
-            NSAttributedString.Key.font: textFont,
-            NSAttributedString.Key.foregroundColor: textColor,
-            
-        ] as [NSAttributedString.Key : Any]
-        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
-        
-        let rect = CGRect(origin: point, size: image.size)
-        text.draw(in: rect, withAttributes: textFontAttributes)
-        
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-    }
+
 }
 
 
@@ -1175,4 +1151,61 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
  
  
  
+ */
+
+
+/*
+ OLD MAIN
+        //        let circleNode = SCNNode()
+        //
+        //        let circle = SCNBox(width: 0.1, height: 0.45, length: 0, chamferRadius: 0.01)
+        //
+        //        let material = SCNMaterial()
+        //
+        //        material.diffuse.contents = UIImage(named:"art.scnassets/navigationBar.png")!
+        //
+        //        circleNode.position = SCNVector3(-0.1, -0.05, -0.4)
+        //
+        //        circle.materials = [material]
+        //
+        //        circleNode.geometry = circle
+        //sceneView.scene.rootNode.addChildNode(circleNode)
+        
+
+        // Create a new scene
+        //let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        
+        // Set the scene to the view
+        //sceneView.scene = scene
+        
+        //var node = loadWelcomeTable2()
+        
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
+//
+//        nodes = loadCardsTable()
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
+//
+//        nodes = loadPastTransactionsTable()
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
+//
+//        nodes = loadWorldPointsTable()
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
+//
+//        nodes = loadSettingsTable()
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
+//
+//        nodes = loadWorldPointsTable()
+//        for node in nodes{
+//            sceneView.scene.rootNode.addChildNode(node)
+//        }
  */
