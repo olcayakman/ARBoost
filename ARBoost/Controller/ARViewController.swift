@@ -30,7 +30,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         let tableMaterial = SCNMaterial()
         
-        let rectangle = SCNBox(width: 0.3, height: 0.3, length: 0, chamferRadius: 0.01)
+        let rectangle = SCNBox(width: 0.35, height: 0.35, length: 0, chamferRadius: 0.01)
         rectangle.materials = [tableMaterial]
         let tableNode = SCNNode()
         let tablePosition:[Float] = [0.05,0,-0.6]
@@ -48,13 +48,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         let circleNode = SCNNode()
                
-        let circle = SCNBox(width: 0.1, height: 0.4, length: 0, chamferRadius: 0.01)
+        let circle = SCNBox(width: 0.1, height: 0.45, length: 0, chamferRadius: 0.01)
 
         let material = SCNMaterial()
 
         material.diffuse.contents = UIImage(named:"art.scnassets/navigationBar.png")!
 
-        circleNode.position = SCNVector3(-0.05, 0, -0.4)
+        circleNode.position = SCNVector3(-0.1, -0.05, -0.4)
 
         circle.materials = [material]
 
@@ -535,17 +535,20 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             if let imageAnchor = anchor as? ARImageAnchor {
                 let pos = imageAnchor.transform
                 //print(pos.columns.3.y)
-                if pos.columns.3.y >= 0.05 {
+                let y = pos.columns.3.y
+                let limit:Float = 0.06
+                print(y)
+                if y >= limit {
                     tableNode.geometry?.firstMaterial?.diffuse.contents = tables[0]
 
                 }
-                else if pos.columns.3.y >= 0 {
+                else if y >= limit-0.06 {
                     tableNode.geometry?.firstMaterial?.diffuse.contents = tables[1]
                 }
-                else if pos.columns.3.y >= -0.05{
+                else if y >= limit-0.12{
                     tableNode.geometry?.firstMaterial?.diffuse.contents = tables[2]
                 }
-                else if pos.columns.3.y >= -0.1 {
+                else if y >= limit-0.18 {
                     tableNode.geometry?.firstMaterial?.diffuse.contents = tables[3]
                 }
                 else{
