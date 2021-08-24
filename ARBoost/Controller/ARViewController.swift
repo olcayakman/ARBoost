@@ -19,6 +19,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     var lastTable:Int = 0
     var tables:[UIImage] = []
     var toDestroy:SCNNode? = nil
+    var cardToTrack:UIImage? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -461,16 +462,37 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         // Create a session configuration
         
         let configuration = ARImageTrackingConfiguration()
-                
-        let imageToTrack = ARReferenceImage.referenceImages(inGroupNamed: "Cards", bundle: Bundle.main)
-        if let safeImageToTrack = imageToTrack{
-            configuration.trackingImages = safeImageToTrack
-            configuration.maximumNumberOfTrackedImages = 1
-            print("Images successfully added.")
+        
+        if let card = cardToTrack {
+            
+            if let img = card.cgImage{
+                let imageToTrack =   ARReferenceImage.init(img,
+                orientation: CGImagePropertyOrientation.up, physicalWidth: CGFloat(0.08))
+                //ARReferenceImage.referenceImages(inGroupNamed: "Cards", bundle: Bundle.main)
+                var mySet:Set<ARReferenceImage> = []
+                mySet.insert(imageToTrack)
+                configuration.trackingImages = mySet
+                configuration.maximumNumberOfTrackedImages = 1
+                print("Images successfully added.")
+            }
+            
+            else{
+                print("Images couldn't added.")
+            }
+            
         }
+        
         else{
             print("Images couldn't added.")
         }
+//        if let safeImageToTrack = imageToTrack{
+//            configuration.trackingImages = safeImageToTrack
+//            configuration.maximumNumberOfTrackedImages = 1
+//            print("Images successfully added.")
+//        }
+//        else{
+//            print("Images couldn't added.")
+//        }
 
         // Run the view's session
         sceneView.session.run(configuration)

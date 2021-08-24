@@ -40,8 +40,13 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func openCredit(_ number:String) {
+    func openCredit(_ number:String,img:UIImage?) {
         let arViewController = self.storyboard?.instantiateViewController(withIdentifier: "ARViewController") as! ARViewController
+        
+        if let safeImg = img{
+            arViewController.cardToTrack = safeImg
+        }
+        
         arViewController.myUser = myUser
         arViewController.myCard =  creditCardNetworkHandler.getByCardNo(cardNo:number)
         arViewController.transactions = transactionNetworkHandler.getByCardNo(cardNo: number)
@@ -75,6 +80,7 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
     
     
     func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
+        
         print(cardInfo.cardNumber ?? "Couldn't read your card...")
         print("provide")
         
@@ -85,7 +91,7 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         
         if userCards.contains(cardInfo.cardNumber) {
             print("Credit card entered")
-            openCredit(cardInfo.cardNumber)
+            openCredit(cardInfo.cardNumber,img:cardInfo.cardImage)
         }
         
         else if userDebitCards.contains(cardInfo.cardNumber){
