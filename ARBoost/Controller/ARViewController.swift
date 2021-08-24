@@ -526,7 +526,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
                 //print(pos.columns.3.y)
                 let y = pos.columns.3.y
                 let limit:Float = 0.06
-                print(y)
+                //print(y)
                 if y >= limit {
                     tableNode.geometry?.firstMaterial?.diffuse.contents = tables[0]
 
