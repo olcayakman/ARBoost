@@ -117,6 +117,8 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         super.viewDidLoad()
         buttonOutlet.layer.cornerRadius = 20
         buttonOutlet.clipsToBounds = true
+        passwordInputField.keyboardType = UIKeyboardType.decimalPad
+        passwordInputField.isSecureTextEntry = true
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
