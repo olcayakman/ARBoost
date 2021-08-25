@@ -49,10 +49,9 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         
         arViewController.myUser = myUser
         arViewController.myCard =  creditCardNetworkHandler.getByCardNo(cardNo:number)
-        arViewController.transactions = transactionNetworkHandler.getByCardNo(cardNo: number)
-        arViewController.closestPaymnet = autoPaymentNetworkHandler.getNearestByCardNo(cardNo: number)
-        print("Heyy")
-        print(arViewController.closestPaymnet?.receiver)
+        arViewController.transactions = transactionNetworkHandler.getByCardNo(cardNo:number)
+        arViewController.closestPaymnet = autoPaymentNetworkHandler.getNearestByCardNo(cardNo:number)
+       
         if arViewController.myCard != nil {
             self.present(arViewController, animated: false, completion: nil)
         }
@@ -63,11 +62,17 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         
     }
     
-    func openDebit(_ number:String) {
+    func openDebit(_ number:String,img:UIImage?) {
         let debitarViewController = self.storyboard?.instantiateViewController(withIdentifier: "DebitARViewController") as! DebitARViewController
+        
         debitarViewController.myUser = myUser
         debitarViewController.myCard =  debitCardNetworkHandler.getByCardNo(cardNo:number)
         debitarViewController.transactions = transactionNetworkHandler.getByCardNo(cardNo: number)
+        
+        if let safeImg = img{
+            debitarViewController.cardToTrack = safeImg
+        }
+        
         let tc = myUser?.tckn ?? "12"
         debitarViewController.account = accountNetworkHandler.getaccountByTC(tc: tc )
         if debitarViewController.myCard != nil {
@@ -83,22 +88,22 @@ class ViewController: UIViewController, CardIOPaymentViewControllerDelegate {
         
         print(cardInfo.cardNumber ?? "Couldn't read your card...")
         print("provide")
-        
+
         self.dismiss(animated: true, completion: nil)
-        
+
         userCards = creditCardNetworkHandler.getByTc(tc: myUser!.tckn)
         userDebitCards = debitCardNetworkHandler.getByTc(tc: myUser!.tckn)
-        
+
         if userCards.contains(cardInfo.cardNumber) {
             print("Credit card entered")
             openCredit(cardInfo.cardNumber,img:cardInfo.cardImage)
         }
-        
+
         else if userDebitCards.contains(cardInfo.cardNumber){
             print("Debit card entered")
-            openDebit(cardInfo.cardNumber)
+            openDebit(cardInfo.cardNumber,img:cardInfo.cardImage)
         }
-        
+
         else{
             alert(text: "Böyle bir kartınız bulunmamaktadır.")
         }
