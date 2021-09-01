@@ -516,7 +516,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
                 let pos = imageAnchor.transform
                 //print(pos.columns.3.y)
                 let y = pos.columns.3.y
-                let limit:Float = 0.06
+                let limit:Float = 0.05
                 //print(y)
                 if y >= limit {
                     tableNode.geometry?.firstMaterial?.diffuse.contents = tables[0]
