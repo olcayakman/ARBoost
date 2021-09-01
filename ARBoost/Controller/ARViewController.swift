@@ -48,6 +48,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         
+        
         sceneView.scene.rootNode.addChildNode(tableNode)
     }
     
